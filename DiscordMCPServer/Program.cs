@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using ModelContextProtocol.AspNetCore;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 
@@ -23,11 +21,8 @@ builder.Configuration
     .AddUserSecrets<Program>()
     .AddEnvironmentVariables();
 
-var discordBotToken =
-    builder.Configuration["DiscordBotToken"];
-
-var discordChannelId =
-    builder.Configuration["DiscordChannelId"];
+var discordBotToken = builder.Configuration["DiscordBotToken"];
+var discordChannelId = builder.Configuration["DiscordChannelId"];
 
 if (string.IsNullOrWhiteSpace(discordBotToken))
 {
@@ -56,7 +51,9 @@ builder.Services.AddSingleton(sp =>
 
 builder.Services
     .AddMcpServer()
-    .WithStdioServerTransport()
+    .WithHttpTransport()
     .WithToolsFromAssembly();
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+app.MapMcp("/mcp");
+app.Run("http://0.0.0.0:3002");

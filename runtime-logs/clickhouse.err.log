@@ -1,0 +1,95 @@
+2026-09-15 11:41:45,824 - mcp-clickhouse - INFO - ClickHouse tools registered
+2026-09-15 11:41:45,896 - mcp-clickhouse - WARNING - WARNING: MCP SERVER AUTHENTICATION IS DISABLED
+2026-09-15 11:41:45,897 - mcp-clickhouse - WARNING - Only use this for local development/testing.
+2026-09-15 11:41:45,898 - mcp-clickhouse - WARNING - DO NOT expose to networks.
+2026-09-15 11:41:45,900 - mcp-clickhouse - INFO - HTTP transport validation configured for 3 host(s) and 0 browser origin(s)
+
+
++-----------------------------------------------------------------------------+
+|                                                                             |
+|                                                                             |
+|                        \u2584\u2580\u2580 \u2584\u2580\u2588 \u2588\u2580\u2580 \u2580\u2588\u2580 \u2588\u2580\u2584\u2580\u2588 \u2588\u2580\u2580 \u2588\u2580\u2588                        |
+|                        \u2588\u2580  \u2588\u2580\u2588 \u2584\u2584\u2588  \u2588  \u2588 \u2580 \u2588 \u2588\u2584\u2584 \u2588\u2580\u2580                        |
+|                                                                             |
+|                                                                             |
+|                                                                             |
+|                                FastMCP 4.0.3                                |
+|                            https://gofastmcp.com                            |
+|                                                                             |
+|                 \U0001f5a5  Server:      mcp-clickhouse, 0.6.0                       |
+|                 \U0001f680 Deploy free: https://horizon.prefect.io                  |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+[09/15/26 11:41:45] INFO     Starting MCP server               transport.py:363
+                             'mcp-clickhouse' with transport                   
+                             'http' on http://0.0.0.0:3001/mcp                 
+INFO:     Started server process [15988]
+INFO:     Waiting for application startup.
+2026-09-15 11:41:46,046 - mcp.server.streamable_http_manager - INFO - StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:3001 (Press CTRL+C to quit)
+2026-09-15 11:41:48,766 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 435addb3224047e98829e784b22ff7f5
+2026-09-15 11:41:48,769 - mcp.server.streamable_http - INFO - Terminating session: 435addb3224047e98829e784b22ff7f5
+2026-09-15 11:41:49,027 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 4f8b440ed4054adab6c6d54a39cb526d
+2026-09-15 11:41:49,029 - mcp.server.streamable_http - INFO - Terminating session: 4f8b440ed4054adab6c6d54a39cb526d
+2026-09-15 11:41:56,565 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: da6710a4185343f6974adb9ecaf6c23d
+2026-09-15 11:41:56,567 - mcp.server.streamable_http - INFO - Terminating session: da6710a4185343f6974adb9ecaf6c23d
+2026-09-15 11:41:56,594 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 13c7edcc018049588532ae1a6640bdb7
+2026-09-15 11:41:56,602 - mcp.server.streamable_http - INFO - Terminating session: 13c7edcc018049588532ae1a6640bdb7
+2026-09-15 11:41:56,691 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 1b758aca66f249f1a755995a31d81760
+2026-09-15 11:41:57,980 - mcp.server.streamable_http - INFO - Terminating session: 1b758aca66f249f1a755995a31d81760
+2026-09-15 11:41:58,042 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 8ef7982caaac4b69be183f81b5834929
+2026-09-15 11:49:02,075 - mcp.server.streamable_http - INFO - Terminating session: 8ef7982caaac4b69be183f81b5834929
+2026-09-15 11:49:03,176 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: b7d957470b65486dbac34e565e1b1314
+2026-09-15 11:51:40,610 - mcp.server.streamable_http - INFO - Terminating session: b7d957470b65486dbac34e565e1b1314
+2026-09-15 11:51:44,546 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: f1925e4d15134ac5a528dbf391ef9a55
+2026-09-15 12:02:46,979 - mcp.server.streamable_http - INFO - Terminating session: f1925e4d15134ac5a528dbf391ef9a55
+2026-09-15 12:03:20,377 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 56a9ef9941804d85bc9a0f98f84b0ead
+2026-09-15 12:03:20,394 - mcp.server.streamable_http - INFO - Terminating session: 56a9ef9941804d85bc9a0f98f84b0ead
+2026-09-15 12:03:20,427 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 286d697e389a4c9e84cffc38ace00099
+2026-09-15 12:03:20,446 - mcp.server.streamable_http - INFO - Terminating session: 286d697e389a4c9e84cffc38ace00099
+2026-09-15 12:03:20,568 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 0ef4ab9c27514063832bf63e48fa1462
+2026-09-15 12:03:20,750 - mcp.server.streamable_http - INFO - Terminating session: 0ef4ab9c27514063832bf63e48fa1462
+2026-09-15 12:03:20,915 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 5609f591679843c4be5f0865aab378c9
+2026-09-15 13:47:30,388 - mcp-clickhouse - INFO - Listing all databases
+2026-09-15 13:47:30,417 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 13:47:51,901 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ee57b0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=7cae9d8b-3c63-4baa-be91-45be632567cc
+2026-09-15 13:48:12,980 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 13:48:12,984 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=7cae9d8b-3c63-4baa-be91-45be632567cc (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ee43d0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 13:48:12,985 - mcp-clickhouse - WARNING - list_databases connection error, retrying: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=7cae9d8b-3c63-4baa-be91-45be632567cc (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ee43d0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 13:48:12,988 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 13:48:34,034 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efed40>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=5af64882-4df6-4603-9859-54245a3caab7
+2026-09-15 13:48:55,072 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 13:48:55,074 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=5af64882-4df6-4603-9859-54245a3caab7 (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45a28f10>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:07:28,904 - mcp-clickhouse - INFO - Listing all databases
+2026-09-15 14:07:28,931 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:07:50,235 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efed40>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=07dd761c-153e-4607-91da-87b68692c28b
+2026-09-15 14:08:11,275 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:08:11,277 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=07dd761c-153e-4607-91da-87b68692c28b (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ec1e10>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:08:11,279 - mcp-clickhouse - WARNING - list_databases connection error, retrying: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=07dd761c-153e-4607-91da-87b68692c28b (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ec1e10>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:08:11,279 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:08:32,312 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45a74940>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=9fcf028b-bb14-49f0-8479-cf8f67964586
+2026-09-15 14:08:53,340 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:08:53,341 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=9fcf028b-bb14-49f0-8479-cf8f67964586 (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f459e5660>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:10:06,315 - mcp-clickhouse - INFO - Listing all databases
+2026-09-15 14:10:06,315 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:10:27,369 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45e457b0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=349e9001-c58e-48d7-9ee7-d97d5979113b
+2026-09-15 14:10:48,419 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:10:48,419 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=349e9001-c58e-48d7-9ee7-d97d5979113b (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45e46b00>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:10:48,420 - mcp-clickhouse - WARNING - list_databases connection error, retrying: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=349e9001-c58e-48d7-9ee7-d97d5979113b (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45e46b00>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:10:48,420 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:11:09,467 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45ec0cd0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=b82dbdb7-fb89-4e5d-9906-a17d79d7b23f
+2026-09-15 14:11:30,501 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:11:30,501 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=b82dbdb7-fb89-4e5d-9906-a17d79d7b23f (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f459e6d70>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:11:54,648 - mcp-clickhouse - INFO - Listing all databases
+2026-09-15 14:11:54,649 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:12:15,736 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45e45d80>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=eabbfcc6-ac51-4b4f-bd14-3c490b214b52
+2026-09-15 14:12:36,783 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:12:36,783 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=eabbfcc6-ac51-4b4f-bd14-3c490b214b52 (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efca30>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:12:36,784 - mcp-clickhouse - WARNING - list_databases connection error, retrying: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=eabbfcc6-ac51-4b4f-bd14-3c490b214b52 (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efca30>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 14:12:36,784 - mcp-clickhouse - INFO - Creating ClickHouse client connection to sql-clickhouse.clickmouse.com:8443 as DEMO (secure=True, verify=True, connect_timeout=30s, send_receive_timeout=35s)
+2026-09-15 14:12:57,834 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efc310>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=fcb93513-55d8-4b32-b2f3-e9187228865e
+2026-09-15 14:13:18,898 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
+2026-09-15 14:13:18,898 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=fcb93513-55d8-4b32-b2f3-e9187228865e (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45eff2e0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)

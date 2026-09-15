@@ -1,8 +1,8 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
+using ModelContextProtocol.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
+
 builder.Configuration.Sources.Clear();
 builder.Configuration
     .SetBasePath(AppContext.BaseDirectory)
@@ -14,6 +14,12 @@ var planeAPIKey = builder.Configuration["PlaneAPIKey"];
 var baseUrl = builder.Configuration["BaseUrl"];
 var workspace = builder.Configuration["Workspace"];
 var projectId = builder.Configuration["ProjectId"];
+var mcpPort = builder.Configuration.GetValue<int?>("McpPort") ?? 3003;
+
+if (mcpPort is < 1 or > 65535)
+{
+    throw new InvalidOperationException("McpPort phải nằm trong khoảng 1-65535.");
+}
 
 if(string.IsNullOrEmpty(planeAPIKey) || string.IsNullOrEmpty(baseUrl) || string.IsNullOrEmpty(workspace) || string.IsNullOrEmpty(projectId))
 {
@@ -21,14 +27,25 @@ if(string.IsNullOrEmpty(planeAPIKey) || string.IsNullOrEmpty(baseUrl) || string.
 }
 
 builder.Services.AddHttpClient();
+
 builder.Services.AddSingleton(sp =>
 {
     var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
-    return new PlaneAPIServices(httpClientFactory, baseUrl, workspace, projectId, planeAPIKey);
+
+    return new PlaneAPIServices(
+        httpClientFactory, 
+        baseUrl, 
+        workspace, 
+        projectId, 
+        planeAPIKey);
 });
 
 builder.Services.AddMcpServer()
-                .WithStdioServerTransport()
+                .WithHttpTransport()
                 .WithToolsFromAssembly();
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+
+app.MapMcp("/mcp");
+
+app.Run($"http://0.0.0.0:{mcpPort}");

@@ -1,0 +1,1238 @@
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://0.0.0.0:3003
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - 405 - - 50.6429ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 400 - application/json;+charset=utf-8 92.2816ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - 404 0 - 1.2111ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - 404 0 - 0.1571ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 12.9607ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 159.3419ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 2.7147ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.1019ms
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.5548ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.1272ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 10.3052ms.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 11.439ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 10.9919ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 12.4412ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.1315ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.1690ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 0.7605ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.5242ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.8363ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.1591ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.5765ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.5151ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - 405 - - 0.3613ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 400 - application/json;+charset=utf-8 1.1868ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - 404 0 - 0.1265ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - 404 0 - 0.1642ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.3835ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.1372ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 0.5526ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1902ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.8899ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.4431ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.5249ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.2287ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.3148ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.0503ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.1599ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.9577ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 0.4886ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1284ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.8339ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.0738ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.3369ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.9216ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2328ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.6200ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1552ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.1722ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6813ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.9728ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 23.7125ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 94.0416ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.669ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 358.0827ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 9.4301ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 203.8228ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 4.2209ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6116ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.8039ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 16.8365ms
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 34.3635ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 36.0335ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.182ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.6844ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6526ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 166.5981ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6861ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.8763ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.0675ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 4.8441ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 108
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request GET https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/states/
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request GET https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/states/
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 1193.2339ms - 200
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 1204.5831ms - 200
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_all_work_item_statuses" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler completed in 1439.2615ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1443.2945ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1493ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.9815ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2837ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 61.3073ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 127
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 24.6479ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 6.1794ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 18.1682ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1397ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.5406ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.5965ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.7125ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 2.95ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 23.0202ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3003/mcp - 405 - - 2.4932ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 400 - application/json;+charset=utf-8 18.0787ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp - 404 0 - 2.9055ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/.well-known/oauth-protected-resource - 404 0 - 0.1083ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3003/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 3.0126ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 14.5923ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[2103773711]
+      Server (PlaneMCPServer 1.0.0.0) message processing canceled.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 12.5195ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1201ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.0407ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.0789ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 5.6785ms.
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 6.7073ms
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.4151ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.2949ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.9231ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.9470ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 0.4183ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1274ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.7952ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3003/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3003/mcp - 405 0 - 0.1426ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/list' request handler completed in 3.8723ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 7.8802ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2679ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.2771ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2725ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.1805ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2178ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.7246ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1791ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.0716ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2308ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.6135ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1303ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.9101ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1317ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.5080ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.5171ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 23.2312ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.4828ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.2052ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.3535ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 0.9570ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.663ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.5711ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 6.3459ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 74.1102ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2512ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.3950ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 3.9903ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 24.8061ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 2.6765ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 11.3114ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1192ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 6.0426ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.2439ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 38.9562ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 2.9845ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 30.4265ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 14.3961ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 93.8229ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.8031ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 5.7013ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 146
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 1242.0464ms - 400
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 1355.4977ms - 400
+fail: ModelContextProtocol.Server.McpServer[1433779783]
+      "create_work_item" threw an unhandled exception.
+      System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+         at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+         at PlaneAPIServices.CreateWorkItemsAsync(String name, String descriptionHtml, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneAPIServices.cs:line 118
+         at PlaneTools.CreateWorkItem(PlaneAPIServices planeApiServices, String name, String description, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneTools.cs:line 42
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunctionDescriptor.<>c__DisplayClass41_1.<<GetReturnParameterMarshaller>b__10>d.MoveNext()
+      --- End of stack trace from previous location ---
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.AIFunctionMcpServerTool.InvokeAsync(RequestContext`1 request, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.McpServerImpl.<>c__DisplayClass85_1.<<BuildComposedCallToolHandler>g__InvokeOrdinaryPipelineAsync|1>d.MoveNext()
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler completed in 4144.4024ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 4158.9677ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 42.7534ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 197.7696ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 45.6986ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1001ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.8314ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 2.2489ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 18.9590ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1053ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 1.1803ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1498ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 21.0230ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 14.3143ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 38.5465ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2361ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 2.1332ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 1.1275ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 7.4740ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 109
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request GET https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/states/
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request GET https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/states/
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 602.4127ms - 200
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 607.0358ms - 200
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "get_all_work_item_statuses" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler completed in 700.7913ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 714.1766ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 178
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 384.5821ms - 400
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 384.685ms - 400
+fail: ModelContextProtocol.Server.McpServer[1433779783]
+      "create_work_item" threw an unhandled exception.
+      System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+         at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+         at PlaneAPIServices.CreateWorkItemsAsync(String name, String descriptionHtml, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneAPIServices.cs:line 118
+         at PlaneTools.CreateWorkItem(PlaneAPIServices planeApiServices, String name, String description, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneTools.cs:line 42
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunctionDescriptor.<>c__DisplayClass41_1.<<GetReturnParameterMarshaller>b__10>d.MoveNext()
+      --- End of stack trace from previous location ---
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.AIFunctionMcpServerTool.InvokeAsync(RequestContext`1 request, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.McpServerImpl.<>c__DisplayClass85_1.<<BuildComposedCallToolHandler>g__InvokeOrdinaryPipelineAsync|1>d.MoveNext()
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler completed in 463.6228ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 464.0806ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 129
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://api.plane.so/api/v1/workspaces/maybaymcp/projects/ad10944b-d1d3-44e7-9c35-c6592fe78c77/work-items/
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 325.9876ms - 400
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 326.163ms - 400
+fail: ModelContextProtocol.Server.McpServer[1433779783]
+      "create_work_item" threw an unhandled exception.
+      System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+         at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+         at PlaneAPIServices.CreateWorkItemsAsync(String name, String descriptionHtml, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneAPIServices.cs:line 118
+         at PlaneTools.CreateWorkItem(PlaneAPIServices planeApiServices, String name, String description, String stateId, String priority, List`1 assigneeIds, List`1 labelIds, String parentId, Nullable`1 estimatePoint, String typeId, String moduleId, String startDate, String targetDate, String externalSource, String externalId, Nullable`1 isDraft) in C:\Users\pc\Desktop\Side_Quest\MCPServer\PlaneMCPServer\PlaneTools.cs:line 42
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunctionDescriptor.<>c__DisplayClass41_1.<<GetReturnParameterMarshaller>b__10>d.MoveNext()
+      --- End of stack trace from previous location ---
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at Microsoft.Extensions.AI.AIFunctionFactory.ReflectionAIFunction.InvokeCoreAsync(AIFunctionArguments arguments, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.AIFunctionMcpServerTool.InvokeAsync(RequestContext`1 request, CancellationToken cancellationToken)
+         at ModelContextProtocol.Server.McpServerImpl.<>c__DisplayClass85_1.<<BuildComposedCallToolHandler>g__InvokeOrdinaryPipelineAsync|1>d.MoveNext()
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'tools/call' request handler completed in 333.2233ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 334.1680ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 3.6327ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 4.1473ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 202 0 - 3.9216ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.9326ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 3.0497ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1438ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 10.8141ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3003/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (PlaneMCPServer 1.0.0.0) method 'ping' request handler completed in 0.9221ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3003/mcp - 200 - text/event-stream 8.2919ms

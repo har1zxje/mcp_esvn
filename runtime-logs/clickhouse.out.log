@@ -1,0 +1,117 @@
+INFO:     127.0.0.1:65317 - "GET /mcp HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65318 - "GET /mcp HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65322 - "HEAD /mcp HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:65327 - "POST /mcp HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65332 - "GET /.well-known/oauth-protected-resource/mcp HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65336 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65339 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65343 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:65339 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65344 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65343 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65345 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65339 - "DELETE /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65349 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65350 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:65349 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65355 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65350 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65386 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65412 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65491 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65516 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49192 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49222 - "DELETE /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49225 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49225 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49247 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49276 - "DELETE /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49277 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49278 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49277 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49279 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49278 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49285 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49298 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49332 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49384 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49427 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49477 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49511 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49544 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49548 - "DELETE /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49567 - "HEAD /mcp HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:49572 - "POST /mcp HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:49575 - "GET /.well-known/oauth-protected-resource/mcp HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49580 - "GET /.well-known/oauth-protected-resource HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49582 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49589 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49582 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49591 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49589 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49592 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49582 - "DELETE /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49598 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49600 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49598 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49604 - "GET /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49600 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49619 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49724 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49728 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49734 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49745 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49768 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49777 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49783 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49793 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49810 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49846 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49585 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49618 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49909 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49941 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49980 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50118 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50118 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50139 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:50266 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50317 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50330 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51111 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51134 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51146 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51211 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51283 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51333 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51334 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51358 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51358 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51358 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51398 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51407 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51398 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51421 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51422 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51442 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51442 - "POST /mcp HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51459 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51489 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51555 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51755 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51796 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51863 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51904 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51949 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51986 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52032 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52108 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52133 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52202 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52314 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52343 - "POST /mcp HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52411 - "POST /mcp HTTP/1.1" 200 OK
