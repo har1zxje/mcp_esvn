@@ -1,0 +1,1296 @@
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://0.0.0.0:3002
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\pc\Desktop\Side_Quest\MCPServer\DiscordMCPServer
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - 405 - - 50.6830ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 400 - application/json;+charset=utf-8 86.1874ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - 404 0 - 1.1894ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - 404 0 - 0.1580ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 13.375ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 158.8235ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 2.9136ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.1614ms
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6763ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.7200ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 7.7394ms.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 11.0272ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 8.4076ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 11.9638ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.1914ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.1538ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 0.5209ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2061ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.4714ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.1613ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.3723ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.3437ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - 405 - - 0.3116ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 400 - application/json;+charset=utf-8 1.4618ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - 404 0 - 0.0910ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - 404 0 - 0.1372ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.27ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.0355ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 0.8728ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1465ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 0.9644ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.3948ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.1860ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.0644ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.3122ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.1392ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.1296ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 0.8187ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 0.6272ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1855ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 0.9248ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.0863ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.1988ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 0.8125ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.4073ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 5.2244ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1972ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.8063ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 2.0192ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 9.6194ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 11.3204ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 102.6384ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 6.5573ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 214.0413ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 6.0595ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 148.0890ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[2103773711]
+      Server (DiscordMCPServer 1.0.0.0) message processing canceled.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 110.2652ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1408ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.5085ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.2705ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 25.9624ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 35.4560ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.3314ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 6.7240ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 20.9542ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 221.1507ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.241ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.7093ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2673ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 4.2733ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.9101ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 6.0743ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2247ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.3575ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.3014ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 18.1717ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1339ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.4224ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.8809ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.8529ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 3.2636ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 28.8220ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 HEAD http://host.docker.internal:3002/mcp - 405 - - 7.2604ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 2
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Http.Result.JsonResult[1]
+      Setting HTTP status code 400.
+info: Microsoft.AspNetCore.Http.Result.JsonResult[3]
+      Writing value of type 'JsonRpcError' as Json.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 400 - application/json;+charset=utf-8 29.9362ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp - 404 0 - 3.9598ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource/mcp, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/.well-known/oauth-protected-resource - 404 0 - 0.0764ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://host.docker.internal:3002/.well-known/oauth-protected-resource, Response status code: 404
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 3.6525ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 14.1696ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 4.1882ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.477ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 4.0173ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.0889ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 4.82ms.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 12.5439ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 5.3813ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 14.6337ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 170
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'initialize' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0), Client (@librechat/api-client 1.2.3) method 'initialize' request handler completed in 0.2995ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 9.5508ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 54
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[2103773711]
+      Server (DiscordMCPServer 1.0.0.0) message processing canceled.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 1.6187ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1908ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.3701ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://host.docker.internal:3002/mcp - - -
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint '405 HTTP Method Not Supported'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://host.docker.internal:3002/mcp - 405 0 - 0.1260ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 46
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/list' request handler completed in 0.8051ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.4729ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 22.6934ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 24.1316ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1914ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.9452ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1947ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.0221ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 18.4026ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 39.6192ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.4532ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 4.4571ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1249ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.7161ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 40
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1431ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.9529ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6846ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.5706ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2345ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.2103ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 16.9838ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 17.8470ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1799ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.9913ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 14.5299ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 132.8133ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.6651ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 6.7585ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 4.6661ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 35.0405ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 2.3217ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 8.1640ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.0753ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.5525ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 4.1102ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 45.9852ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 5.4661ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 34.7464ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 11.7877ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 159.3990ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1372ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 14.2693ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 16.9761ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 164.0531ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 5.3674ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 7.1491ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.7918ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 13.5281ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.5396ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.3857ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.0856ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 22.2151ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1345ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.9670ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 8.5203ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 16.6825ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2026ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 8.4529ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 197
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 838.9086ms - 200
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 851.4276ms - 200
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "send_discord_message" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler completed in 1211.4328ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1223.7517ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 12.6397ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.3106ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.5132ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 2.1331ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 11.3916ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 2.1573ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 12.6899ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 234
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 476.1203ms - 200
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 478.5934ms - 200
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "send_discord_message" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler completed in 527.5534ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 540.2790ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 1.2839ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1098ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 0.8449ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1065ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 25.6126ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.0738ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.9742ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 373
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler called.
+info: System.Net.Http.HttpClient.Default.LogicalHandler[100]
+      Start processing HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[100]
+      Sending HTTP request POST https://discord.com/api/v10/channels/1547521617091887126/messages
+info: System.Net.Http.HttpClient.Default.ClientHandler[101]
+      Received HTTP response headers after 622.4647ms - 200
+info: System.Net.Http.HttpClient.Default.LogicalHandler[101]
+      End processing HTTP request after 622.545ms - 200
+info: ModelContextProtocol.Server.McpServer[2065726448]
+      "send_discord_message" completed. IsError = False.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'tools/call' request handler completed in 624.8779ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 625.9018ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 128
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[2103773711]
+      Server (DiscordMCPServer 1.0.0.0) message processing canceled.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 202 0 - 3.3809ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.0986ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.5412ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.0747ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 44.3760ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 1.8587ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 17.4499ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1103ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 1.0779ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 2.2662ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 24.2248ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2351ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 9.2137ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.908ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 9.5235ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.2245ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 3.3890ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://host.docker.internal:3002/mcp - application/json 41
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: ModelContextProtocol.Server.McpServer[570385771]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler called.
+info: ModelContextProtocol.Server.McpServer[1867955179]
+      Server (DiscordMCPServer 1.0.0.0) method 'ping' request handler completed in 0.1006ms.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'MCP Streamable HTTP | HTTP: POST /mcp/'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://host.docker.internal:3002/mcp - 200 - text/event-stream 2.7299ms

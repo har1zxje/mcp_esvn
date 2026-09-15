@@ -60,8 +60,10 @@ public class PlaneAPIServices
         var requestBody = new Dictionary<string, object?>
         {
             ["name"] = name,
-            ["description_html"] = descriptionHtml
         };
+
+        if (descriptionHtml is not null)
+            requestBody["description_html"] = descriptionHtml;
 
         if (stateId is not null)
             requestBody["state"] = stateId;
@@ -115,9 +117,14 @@ public class PlaneAPIServices
         SetApiKey(request);
 
         var response = await _httpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
 
         var responseContent = await response.Content.ReadAsStringAsync(); 
+
+        if(!response.IsSuccessStatusCode)
+        {
+            throw new HttpRequestException(
+                $"Plane API returned: {(int)response.StatusCode} ({response.ReasonPhrase}): {responseContent}");
+        }
         return responseContent;
     }
 
