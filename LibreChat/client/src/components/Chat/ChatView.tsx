@@ -141,7 +141,7 @@ function ChatView({ index = 0, project }: { index?: number; project?: TChatProje
   } else if (!isLandingPage) {
     content = <MessagesView messagesTree={messagesTree} messages={messages} />;
   } else {
-    content = <Landing centerFormOnLanding={centerFormOnLanding} />;
+    content = <Landing />;
   }
 
   const chatFormPlaceholder =
@@ -180,7 +180,6 @@ function ChatView({ index = 0, project }: { index?: number; project?: TChatProje
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div
                         className={cn(
-                          'flex flex-col',
                           isLandingPage
                             ? /* The gutter is reserved once per state, wherever the
                                centring happens. A conversation centres the composer
@@ -190,8 +189,8 @@ function ChatView({ index = 0, project }: { index?: number; project?: TChatProje
                                together, so it holds the same band back here. Without
                                it the composer lands 4px right of where a conversation
                                puts it and slides sideways on the way in. */
-                              'scrollbar-gutter-spacer flex-1 items-center justify-end sm:justify-center'
-                            : 'h-full overflow-y-auto',
+                              'flex h-full min-h-0 flex-col scrollbar-gutter-spacer items-center justify-start'
+                            : 'flex h-full min-h-0 flex-col overflow-y-auto',
                         )}
                       >
                         {content}
@@ -202,7 +201,7 @@ function ChatView({ index = 0, project }: { index?: number; project?: TChatProje
                         page, so normal rendering is unchanged. */}
                         <div
                           className={cn(
-                            'w-full bg-presentation [view-transition-name:chat-form]',
+                            'w-full shrink-0 bg-presentation [view-transition-name:chat-form]',
                             !isLandingPage && 'scrollbar-gutter-spacer',
                             isLandingPage && 'max-w-3xl transition-all duration-200 xl:max-w-4xl',
                           )}
@@ -216,14 +215,16 @@ function ChatView({ index = 0, project }: { index?: number; project?: TChatProje
                               {localize('com_ui_subagent_thread_read_only')}
                             </div>
                           ) : (
-                            <ChatForm
-                              index={index}
-                              placeholder={chatFormPlaceholder}
-                              project={isProjectLandingPage ? project : undefined}
-                              isLandingPage={isLandingPage}
-                              footerBelow={footerBelow}
-                              centerFormOnLanding={centerFormOnLanding}
-                            />
+                            <div className={isLandingPage ? 'px-2 pt-4 sm:px-4' : undefined}>
+                              <ChatForm
+                                index={index}
+                                placeholder={chatFormPlaceholder}
+                                project={isProjectLandingPage ? project : undefined}
+                                isLandingPage={isLandingPage}
+                                footerBelow={footerBelow}
+                                centerFormOnLanding={centerFormOnLanding}
+                              />
+                            </div>
                           )}
                           {/* The generic disclaimer is the welcome screen's; a
                             deployment's own footer, privacy policy and terms

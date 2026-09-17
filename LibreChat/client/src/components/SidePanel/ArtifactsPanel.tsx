@@ -48,7 +48,7 @@ const ArtifactsPanel = memo(function ArtifactsPanel({
         panelRef={artifactsPanelRef}
         id="artifacts-panel"
       >
-        <div className="h-full min-w-[400px] overflow-hidden">{panel}</div>
+        <div className="h-full min-w-0 overflow-hidden">{panel}</div>
       </ResizablePanel>
     </>
   );
