@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DiscordMCPServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3936d91dbdb2ef18d64f62c382cbd2a5d988d9a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5d9c9b495b3b59b71384146e9053f863199bc8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DiscordMCPServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DiscordMCPServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

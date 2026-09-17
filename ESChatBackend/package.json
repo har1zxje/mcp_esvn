@@ -1,7 +1,0 @@
-{
-  "name": "es-chat-backend",
-  "private": true,
-  "type": "module",
-  "scripts": { "start": "node server.js" },
-  "dependencies": { "express": "^5.1.0" }
-}
