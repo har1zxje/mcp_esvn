@@ -591,8 +591,7 @@ const ChatForm = memo(function ChatForm({
      conversation has nothing beneath it, so it keeps only enough to clear the
      surface's own shadow. Below `sm` the composer runs to the viewport floor in
      every state. */
-  const landingClearance =
-    centerFormOnLanding && !isSubmitting ? 'transition-all duration-200 sm:mb-28' : 'sm:mb-10';
+  const landingClearance = 'transition-all duration-200 sm:mb-6';
   let bottomClearance = 'sm:mb-4';
   if (isLandingPage) {
     bottomClearance = landingClearance;

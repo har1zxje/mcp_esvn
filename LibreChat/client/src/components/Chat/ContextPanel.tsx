@@ -90,7 +90,7 @@ export default function ContextPanel({
     <div className="hidden h-full shrink-0 flex-row xl:flex">
       {!collapsed && (
         <aside
-          className="sticky top-0 z-10 h-full w-[290px] shrink-0 flex-col gap-4 overflow-y-auto border-l border-border-light bg-surface-primary-alt p-4 xl:flex"
+          className="sticky top-0 z-10 h-full w-[224px] min-w-[224px] shrink-0 flex-col gap-4 overflow-y-auto border-l border-border-light bg-surface-primary-alt p-4 xl:flex"
           aria-label="VFI workspace context"
         >
           <TemporaryChatIndicator />
@@ -99,22 +99,24 @@ export default function ContextPanel({
               <h2 className="mb-2 text-sm font-semibold text-text-primary">Làm nhanh</h2>
               <div className="space-y-2">
                 {quickTools.map(({ label, prompt, icon: Icon }) => (
-                  <div
+                  <button
+                    type="button"
                     key={label}
-                    className="flex items-center gap-2 rounded-lg p-2 hover:bg-surface-hover"
+                    className="flex w-full items-center gap-2 rounded-lg p-2 text-left hover:bg-surface-hover"
+                    onClick={() => submitMessage({ text: prompt })}
                   >
                     <Icon size={18} className="shrink-0 text-text-secondary" />
-                    <span className="min-w-0 flex-1 truncate text-xs font-medium text-text-primary">
+                    <span className="min-w-0 flex-1 text-xs font-medium text-text-primary">
                       {label}
                     </span>
                     <button
                       type="button"
-                      className="rounded-md px-2 py-1 text-xs font-medium text-text-secondary hover:bg-surface-active-alt hover:text-text-primary"
+                      className="hidden"
                       onClick={() => submitMessage({ text: prompt })}
                     >
                       Sử dụng
                     </button>
-                  </div>
+                  </button>
                 ))}
               </div>
             </section>
@@ -128,14 +130,14 @@ export default function ContextPanel({
                     className="flex items-center gap-2 rounded-lg p-2 hover:bg-surface-hover"
                   >
                     <div className="min-w-0 flex-1">
-                      <span className="block truncate text-xs font-medium text-text-primary">
+                      <span className="block text-xs font-medium text-text-primary">
                         {title}
                       </span>
                       <span className="block text-[11px] text-text-secondary">{meta}</span>
                     </div>
                     <button
                       type="button"
-                      className="rounded-md px-2 py-1 text-xs font-medium text-text-secondary hover:bg-surface-active-alt hover:text-text-primary"
+                      className="hidden"
                       onClick={() => submitMessage({ text: prompt })}
                     >
                       Sử dụng
