@@ -93,3 +93,12 @@ INFO:     Uvicorn running on http://0.0.0.0:3001 (Press CTRL+C to quit)
 2026-09-15 14:12:57,834 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45efc310>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')': /?query_id=fcb93513-55d8-4b32-b2f3-e9187228865e
 2026-09-15 14:13:18,898 - clickhouse_connect.driver._backend.http_sync - WARNING - Unexpected Http Driver Exception
 2026-09-15 14:13:18,898 - mcp-clickhouse - ERROR - Failed to connect to ClickHouse: Error HTTPSConnectionPool(host='sql-clickhouse.clickmouse.com', port=8443): Max retries exceeded with url: /?query_id=fcb93513-55d8-4b32-b2f3-e9187228865e (Caused by ConnectTimeoutError(<HTTPSConnection(host='sql-clickhouse.clickmouse.com', port=8443) at 0x21f45eff2e0>, 'Connection to sql-clickhouse.clickmouse.com timed out. (connect timeout=30)')) executing HTTP request attempt 1 (https://sql-clickhouse.clickmouse.com:8443)
+2026-09-15 16:53:08,248 - mcp.server.streamable_http - INFO - Terminating session: 5609f591679843c4be5f0865aab378c9
+2026-09-15 17:16:58,695 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: a7882988d2f04ee48196d5e8136df854
+2026-09-15 17:16:58,884 - mcp.server.streamable_http - INFO - Terminating session: a7882988d2f04ee48196d5e8136df854
+2026-09-15 17:16:58,967 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 07783cefa6e947a1be59f3af7a162403
+2026-09-15 17:16:59,053 - mcp.server.streamable_http - INFO - Terminating session: 07783cefa6e947a1be59f3af7a162403
+2026-09-15 17:16:59,095 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: 12a42465db4c4cf8836da9e24a06a258
+2026-09-15 17:16:59,734 - mcp.server.streamable_http - INFO - Terminating session: 12a42465db4c4cf8836da9e24a06a258
+2026-09-15 17:17:04,868 - mcp.server.streamable_http_manager - INFO - Created new transport with session ID: c2b66e55d0cb4d82a401e7f4ffaf8b2a
+2026-09-15 17:24:06,035 - mcp.server.streamable_http - INFO - Terminating session: c2b66e55d0cb4d82a401e7f4ffaf8b2a
