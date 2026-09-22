@@ -1,0 +1,14 @@
+services:
+  chat-backend:
+    build:
+      context: ../be
+    container_name: mcpserver-chat-backend
+    restart: always
+    env_file:
+      - ../be/.env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3091
+      LIBRECHAT_URL: http://api:3080
+    depends_on:
+      - api

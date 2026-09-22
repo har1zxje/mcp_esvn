@@ -166,8 +166,10 @@ export type TPayload = Partial<TMessage> &
     codeEnvironmentMode?: CodeEnvironmentMode;
     /** Conversation-selected workspaces, with at most one binding per environment. */
     codeWorkspaces?: CodeWorkspaceSelection[];
-    /** Browser IANA timezone (e.g. `America/New_York`) used to resolve local-time prompt variables server-side. */
-    timezone?: string;
+  /** Browser IANA timezone (e.g. `America/New_York`) used to resolve local-time prompt variables server-side. */
+  timezone?: string;
+  /** Project backend model registry key. It is resolved to a LibreChat agent server-side. */
+  modelId?: string;
     /**
      * Stable per-submission idempotency key (uuid) generated once per `ask()`. Identical
      * across the client's start-generation network retries, unique per user action (including

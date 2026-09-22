@@ -25,19 +25,6 @@ public class PlaneAPIServices
         _projectId = projectId;
     } 
 
-    public async Task<string> GetProjectStateAsync()
-    {
-        var url = $"{_baseUrl}/api/v1/workspaces/{_workspace}/projects/{_projectId}/states/";
-        using var request = new HttpRequestMessage(HttpMethod.Get, url);
-        SetApiKey(request);
-
-        var response = await _httpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
-        var content = await response.Content.ReadAsStringAsync();
-        return content;
-    }
-
     public async Task<string> CreateWorkItemsAsync(
         string? name = null,
         string? descriptionHtml = null,
@@ -129,17 +116,103 @@ public class PlaneAPIServices
     }
 
     //lay ttin cua work de thuc hien chuc nang
-    public async Task<string> GetWorkItemAsync(string workItemId)
+    public async Task<string> FindWorkItemsAsync(
+        string? name = null,
+        string? description = null,
+        string? priority = null,
+        string? stateId = null,
+        string? assigneeId = null,
+        string? labelId = null,
+        string? externalId = null,
+        bool? isDraft = null)
     {
+        if (string.IsNullOrWhiteSpace(name) &&
+            string.IsNullOrWhiteSpace(description) &&
+            string.IsNullOrWhiteSpace(priority) &&
+            string.IsNullOrWhiteSpace(stateId) &&
+            string.IsNullOrWhiteSpace(assigneeId) &&
+            string.IsNullOrWhiteSpace(labelId) &&
+            string.IsNullOrWhiteSpace(externalId) &&
+            isDraft is null)
+        {
+            throw new ArgumentException("Provide at least one search field.");
+        }
+
         var url =
-            $"{_baseUrl}/api/v1/workspaces/{_workspace}/projects/{_projectId}/work-items/{workItemId}/";
+            $"{_baseUrl}/api/v1/workspaces/{_workspace}/projects/{_projectId}/work-items/?per_page=100";
+
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         SetApiKey(request);
 
         var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadAsStringAsync();
+        var json = await response.Content.ReadAsStringAsync();
+        using var document = JsonDocument.Parse(json);
+        var root = document.RootElement;
+        var items = root.TryGetProperty("results", out var results)
+            ? results
+            : root;
+
+        var matches = items.EnumerateArray()
+            .Where(item => MatchesWorkItem(
+                item, name, description, priority, stateId,
+                assigneeId, labelId, externalId, isDraft))
+            .Select(item => item.Clone())
+            .ToList();
+
+        return JsonSerializer.Serialize(matches);
+    }
+
+    private static bool MatchesWorkItem(
+        JsonElement item,
+        string? name,
+        string? description,
+        string? priority,
+        string? stateId,
+        string? assigneeId,
+        string? labelId,
+        string? externalId,
+        bool? isDraft)
+    {
+        static string? Value(JsonElement value, string property) =>
+            value.TryGetProperty(property, out var propertyValue)
+                ? propertyValue.ToString()
+                : null;
+
+        static bool ContainsIgnoreCase(string? value, string? expected) =>
+            expected is null ||
+            (value?.Contains(expected, StringComparison.OrdinalIgnoreCase) ?? false);
+
+        static bool EqualsIgnoreCase(string? value, string? expected) =>
+            expected is null ||
+            string.Equals(value, expected, StringComparison.OrdinalIgnoreCase);
+
+        static bool ArrayContains(JsonElement item, string property, string expected)
+        {
+            if (!item.TryGetProperty(property, out var array) ||
+                array.ValueKind != JsonValueKind.Array)
+                return false;
+
+            return array.EnumerateArray().Any(value =>
+                string.Equals(value.ToString(), expected, StringComparison.OrdinalIgnoreCase) ||
+                (value.ValueKind == JsonValueKind.Object &&
+                 value.TryGetProperty("id", out var id) &&
+                 string.Equals(id.ToString(), expected, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        var itemDescription =
+            Value(item, "description_stripped") ?? Value(item, "description_html");
+
+        return ContainsIgnoreCase(Value(item, "name"), name) &&
+               ContainsIgnoreCase(itemDescription, description) &&
+               EqualsIgnoreCase(Value(item, "priority"), priority) &&
+               EqualsIgnoreCase(Value(item, "state"), stateId) &&
+               EqualsIgnoreCase(Value(item, "external_id"), externalId) &&
+               (!isDraft.HasValue ||
+                bool.TryParse(Value(item, "is_draft"), out var draft) && draft == isDraft.Value) &&
+               (assigneeId is null || ArrayContains(item, "assignees", assigneeId)) &&
+               (labelId is null || ArrayContains(item, "labels", labelId));
     }
 
     public async Task<string> UpdateWorkItemAsync(
@@ -225,10 +298,35 @@ public class PlaneAPIServices
         return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task<string> DeleteWorkItemAsync(string workItemId)
+    public async Task<string> DeleteWorkItemAsync(
+        string? workItemId = null,
+        string? delName = null,
+        string? description = null,
+        string? priority = null,
+        string? stateId = null,
+        string? assigneeId = null,
+        string? labelId = null,
+        string? externalId = null,
+        bool? isDraft = null)
     {
         if (string.IsNullOrWhiteSpace(workItemId))
-            throw new ArgumentException("workItemId is required.");
+        {
+            var searchResult = await FindWorkItemsAsync(
+                delName, description, priority, stateId,
+                assigneeId, labelId, externalId, isDraft);
+
+            using var searchDocument = JsonDocument.Parse(searchResult);
+            var matches = searchDocument.RootElement;
+
+            if (matches.GetArrayLength() == 0)
+                throw new ArgumentException("Không tìm thấy work item phù hợp.");
+
+            if (matches.GetArrayLength() > 1)
+                throw new ArgumentException(
+                    "Có nhiều work item phù hợp. Hãy bổ sung điều kiện hoặc dùng workItemId.");
+
+            workItemId = matches[0].GetProperty("id").GetString();
+        }
 
         var url =
             $"{_baseUrl}/api/v1/workspaces/{_workspace}/projects/{_projectId}/work-items/{workItemId}/";
@@ -242,7 +340,8 @@ public class PlaneAPIServices
         return JsonSerializer.Serialize(new
         {
             success = true,
-            workItemId
+            workItemId,
+            delName
         });
     }
 

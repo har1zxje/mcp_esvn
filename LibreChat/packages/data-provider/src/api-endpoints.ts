@@ -317,9 +317,9 @@ export const agents = ({ path = '', options }: { path?: string; options?: object
   return url;
 };
 
-export const activeJobs = () => `${BASE_URL}/api/agents/chat/active`;
+export const activeJobs = () => `${BASE_URL}/api/chat/active`;
 
-const agentQueuedTurnsRoot = `${BASE_URL}/api/agents/chat/queued-turns`;
+const agentQueuedTurnsRoot = `${BASE_URL}/api/chat/queued-turns`;
 export const agentQueuedTurns = () => agentQueuedTurnsRoot;
 export const agentQueuedTurnsByConversation = (
   conversationId: string,
