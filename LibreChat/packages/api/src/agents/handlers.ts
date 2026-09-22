@@ -125,6 +125,7 @@ import { cleanCodeToolOutput } from './cleanup';
 import { primeSkillFiles } from './skillFiles';
 import { instrumentPtcToolMap } from './ptc';
 import { markSandboxReady } from './prewarm';
+import { validateMCPToolTarget } from './mcpTarget';
 
 export interface ToolEndCallbackData {
   /** The executed call's arguments. The stream-consumer tool-end path cannot
@@ -6296,6 +6297,16 @@ export function createToolExecuteHandler(options: ToolExecuteOptions): EventHand
                 );
                 if (filteredName != null) {
                   return reportResult(filteredName);
+                }
+                const requestText = (mergedConfigurable?.req as ServerRequest | undefined)?.body as
+                  | { text?: unknown }
+                  | undefined;
+                const targetError = validateMCPToolTarget(requestText?.text, tc.name);
+                if (targetError != null) {
+                  logger.warn('[ON_TOOL_EXECUTE] Blocked MCP tool on a different requested target', {
+                    toolName: tc.name,
+                  });
+                  return reportResult(errorResult(tc, targetError));
                 }
                 if (backgroundControlEnabled && tc.name === CHECK_BACKGROUND_TASK_NAME) {
                   const req = mergedConfigurable?.req as ServerRequest | undefined;

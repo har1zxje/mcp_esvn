@@ -56,6 +56,8 @@ export const config = {
   googleKey: loadServerGoogleKey(),
   maxToolIterations: Number(process.env.MAX_TOOL_ITERATIONS ?? 10),
   contextMessageLimit: Number(process.env.CONTEXT_MESSAGE_LIMIT ?? 24),
+  modelTimeoutMs: Number(process.env.MODEL_TIMEOUT_MS ?? 30000),
+  mcpTimeoutMs: Number(process.env.MCP_TIMEOUT_MS ?? 15000),
   mcpServers: parseMcpServers(),
 };
 
@@ -79,6 +81,14 @@ function parseMcpServers() {
 
 if (!Number.isInteger(config.port) || config.port < 1 || config.port > 65535) {
   throw new Error('PORT must be an integer between 1 and 65535');
+}
+
+if (!Number.isInteger(config.modelTimeoutMs) || config.modelTimeoutMs < 1000) {
+  throw new Error('MODEL_TIMEOUT_MS must be an integer >= 1000');
+}
+
+if (!Number.isInteger(config.mcpTimeoutMs) || config.mcpTimeoutMs < 1000) {
+  throw new Error('MCP_TIMEOUT_MS must be an integer >= 1000');
 }
 
 if (config.defaultModelId && !config.modelMap[config.defaultModelId]) {

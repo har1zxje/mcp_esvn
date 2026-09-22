@@ -304,6 +304,13 @@ app.delete('/api/chat/history/:conversationId', async (req, res) => {
  * tool calls, resume, steering, and conversation metadata during migration.
  */
 app.post('/api/chat', async (req, res) => {
+  const abortController = new AbortController();
+  const onRequestClose = () => { if (!res.writableEnded) abortController.abort(); };
+  let sendEvent;
+  // IncomingMessage.close can fire after the request body is consumed, while
+  // the browser is still waiting for the SSE response. Only abort when the
+  // response connection itself is closed by the client.
+  res.once('close', onRequestClose);
   try {
     const body = req.body ?? {};
     const ownerId = getOwnerId(req, res);
@@ -330,6 +337,10 @@ app.post('/api/chat', async (req, res) => {
       messages: [],
       createdAt: Date.now(),
     };
+    if (body.editMessageCreatedAt != null && existingConversation) {
+      const editIndex = conversation.messages.findIndex((item) => item.role === 'user' && item.createdAt === body.editMessageCreatedAt);
+      if (editIndex >= 0) conversation.messages = conversation.messages.slice(0, editIndex);
+    }
     conversation.ownerId = ownerId;
     conversation.modelId = mapping.modelId;
     // Store the MCP scope with the conversation so reopening or refreshing
@@ -340,12 +351,17 @@ app.post('/api/chat', async (req, res) => {
     history[conversationId] = conversation;
     await writeHistory(history);
     conversation.messages.push({ role: 'user', text: message, createdAt: Date.now() });
-    const result = await agent.run(conversation, mapping);
+    res.status(200).set({ 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-cache, no-transform', Connection: 'keep-alive' });
+    res.flushHeaders?.();
+    sendEvent = (payload) => { if (!res.writableEnded) res.write(`data: ${JSON.stringify(payload)}\n\n`); };
+    const result = await agent.run(conversation, mapping, abortController.signal, (delta) => sendEvent({ delta }));
     conversation.messages.push({ role: 'assistant', text: result.text, createdAt: Date.now() });
     conversation.updatedAt = Date.now();
     history[conversationId] = conversation;
     await writeHistory(history);
-    return res.json({ conversationId, modelId: mapping.modelId, text: result.text, usage: result.usage, conversation });
+    sendEvent({ conversationId, modelId: mapping.modelId, text: result.text, usage: result.usage, conversation });
+    sendEvent('[DONE]');
+    return res.end();
 
     /* Legacy LibreChat payload kept below for reference during migration. */
     const isLibreChatPayload = typeof body.text === 'string' || body.userMessage;
@@ -388,7 +404,12 @@ app.post('/api/chat', async (req, res) => {
 
     return copyUpstreamResponse(upstream, res);
   } catch (error) {
-    if (res.headersSent) return res.end();
+    if (error.name === 'AbortError' || abortController.signal.aborted) return;
+    if (res.headersSent) {
+      sendEvent?.({ error: error.message || 'Chat generation failed', code: describeError(error, error.statusCode).code, action: describeError(error, error.statusCode).action });
+      sendEvent?.('[DONE]');
+      return res.end();
+    }
     return jsonError(res, error);
   }
 });
