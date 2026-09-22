@@ -1,0 +1,2 @@
+Chat backend listening on http://127.0.0.1:3091
+Forwarding chat requests to http://127.0.0.1:3080

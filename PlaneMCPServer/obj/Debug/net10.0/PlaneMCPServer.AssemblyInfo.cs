@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PlaneMCPServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+618b302ced749d11b6a7e6dbbf02c34f5f32a6e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4bc41dcb03a7987b1c9416a1a32844dd2e9f579")]
 [assembly: System.Reflection.AssemblyProductAttribute("PlaneMCPServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PlaneMCPServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

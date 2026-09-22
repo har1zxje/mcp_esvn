@@ -531,7 +531,21 @@ describe('MCPManager', () => {
       const manager = await MCPManager.createInstance(newMCPServersConfig());
       const result = await manager.formatInstructionsForContext(['files']);
 
-      expect(result).toBe('');
+      expect(result).toContain('## MCP server selection policy');
+      expect(result).toContain('Do not substitute another server');
+      expect(result).not.toContain('# MCP Server Instructions');
+    });
+
+    it('should include the selection policy even when no server has custom instructions', async () => {
+      (mockRegistryInstance.getAllServerConfigs as jest.Mock).mockResolvedValue({
+        plane: { type: 'stdio', command: 'plane', args: [] },
+      });
+
+      const manager = await MCPManager.createInstance(newMCPServersConfig());
+      const result = await manager.formatInstructionsForContext(['plane']);
+
+      expect(result).toContain('## MCP server selection policy');
+      expect(result).toContain('If the requested target is not available');
     });
   });
 

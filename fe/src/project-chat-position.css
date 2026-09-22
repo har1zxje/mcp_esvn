@@ -485,6 +485,183 @@
 .conversation-history-item { font-weight: 500; }
 .conversation-history-item { min-height: 42px; font-size: 14px; }
 .conversation-period { font-size: 12px; }
+.conversation-group + .conversation-group { margin-top: 14px; }
+
+/* Match the quick-action rows to the navigation items in the left sidebar. */
+.right-card.quick-card {
+  /* Align the heading with the Chats heading in the left sidebar. */
+  margin-top: 44px;
+  margin-bottom: 18px;
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.right-card.quick-card h3 {
+  margin: 0 0 7px;
+  padding: 0;
+  color: #242428;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.right-card.quick-card button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 0;
+  color: #5d5d64;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.right-card.quick-card button svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+}
+
+.right-card.quick-card button:hover {
+  color: #222227;
+  background: #e8e8ea;
+}
+
+.project-theme-dark .right-card.quick-card {
+  background: transparent;
+  border-color: transparent;
+}
+
+.project-theme-dark .right-card.quick-card h3 {
+  color: #f1f1f3;
+}
+
+.project-theme-dark .right-card.quick-card button {
+  color: #bdbdc5;
+}
+
+.project-theme-dark .right-card.quick-card button:hover {
+  color: #fff;
+  background: #29292e;
+}
+
+.right-card.recent-card {
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.right-card.recent-card h3 {
+  margin: 0 9px 7px;
+  color: #242428;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.recent-activity {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 9px;
+  color: #5d5d64;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.recent-activity > svg {
+  flex: 0 0 14px;
+  margin-top: 2px;
+}
+
+.recent-activity > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recent-activity strong,
+.recent-activity small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-activity strong {
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.recent-activity small {
+  color: #92929b;
+  font-size: 11px;
+}
+
+.recent-activity:hover {
+  color: #222227;
+  background: #e8e8ea;
+}
+
+.project-theme-dark .right-card.recent-card,
+.project-theme-dark .right-card.recent-card h3 {
+  background: transparent;
+  border-color: transparent;
+  color: #f1f1f3;
+}
+
+.project-theme-dark .recent-activity {
+  color: #bdbdc5;
+}
+
+.project-theme-dark .recent-activity small {
+  color: #92929b;
+}
+
+.project-theme-dark .recent-activity:hover {
+  color: #fff;
+  background: #29292e;
+}
+
+/* Quick actions and recent activity are separate right-rail destinations. */
+.utility-panel-recent .quick-card,
+.utility-panel-quick .recent-card {
+  display: none;
+}
+
+/* The legacy activity shortcut is replaced by the dedicated recent shortcut. */
+.utility-toolbar > button:nth-child(3) {
+  display: none;
+}
+
+/* Keep both right-panel destinations aligned with the MCP Servers heading. */
+.utility-panel-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+}
+
+.right-card.quick-card {
+  margin-top: 0;
+  order: 1;
+}
+
+.right-card.recent-card {
+  order: 1;
+}
+
+.right-card.tip-card {
+  order: 2;
+}
 .sidebar-heading-button, .sidebar-section-heading > strong { font-size: 16px; }
 .sidebar-heading-button, .sidebar-section-heading > strong { font-weight: 700; }
 .conversation-icon { display: inline-flex; flex: 0 0 14px; align-items: center; justify-content: center; width: 14px; height: 14px; color: currentColor; }
@@ -526,8 +703,9 @@
 .project-rightbar.is-collapsed { display: flex; justify-content: flex-start; }
 .project-rightbar.is-collapsed .utility-toolbar { position: static; flex-direction: column; align-items: center; gap: 7px; }
 .project-rightbar.is-collapsed .utility-toolbar-button:first-child { margin-bottom: 5px; }
-.utility-toolbar-button { width: 36px; height: 36px; color: #727278; border-radius: 10px; }
+.utility-toolbar-button { width: 34px; height: 34px; color: #727278; border-radius: 9px; transition: color .16s ease, background .16s ease; }
 .utility-toolbar-button:hover, .utility-toolbar-button:focus-visible { color: #222227; background: #e8e8ea; outline: none; }
+.utility-toolbar-button.active { color: #222227; background: #e8e8ea; }
 .utility-panel-content { min-width: 0; padding-top: 48px; }
 .utility-panel-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: #8a8a90; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .utility-panel-heading button { display: grid; place-items: center; color: #77777d; background: transparent; border: 0; cursor: pointer; }
@@ -546,7 +724,58 @@
 .project-rightbar .utility-toolbar { position: absolute; top: 18px; right: 14px; display: flex; flex-direction: column; align-items: center; gap: 7px; }
 .project-rightbar .utility-toolbar-button:first-child { margin-bottom: 5px; }
 .project-rightbar.is-collapsed .utility-toolbar { position: absolute; top: 18px; right: 14px; display: flex; flex-direction: column; align-items: center; gap: 7px; }
-.utility-panel-content { padding: 48px 56px 0 0; }
+.utility-panel-content { padding: 12px 54px 0 0; }
+
+/* Keep the utility panel calm: the actions are one consistent list and the
+   suggestion is a supporting note, not a second competing panel. */
+.project-rightbar:not(.is-collapsed) {
+  background: #fff;
+}
+
+.project-rightbar:not(.is-collapsed) .quick-card {
+  margin-bottom: 22px;
+}
+
+.project-rightbar:not(.is-collapsed) .quick-card h3 {
+  margin-left: 9px;
+}
+
+.project-rightbar:not(.is-collapsed) .quick-card button {
+  min-height: 40px;
+  padding: 7px 8px 7px 9px;
+  border-radius: 9px;
+  transition: color .16s ease, background .16s ease;
+}
+
+.project-rightbar:not(.is-collapsed) .quick-card button:hover,
+.project-rightbar:not(.is-collapsed) .quick-card button:focus-visible {
+  color: #222227;
+  background: #f1f1f3;
+  outline: none;
+}
+
+.project-rightbar:not(.is-collapsed) .quick-card button svg {
+  color: #77777e;
+}
+
+.project-rightbar:not(.is-collapsed) .tip-card {
+  margin: 0;
+  padding: 14px 16px 15px;
+  background: #fffdf7;
+  border-color: #e2e0da;
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.project-rightbar:not(.is-collapsed) .tip-title {
+  color: #29292e;
+}
+
+.project-rightbar:not(.is-collapsed) .tip-card p {
+  margin: 7px 0 0;
+  color: #707076;
+  line-height: 1.65;
+}
 
 /* Account menu */
 .avatar-menu-wrap { position: relative; display: flex; justify-content: center; }
@@ -592,3 +821,123 @@ html[data-project-theme='dark'], html[data-project-theme='dark'] body { color-sc
 .project-theme-dark .avatar-theme-item:hover { background: #35353b; }
 .project-theme-dark .send-button { color: #171719; background: #f1f1f3; }
 .project-theme-dark .send-button:disabled { color: #777780; background: #37373d; }
+
+/* The standalone project shell has a second set of light-theme rules with
+   higher specificity. Keep the dark palette authoritative for every surface
+   in the shell, including the expanded utility panel. */
+.project-app.project-theme-dark,
+.project-theme-dark .project-main,
+.project-theme-dark .project-header,
+.project-theme-dark .project-messages {
+  background: #171719;
+  color: #f1f1f3;
+}
+
+.project-theme-dark .project-rail,
+.project-theme-dark .project-sidebar,
+.project-theme-dark .project-rightbar,
+.project-app:not(.right-sidebar-collapsed).project-theme-dark .project-rightbar {
+  background: #1d1d20;
+  border-color: #333338;
+}
+
+.project-theme-dark .right-card,
+.project-theme-dark .model-select-wrap,
+.project-theme-dark .project-composer,
+.project-theme-dark .composer-mcp,
+.project-theme-dark .mcp-filter,
+.project-theme-dark .mcp-server-card {
+  color: #f1f1f3;
+  background: #202024;
+  border-color: #3a3a41;
+}
+
+.project-theme-dark .tip-card {
+  background: #242428;
+}
+
+.project-theme-dark .quick-card button,
+.project-theme-dark .tip-card p,
+.project-theme-dark .tip-card li,
+.project-theme-dark .tip-title button,
+.project-theme-dark .utility-panel-heading,
+.project-theme-dark .utility-toolbar-button {
+  color: #b7b7c0;
+}
+
+.project-theme-dark .quick-card button:hover,
+.project-theme-dark .utility-toolbar-button:hover,
+.project-theme-dark .utility-toolbar-button:focus-visible {
+  color: #fff;
+  background: #303035;
+}
+
+.project-theme-dark .quick-card h3,
+.project-theme-dark .tip-title,
+.project-theme-dark .project-empty h2,
+.project-theme-dark .message-meta,
+.project-theme-dark .assistant-content,
+.project-theme-dark .user-bubble,
+.project-theme-dark .project-composer textarea {
+  color: #f1f1f3;
+}
+
+.project-theme-dark .assistant-content strong,
+.project-theme-dark .tool-summary-toggle strong {
+  color: #fff;
+}
+
+.project-theme-dark .project-header,
+.project-theme-dark .project-message + .project-message,
+.project-theme-dark .project-composer,
+.project-theme-dark .tool-execution,
+.project-theme-dark .assistant-content th,
+.project-theme-dark .assistant-content td {
+  border-color: #303035;
+}
+
+.project-theme-dark .project-composer textarea::placeholder,
+.project-theme-dark .composer-hint,
+.project-theme-dark .project-disclaimer,
+.project-theme-dark .message-meta time {
+  color: #92929b;
+}
+
+.project-theme-dark .user-bubble {
+  background: #303035;
+  border-color: #3d3d44;
+}
+
+.project-theme-dark .assistant-content code {
+  color: #ddd4ff;
+  background: #302a48;
+  border-color: #463d69;
+}
+
+.project-theme-dark .assistant-content th {
+  background: #29292e;
+}
+
+.project-theme-dark .tool-execution {
+  background: #222228;
+}
+
+.project-theme-dark .tool-summary-toggle,
+.project-theme-dark .tool-execution-item code {
+  color: #d0d0d7;
+}
+
+.project-theme-dark .tool-execution-list,
+.project-theme-dark .tool-execution-item {
+  border-color: #36363c;
+}
+
+.project-theme-dark .send-button {
+  color: #171719;
+  background: #f1f1f3;
+}
+
+.project-theme-dark .send-button:disabled {
+  color: #777780;
+  background: #37373d;
+}

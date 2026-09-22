@@ -1,7 +1,5 @@
 import { config } from './config.js';
 
-const timeout = (ms) => AbortSignal.timeout(ms);
-
 export class McpClient {
   constructor(name, server) {
     this.name = name;
@@ -10,11 +8,14 @@ export class McpClient {
     this.requestId = 0;
   }
 
-  async rpc(method, params = {}) {
+  async rpc(method, params = {}, signal) {
     const isNotification = method.startsWith('notifications/');
+    const requestSignal = signal
+      ? AbortSignal.any([signal, AbortSignal.timeout(config.mcpTimeoutMs)])
+      : AbortSignal.timeout(config.mcpTimeoutMs);
     const response = await fetch(this.server.url, {
       method: 'POST',
-      signal: timeout(Number(process.env.MCP_TIMEOUT_MS ?? 30000)),
+      signal: requestSignal,
       headers: {
         'content-type': 'application/json',
         accept: 'application/json, text/event-stream',
@@ -52,18 +53,18 @@ export class McpClient {
     return payload.result;
   }
 
-  async initialize() {
+  async initialize(signal) {
     if (this.sessionId) return;
     await this.rpc('initialize', {
       protocolVersion: '2025-06-18',
       capabilities: {},
       clientInfo: { name: 'project-chat-agent', version: '1.0.0' },
-    });
-    await this.rpc('notifications/initialized');
+    }, signal);
+    await this.rpc('notifications/initialized', {}, signal);
   }
 
-  async listTools() { await this.initialize(); return (await this.rpc('tools/list')).tools ?? []; }
-  async callTool(name, arguments_) { await this.initialize(); return this.rpc('tools/call', { name, arguments: arguments_ ?? {} }); }
+  async listTools(signal) { await this.initialize(signal); return (await this.rpc('tools/list', {}, signal)).tools ?? []; }
+  async callTool(name, arguments_, signal) { await this.initialize(signal); return this.rpc('tools/call', { name, arguments: arguments_ ?? {} }, signal); }
 }
 
 export function createMcpClients() {

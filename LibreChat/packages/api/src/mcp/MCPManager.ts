@@ -41,6 +41,18 @@ import { formatToolContent } from './parsers';
 import { MCPConnection } from './connection';
 import { mcpConfig } from './mcpConfig';
 
+/**
+ * MCP tools are scoped to the server that provides them. Keep this policy in
+ * the shared context so similar products cannot be treated as interchangeable
+ * for side-effecting operations.
+ */
+export const MCP_SERVER_SELECTION_POLICY = `## MCP server selection policy
+
+- Treat an explicitly named platform, product, provider, or MCP server in the user's request as a hard target.
+- Use only tools belonging to that exact target. Do not substitute another server or a similar product, even when it offers an equivalent operation.
+- If the requested target is not available, is not connected, or has no suitable tool, do not perform the operation elsewhere. Explain that the requested target is unavailable and identify what is missing.
+- Only choose among multiple available servers when the user did not specify a target. For read and write operations alike, preserve the user's target exactly.`;
+
 function createOboToolCallErrorMessage(
   logPrefix: string,
   toolName: string,
@@ -720,7 +732,7 @@ export class MCPManager extends UserConnectionManager {
   ): Promise<string> {
     const instructionsToInclude = await this.getInstructions(serverNames, configServers);
 
-    if (Object.keys(instructionsToInclude).length === 0) {
+    if (Object.keys(instructionsToInclude).length === 0 && !serverNames?.length) {
       return '';
     }
 
@@ -733,13 +745,17 @@ ${instructions}`;
       })
       .join('\n\n');
 
-    return `# MCP Server Instructions
+    const serverInstructions = formattedInstructions
+      ? `# MCP Server Instructions
 
 The following MCP servers are available with their specific instructions:
 
 ${formattedInstructions}
 
-Please follow these instructions when using tools from the respective MCP servers.`;
+Please follow these instructions when using tools from the respective MCP servers.`
+      : '';
+
+    return [MCP_SERVER_SELECTION_POLICY, serverInstructions].filter(Boolean).join('\n\n');
   }
 
   private async recoverOAuthConnection(
