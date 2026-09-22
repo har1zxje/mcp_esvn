@@ -5,14 +5,6 @@ using System.Text.Json;
 [McpServerToolType]
 public class PlaneTools
 {
-    [McpServerTool, Description("Get all possible statuses that a work item could be created in. These statuses denote where a work item would be in a typical kanban flow. The state ids returned can be use with other tools such as creating work items")]
-    public static async Task<string> GetAllWorkItemStatuses(
-        PlaneAPIServices planeApiServices)
-    {
-        var statuses = await planeApiServices.GetProjectStateAsync();
-        return JsonSerializer.Serialize(statuses);
-    }
-
     [McpServerTool, Description("The tool allow for the creation of a work item in Plane, in the given state.")]
     public static async Task<string> CreateWorkItem(
         PlaneAPIServices planeApiServices,
@@ -20,7 +12,7 @@ public class PlaneTools
 
         [Description("The detailed description of the work to be done where appropriate include acceptance criteria")] string? description = null,
 
-        [Description("The state or status id of the work item, derived from the GetAllWorkItemStatuses tool")] string? stateId = null,
+        [Description("The Plane state or status id of the work item, if known")] string? stateId = null,
         
         [Description("The priority of the work item, can only be one of: none, urgent, high, medium or low. other values will be ignored.")] string? priority = null,
         [Description("The assignee ids for the work item")]List<string>? assigneeIds = null,
@@ -125,23 +117,151 @@ public class PlaneTools
     }
 
     [McpServerTool]
-    [Description("Delete an existing Plane work item. Requires explicit confirmation.")]
+    [Description("Find Plane work items using one or more fields.")]
+    public static async Task<string> FindWorkItems(
+        PlaneAPIServices planeApiServices,
+        [Description("Name or part of the work item name")]
+        string? name = null,
+        [Description("Text contained in the description")]
+        string? description = null,
+        [Description("Priority: none, urgent, high, medium, or low")]
+        string? priority = null,
+        [Description("State ID")]
+        string? stateId = null,
+        [Description("Assignee ID")]
+        string? assigneeId = null,
+        [Description("Label ID")]
+        string? labelId = null,
+        [Description("External ID")]
+        string? externalId = null,
+        [Description("Whether the work item is a draft")]
+        bool? isDraft = null)
+    {
+        return await planeApiServices.FindWorkItemsAsync(
+            name, description, priority, stateId,
+            assigneeId, labelId, externalId, isDraft);
+    }
+
+    [McpServerTool]
+    [Description("Check whether Plane work item information matches existing work items. Returns the matching work items without changing anything.")]
+    public static async Task<string> MatchWorkItems(
+        PlaneAPIServices planeApiServices,
+        [Description("Name or part of the work item name")]
+        string? name = null,
+        [Description("Text contained in the description")]
+        string? description = null,
+        [Description("Priority: none, urgent, high, medium, or low")]
+        string? priority = null,
+        [Description("State ID")]
+        string? stateId = null,
+        [Description("Assignee ID")]
+        string? assigneeId = null,
+        [Description("Label ID")]
+        string? labelId = null,
+        [Description("External ID")]
+        string? externalId = null,
+        [Description("Whether the work item is a draft")]
+        bool? isDraft = null)
+    {
+        return await planeApiServices.FindWorkItemsAsync(
+            name, description, priority, stateId,
+            assigneeId, labelId, externalId, isDraft);
+    }
+
+    [McpServerTool]
+    [Description("Find a Plane work item and delete it only after explicit user confirmation. Without confirmation this tool performs a read-only preview and returns matching items.")]
     public static async Task<string> DeleteWorkItem(
         PlaneAPIServices planeApiServices,
 
-        [Description("The id of the work item to delete")]
-        string workItemId,
+        [Description("The id of the work item to delete, if already known. Otherwise use name or other search criteria.")]
+        string? workItemId = null,
+
+        [Description("The name or part of the work item name")]
+        string? delName = null,
+
+        [Description("Text contained in the description")]
+        string? description = null,
+
+        [Description("Priority: none, urgent, high, medium, or low")]
+        string? priority = null,
+
+        [Description("State ID")]
+        string? stateId = null,
+
+        [Description("Assignee ID")]
+        string? assigneeId = null,
+
+        [Description("Label ID")]
+        string? labelId = null,
+
+        [Description("External ID")]
+        string? externalId = null,
+
+        [Description("Whether the work item is a draft")]
+        bool? isDraft = null,
 
         [Description("Must be true to confirm deletion")]
-        bool confirm = false)
+        bool confirm = false,
+
+        [Description("Must be exactly DELETE after the user confirms the preview")]
+        string? confirmationPhrase = null)
     {
+        if (string.IsNullOrWhiteSpace(workItemId) &&
+            string.IsNullOrWhiteSpace(delName) &&
+            string.IsNullOrWhiteSpace(description) &&
+            string.IsNullOrWhiteSpace(priority) &&
+            string.IsNullOrWhiteSpace(stateId) &&
+            string.IsNullOrWhiteSpace(assigneeId) &&
+            string.IsNullOrWhiteSpace(labelId) &&
+            string.IsNullOrWhiteSpace(externalId) &&
+            isDraft is null)
+            throw new ArgumentException("Provide workItemId or at least one search field.");
+
         if (string.IsNullOrWhiteSpace(workItemId))
-            throw new ArgumentException("workItemId is required.");
+        {
+            var searchResult = await planeApiServices.FindWorkItemsAsync(
+                delName, description, priority, stateId,
+                assigneeId, labelId, externalId, isDraft);
 
-        if (!confirm)
-            throw new ArgumentException(
-                "Deletion was not confirmed. Set confirm=true to delete this work item.");
+            using var searchDocument = JsonDocument.Parse(searchResult);
+            var matches = searchDocument.RootElement.Clone();
 
-        return await planeApiServices.DeleteWorkItemAsync(workItemId);
+            if (!confirm || !string.Equals(confirmationPhrase, "DELETE", StringComparison.Ordinal))
+            {
+                return JsonSerializer.Serialize(new
+                {
+                    confirmationRequired = true,
+                    message = "I found these work items. Ask the user to confirm before deleting.",
+                    matches
+                });
+            }
+
+            if (matches.ValueKind != JsonValueKind.Array || matches.GetArrayLength() == 0)
+                throw new ArgumentException("No matching work item was found; nothing was deleted.");
+
+            if (matches.GetArrayLength() > 1)
+                throw new ArgumentException("Multiple work items matched; ask the user to identify one before deleting.");
+
+            workItemId = matches[0].GetProperty("id").GetString();
+        }
+
+        if (!confirm || !string.Equals(confirmationPhrase, "DELETE", StringComparison.Ordinal))
+            return JsonSerializer.Serialize(new
+            {
+                confirmationRequired = true,
+                message = "The work item was identified. Ask the user to confirm before deleting.",
+                workItemId
+            });
+
+        return await planeApiServices.DeleteWorkItemAsync(
+            workItemId,
+            delName,
+            description,
+            priority,
+            stateId,
+            assigneeId,
+            labelId,
+            externalId,
+            isDraft);
     }
 }

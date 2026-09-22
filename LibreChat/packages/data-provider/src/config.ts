@@ -3227,6 +3227,10 @@ export const EndpointURLs = {
   [EModelEndpoint.agents]: `${apiBaseUrl()}/api/${EModelEndpoint.agents}/chat`,
 } as const;
 
+/** Project-owned facade. The facade resolves modelId to a trusted LibreChat agent. */
+export const ProjectChatURL = `${apiBaseUrl()}/api/chat`;
+export const ProjectChatBaseURL = ProjectChatURL;
+
 export const modularEndpoints = new Set<EModelEndpoint | string>([
   EModelEndpoint.anthropic,
   EModelEndpoint.google,

@@ -1,5 +1,5 @@
 import type * as t from './types';
-import { EndpointURLs } from './config';
+import { EndpointURLs, ProjectChatURL } from './config';
 import * as s from './schemas';
 
 /** Resolves the browser's IANA timezone so the server can localize prompt variables. */
@@ -41,7 +41,10 @@ export default function createPayload(submission: t.TSubmission) {
   const endpoint = _e as s.EModelEndpoint;
   /** Custom endpoint names are user-defined and may contain `/`, which would
    * otherwise split into extra path segments and miss the `/:endpoint` route. */
-  let server = `${EndpointURLs[s.EModelEndpoint.agents]}/${encodeURIComponent(endpoint)}`;
+  let server =
+    endpoint === s.EModelEndpoint.agents
+      ? ProjectChatURL
+      : `${EndpointURLs[s.EModelEndpoint.agents]}/${encodeURIComponent(endpoint)}`;
   if (s.isAssistantsEndpoint(endpoint)) {
     server =
       EndpointURLs[(endpointType ?? endpoint) as 'assistants' | 'azureAssistants'] +
@@ -52,6 +55,10 @@ export default function createPayload(submission: t.TSubmission) {
     ...userMessage,
     ...endpointOption,
     endpoint,
+    /** The backend owns modelId -> agentId resolution. For persisted Agents, model
+     * is intentionally cleared by the client, so the selected agent is the stable
+     * migration alias until the UI exposes a separate model registry selector. */
+    modelId: conversation?.model ?? conversation?.agent_id ?? endpointOption.model ?? undefined,
     addedConvo,
     isTemporary,
     /** A compaction borrows the regenerate shape client-side only: the server

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="189.57">
+  <testsuite name="TemporaryChat" errors="0" failures="0" skipped="0" timestamp="2026-09-17T04:34:36" time="87.369" tests="8">
+    <testcase classname="TemporaryChat offers the toggle on a chat that has not started" name="TemporaryChat offers the toggle on a chat that has not started" time="0.333">
+    </testcase>
+    <testcase classname="TemporaryChat marks the toggle pressed while temporary mode is on" name="TemporaryChat marks the toggle pressed while temporary mode is on" time="0.028">
+    </testcase>
+    <testcase classname="TemporaryChat retires the toggle once the conversation has started" name="TemporaryChat retires the toggle once the conversation has started" time="0.012">
+    </testcase>
+    <testcase classname="TemporaryChatIndicator stays hidden while the toggle is still offered" name="TemporaryChatIndicator stays hidden while the toggle is still offered" time="0.013">
+    </testcase>
+    <testcase classname="TemporaryChatIndicator labels a started temporary conversation" name="TemporaryChatIndicator labels a started temporary conversation" time="0.02">
+    </testcase>
+    <testcase classname="TemporaryChatIndicator exposes the cue as a status so the mode change reaches assistive tech" name="TemporaryChatIndicator exposes the cue as a status so the mode change reaches assistive tech" time="0.034">
+    </testcase>
+    <testcase classname="TemporaryChatIndicator keeps the label in the accessible name when it is visually hidden" name="TemporaryChatIndicator keeps the label in the accessible name when it is visually hidden" time="0.008">
+    </testcase>
+    <testcase classname="TemporaryChatIndicator stays hidden on a started conversation that is not temporary" name="TemporaryChatIndicator stays hidden on a started conversation that is not temporary" time="0.009">
+    </testcase>
+  </testsuite>
+</testsuites>

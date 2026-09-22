@@ -38,6 +38,9 @@ const backendHost = process.env.HOST?.includes(':') ? `[${process.env.HOST}]` : 
 const backendURL = backendHost
   ? `http://${backendHost}:${backendPort}`
   : `http://localhost:${backendPort}`;
+const chatBackendPort =
+  (process.env.CHAT_BACKEND_PORT && Number(process.env.CHAT_BACKEND_PORT)) || 3091;
+const chatBackendURL = `http://localhost:${chatBackendPort}`;
 const buildSourceMap = process.env.NODE_ENV === 'development';
 const QUERY_DEVTOOLS_CHUNK_MODULES = [
   '@tanstack/react-query-devtools',
@@ -56,6 +59,10 @@ export default defineConfig(({ command }) => ({
     port: (process.env.PORT && Number(process.env.PORT)) || 3090,
     strictPort: false,
     proxy: {
+      '/api/chat': {
+        target: chatBackendURL,
+        changeOrigin: true,
+      },
       '/api': {
         target: backendURL,
         changeOrigin: true,

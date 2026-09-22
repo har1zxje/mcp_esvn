@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 160" role="img" aria-labelledby="title desc">
+  <title id="title">eschat</title>
+  <desc id="desc">eschat chat logo</desc>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#14b8a6"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs>
+  <rect x="8" y="8" width="144" height="144" rx="42" fill="url(#g)"/>
+  <path d="M45 53h70a16 16 0 0 1 16 16v35a16 16 0 0 1-16 16H80l-22 18v-18h-13a16 16 0 0 1-16-16V69a16 16 0 0 1 16-16Z" fill="white"/>
+  <circle cx="61" cy="86" r="7" fill="#2563eb"/><circle cx="80" cy="86" r="7" fill="#2563eb"/><circle cx="99" cy="86" r="7" fill="#2563eb"/>
+  <text x="180" y="108" fill="currentColor" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="-3">eschat</text>
+</svg>
