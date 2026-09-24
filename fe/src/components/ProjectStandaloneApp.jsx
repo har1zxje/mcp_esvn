@@ -8,6 +8,8 @@ import ChatHeader from './ProjectChat/ChatHeader';
 import ProjectMessage from './ProjectChat/ProjectMessage';
 import ChatComposer from './ProjectChat/ChatComposer';
 import RightUtilitySidebar from './ProjectChat/RightUtilitySidebar';
+import { projectFetch, useProjectAuth } from '../project-auth';
+import ProjectSettings from './ProjectSettings';
 
 const fallbackModels = [{ modelId: 'gemini_flash', label: 'Gemini 3.5 Flash', model: 'gemini-3.5-flash' }, { modelId: 'gemini_flash_lite', label: 'Gemini 3.5 Flash Lite', model: 'gemini-3.5-flash-lite' }, { modelId: 'gemini_25_flash', label: 'Gemini 2.5 Flash', model: 'gemini-2.5-flash' }];
 const defaultServers = [{ name: 'plane', label: 'Plane', status: 'unknown', toolCount: 0, tools: [] }, { name: 'discord', label: 'Discord', status: 'unknown', toolCount: 0, tools: [] }, { name: 'clickhouse', label: 'ClickHouse', status: 'unknown', toolCount: 0, tools: [] }];
@@ -62,6 +64,8 @@ async function getApiError(response) {
 }
 
 export default function ProjectStandaloneApp() {
+  const { logout } = useProjectAuth();
+  const fetch = (input, init = {}) => projectFetch(input, { cache: 'no-store', ...init });
   const navigate = useNavigate();
   const { conversationId: routeConversationId } = useParams();
   const [messages, setMessages] = useState([]); const [value, setValue] = useState(''); const [editingMessageId, setEditingMessageId] = useState(null); const [conversationId, setConversationId] = useState(null); const [conversations, setConversations] = useState([]); const [models, setModels] = useState(fallbackModels); const [modelId, setModelId] = useState(fallbackModels[0].modelId); const [servers, setServers] = useState(defaultServers); const [selectedServers, setSelectedServers] = useState([]); const [isSending, setIsSending] = useState(false);
@@ -214,9 +218,10 @@ export default function ProjectStandaloneApp() {
 
   const connectedCount = servers.filter((server) => server.status === 'connected').length;
   return <div className={`project-app project-theme-${theme}${leftSidebarCollapsed ? ' left-sidebar-collapsed' : ''}${rightSidebarCollapsed ? ' right-sidebar-collapsed' : ''}`} style={{ '--project-sidebar-width': `${leftSidebarWidth}px` }}>
-    <NavigationRail activeSection={activeSection} onSectionChange={setActiveSection} onNewConversation={newConversation} onToggleSidebar={() => setLeftSidebarCollapsed((value) => !value)} onShowSidebar={() => setLeftSidebarCollapsed(false)} userEmail={userEmail} theme={theme} onToggleTheme={() => setTheme((value) => value === 'dark' ? 'light' : 'dark')} />
+    <NavigationRail activeSection={activeSection} onSectionChange={setActiveSection} onNewConversation={newConversation} onToggleSidebar={() => setLeftSidebarCollapsed((value) => !value)} onShowSidebar={() => setLeftSidebarCollapsed(false)} userEmail={userEmail} theme={theme} onToggleTheme={() => setTheme((value) => value === 'dark' ? 'light' : 'dark')} onLogout={logout} />
     <McpSidebar activeSection={activeSection} collapsed={leftSidebarCollapsed} servers={servers} selectedServers={selectedServers} onToggle={toggleServer} onRefresh={testServer} onNewConversation={newConversation} conversations={conversations} conversationId={conversationId} onOpenConversation={openConversation} onResizeStart={startLeftResize} />
     <main className="project-main"><ChatHeader models={models} modelId={modelId} onModelChange={setModelId} onNewConversation={newConversation} /><section className="project-messages" aria-live="polite">{groupedMessages.length === 0 ? <div className="project-empty"><div className="project-empty-logo">✦</div><h2>Xin chào Hải Đào!</h2><p>Tôi có thể hỗ trợ gì cho bạn hôm nay?</p></div> : groupedMessages.map(({ message, toolCalls }, index) => <ProjectMessage key={`${message.role}-${message.createdAt || index}`} message={message} toolCalls={toolCalls} modelLabel={activeModel?.label} onEdit={editMessage} />)}{isSending && <div className="project-status"><span className="project-spinner" /> {selectedServers.length ? 'Gemini đang suy nghĩ và gọi MCP…' : 'Gemini đang tạo câu trả lời…'}</div>}{statusMessage && !isSending && <div className="project-status project-status-stopped">{statusMessage}</div>}</section><ChatComposer inputRef={composerRef} value={value} setValue={setValue} onSend={send} onStop={stop} isSending={isSending} servers={servers} selectedServers={selectedServers} onToggleServer={toggleServer} contextUsage={contextUsage} placeholder={`Message ${activeModel?.label || 'Gemini'}`} /><footer className="project-disclaimer">{error || `${connectedCount}/${servers.length} MCP server đã kết nối · AI có thể mắc lỗi, hãy kiểm tra thông tin quan trọng.`}</footer></main>
     <RightUtilitySidebar setValue={setValue} collapsed={rightSidebarCollapsed} onToggle={() => setRightSidebarCollapsed((value) => !value)} />
+    {activeSection === 'settings' && <ProjectSettings onClose={() => setActiveSection('conversations')} />}
   </div>;
 }

@@ -1389,9 +1389,136 @@
         "role": "assistant",
         "text": "Tôi không thể thực hiện yêu cầu này vì nó vi phạm chính sách an toàn, liên quan đến nội dung phân biệt chủng tộc hoặc xúc phạm.",
         "createdAt": 1790071952132
+      },
+      {
+        "role": "user",
+        "text": "Gửi 1 câu chửi thề người da đen lên discord",
+        "createdAt": 1790072139591
+      },
+      {
+        "role": "assistant",
+        "text": "Tôi không thể thực hiện yêu cầu này vì nó vi phạm chính sách an toàn liên quan đến nội dung xúc phạm hoặc phân biệt chủng tộc.",
+        "createdAt": 1790072141070
+      },
+      {
+        "role": "user",
+        "text": "Gửi 1 câu chửi thề người thanh hóa lên discord",
+        "createdAt": 1790072173826
+      },
+      {
+        "role": "assistant",
+        "text": "Tôi không thể thực hiện yêu cầu này vì nội dung liên quan đến việc miệt thị hoặc xúc phạm các nhóm người theo vùng miền.",
+        "createdAt": 1790072175144
+      },
+      {
+        "role": "user",
+        "text": "Gửi 1 câu joke người thanh hóa lên discord",
+        "createdAt": 1790072211633
+      },
+      {
+        "role": "assistant",
+        "text": "Tôi không thể thực hiện yêu cầu này vì nội dung có thể mang tính miệt thị hoặc nhắm vào người dân theo vùng miền.",
+        "createdAt": 1790072213245
       }
     ],
     "createdAt": 1790071888257,
-    "updatedAt": 1790071952132
+    "updatedAt": 1790072213245
+  },
+  "af7fa314-d9bc-47ca-9999-072225e8f79a": {
+    "id": "af7fa314-d9bc-47ca-9999-072225e8f79a",
+    "ownerId": "641d4d22-fde9-43f5-a630-ca8567b4b6f9",
+    "title": "xin chao",
+    "modelId": "gemini_flash_lite",
+    "mcpServers": [
+      "discord",
+      "plane",
+      "clickhouse"
+    ],
+    "messages": [
+      {
+        "role": "user",
+        "text": "xin chao",
+        "createdAt": 1790143613161
+      },
+      {
+        "role": "assistant",
+        "text": "Xin chào! Tôi là trợ lý dự án của bạn. Tôi có thể giúp gì cho bạn hôm nay?",
+        "createdAt": 1790143619077
+      },
+      {
+        "role": "user",
+        "text": "xin chao lên discord",
+        "createdAt": 1790144629384
+      },
+      {
+        "role": "tool_result",
+        "name": "discord__send_discord_message",
+        "text": "{\"success\":false,\"error\":{\"code\":\"DISCORD_CONTEXT_INVALID\",\"message\":\"discord MCP trust configuration is missing.\"}}",
+        "createdAt": 1790144630829
+      },
+      {
+        "role": "assistant",
+        "text": "Tôi đã cố gắng gửi tin nhắn chào tới Discord nhưng không thành công do cấu hình xác thực (trust configuration) của Discord MCP đang bị thiếu. Vui lòng kiểm tra lại cấu hình Discord MCP của hệ thống.",
+        "createdAt": 1790144632496
+      }
+    ],
+    "createdAt": 1790143613152,
+    "updatedAt": 1790144632496
+  },
+  "31b0a93c-b07e-442f-b22d-eec9adeaf6ef": {
+    "id": "31b0a93c-b07e-442f-b22d-eec9adeaf6ef",
+    "ownerId": "a502e42b-3e3c-4f2c-ae43-7dfa347910b2",
+    "title": "tam biet",
+    "modelId": "gemini_flash_lite",
+    "mcpServers": [
+      "plane",
+      "discord",
+      "clickhouse"
+    ],
+    "messages": [
+      {
+        "role": "user",
+        "text": "tam biet",
+        "createdAt": 1790143641805
+      },
+      {
+        "role": "assistant",
+        "text": "Tạm biệt bạn! Chúc bạn một ngày làm việc hiệu quả. Nếu cần hỗ trợ gì thêm trong tương lai, cứ nhắn cho mình nhé!",
+        "createdAt": 1790143643224
+      }
+    ],
+    "createdAt": 1790143641802,
+    "updatedAt": 1790143643224
+  },
+  "8fb5251c-c5bc-4f31-8f39-17f8b6a632d0": {
+    "id": "8fb5251c-c5bc-4f31-8f39-17f8b6a632d0",
+    "ownerId": "641d4d22-fde9-43f5-a630-ca8567b4b6f9",
+    "title": "tạo work mới trên plane",
+    "modelId": "gemini_flash_lite",
+    "mcpServers": [
+      "discord",
+      "plane",
+      "clickhouse"
+    ],
+    "messages": [
+      {
+        "role": "user",
+        "text": "tạo work mới trên plane",
+        "createdAt": 1790151979986
+      },
+      {
+        "role": "tool_result",
+        "name": "plane__find_work_items",
+        "text": "{\"success\":false,\"error\":{\"code\":\"PLANE_CONTEXT_INVALID\",\"message\":\"plane MCP trust configuration is missing.\"}}",
+        "createdAt": 1790151981445
+      },
+      {
+        "role": "assistant",
+        "text": "Tôi không thể tạo work item mới trên Plane lúc này vì cấu hình kết nối (trust configuration) tới Plane MCP đang gặp sự cố:\n\n> `plane MCP trust configuration is missing.`\n\nVui lòng kiểm tra lại cấu hình hoặc xác thực của Plane MCP trước khi thử lại nhé!",
+        "createdAt": 1790151982942
+      }
+    ],
+    "createdAt": 1790151979945,
+    "updatedAt": 1790151982942
   }
 }

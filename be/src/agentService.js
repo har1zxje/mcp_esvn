@@ -17,7 +17,7 @@ function requiresUserConfirmation(value) {
 export class AgentService {
   constructor(registry, gemini = new GeminiClient()) { this.registry = registry; this.gemini = gemini; }
 
-  async run(conversation, mapping, signal, onText) {
+  async run(conversation, mapping, signal, onText, executionContext = {}) {
     await this.registry.refresh(mapping.mcpServers, signal);
     const messages = [{ role: 'user', parts: [{ text: SYSTEM }] }, ...this.toGeminiMessages(conversation.messages)];
     const usage = {};
@@ -36,7 +36,7 @@ export class AgentService {
       for (const call of response.toolCalls) {
         const latestUserMessage = [...conversation.messages].reverse().find((item) => item.role === 'user')?.text;
         if (signal?.aborted) throw new DOMException('The request was aborted', 'AbortError');
-        const result = await this.registry.execute(call.name, call.args ?? {}, latestUserMessage, signal);
+        const result = await this.registry.execute(call.name, call.args ?? {}, latestUserMessage, signal, executionContext);
         console.log(JSON.stringify({ event: 'agent.tool', conversationId: conversation.id, tool: call.name, success: result.success }));
         messages.push({ role: 'user', parts: [{ functionResponse: { name: call.name, response: result } }] });
         conversation.messages.push({ role: 'tool_result', name: call.name, text: JSON.stringify(result), createdAt: Date.now() });

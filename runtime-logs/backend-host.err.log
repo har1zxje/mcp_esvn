@@ -1,0 +1,1 @@
+{"event":"api.error","requestId":"91b8967b-423c-4864-bf20-eff6a2de31cf","method":"GET","path":"/api/integrations/discord/connect","status":503,"code":"CHAT_BACKEND_ERROR","message":"Discord OAuth is not configured","operation":null,"hostname":null,"errorName":"Error","causeCode":null}

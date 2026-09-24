@@ -6,23 +6,26 @@ using System.Collections.Generic;
 public class PlaneAPIServices
 {
     private readonly HttpClient _httpClient;
-    private readonly string _apiKey;
     private readonly string _baseUrl;
     private readonly string _workspace;
     private readonly string _projectId;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly ILogger<PlaneAPIServices> _logger;
 
     public PlaneAPIServices(
         IHttpClientFactory httpClientFactory, 
         string baseUrl, 
         string workspace, 
         string projectId,
-        string apiKey)
+        IHttpContextAccessor httpContextAccessor,
+        ILogger<PlaneAPIServices> logger)
     {
         _httpClient = httpClientFactory.CreateClient();
-        _apiKey = apiKey;
         _baseUrl = baseUrl.TrimEnd('/');
         _workspace = workspace;
         _projectId = projectId;
+        _httpContextAccessor = httpContextAccessor;
+        _logger = logger;
     } 
 
     public async Task<string> CreateWorkItemsAsync(
@@ -97,6 +100,14 @@ public class PlaneAPIServices
             Headers = { ContentType = new MediaTypeHeaderValue("application/json") }
         };
 
+        _logger.LogInformation(
+            "Plane API request. Method={Method} Url={Url} Workspace={Workspace} ProjectId={ProjectId} PayloadLength={PayloadLength}",
+            HttpMethod.Post,
+            url,
+            _workspace,
+            _projectId,
+            jsonContent.Length);
+
         using var request = new HttpRequestMessage(HttpMethod.Post, url)
         {
             Content = content
@@ -106,6 +117,12 @@ public class PlaneAPIServices
         var response = await _httpClient.SendAsync(request);
 
         var responseContent = await response.Content.ReadAsStringAsync(); 
+
+        _logger.LogInformation(
+            "Plane API response. StatusCode={StatusCode} ReasonPhrase={ReasonPhrase} BodyLength={BodyLength}",
+            (int)response.StatusCode,
+            response.ReasonPhrase,
+            responseContent.Length);
 
         if(!response.IsSuccessStatusCode)
         {
@@ -144,8 +161,21 @@ public class PlaneAPIServices
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         SetApiKey(request);
 
-        var response = await _httpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
+        HttpResponseMessage response;
+        try
+        {
+            response = await _httpClient.SendAsync(request);
+        }
+        catch (Exception exception)
+        {
+            LogPlaneFailure("plane.find_work_items", url, null, "PLANE_UPSTREAM_UNREACHABLE", exception);
+            throw new HttpRequestException("Plane API is unreachable.", exception);
+        }
+        if (!response.IsSuccessStatusCode)
+        {
+            LogPlaneFailure("plane.find_work_items", url, (int)response.StatusCode, response.StatusCode == System.Net.HttpStatusCode.Unauthorized ? "PLANE_UNAUTHORIZED" : response.StatusCode == System.Net.HttpStatusCode.Forbidden ? "PLANE_FORBIDDEN" : "PLANE_UPSTREAM_ERROR", null);
+            throw new HttpRequestException($"Plane API returned HTTP {(int)response.StatusCode}.");
+        }
 
         var json = await response.Content.ReadAsStringAsync();
         using var document = JsonDocument.Parse(json);
@@ -347,7 +377,21 @@ public class PlaneAPIServices
 
     private void SetApiKey(HttpRequestMessage request)
     {
-        request.Headers.Remove("X-API-Key");
-        request.Headers.Add("X-API-Key", _apiKey);
+        var context = _httpContextAccessor.HttpContext;
+        var apiKey = context?.Request.Headers["X-Plane-API-Key"].ToString();
+        var userId = _httpContextAccessor.HttpContext?.Request.Headers["X-MCP-User-Id"].ToString();
+        if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrWhiteSpace(userId))
+            throw new InvalidOperationException("Authenticated Plane execution context is missing.");
+        if (string.Equals(context?.Request.Headers["X-Plane-Auth-Type"].ToString(), "oauth", StringComparison.OrdinalIgnoreCase))
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        else
+            request.Headers.Add("X-API-Key", apiKey);
+    }
+
+    private void LogPlaneFailure(string operation, string url, int? status, string code, Exception? exception)
+    {
+        var context = _httpContextAccessor.HttpContext;
+        Uri.TryCreate(url, UriKind.Absolute, out var uri);
+        _logger.LogError(exception, "Plane MCP request failed. RequestId={RequestId} UserId={UserId} Operation={Operation} HttpStatus={HttpStatus} Hostname={Hostname} ErrorCode={ErrorCode}", context?.Request.Headers["X-Request-Id"].ToString(), context?.Request.Headers["X-MCP-User-Id"].ToString(), operation, status, uri?.Host, code);
     }
 }
