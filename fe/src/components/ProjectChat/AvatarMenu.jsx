@@ -7,7 +7,7 @@ function getInitials(email) {
   return value.split('@')[0].slice(0, 2).toUpperCase();
 }
 
-export default function AvatarMenu({ email, theme, onToggleTheme }) {
+export default function AvatarMenu({ email, theme, onToggleTheme, onLogout }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const isDark = theme === 'dark';
@@ -38,6 +38,7 @@ export default function AvatarMenu({ email, theme, onToggleTheme }) {
         <span>{isDark ? 'Chế độ sáng' : 'Chế độ tối'}</span>
         <span className={`theme-switch ${isDark ? 'is-on' : ''}`} aria-hidden="true"><span /></span>
       </button>
+      <button type="button" className="avatar-theme-item" onClick={onLogout}>Sign out</button>
     </div>}
   </div>;
 }

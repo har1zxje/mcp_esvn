@@ -6,9 +6,7 @@
  */
 export const PROJECT_USER_MODE = true;
 
-// LibreChat's Agents API requires an authenticated user JWT. Keep the
-// provider/API settings project-managed, but use the normal login flow so the
-// project backend can forward a valid session to LibreChat.
+// Project authentication is independent from the LibreChat model integration.
 export const PROJECT_GUEST_MODE = false;
 
 export const PROJECT_NAME = 'eschat';

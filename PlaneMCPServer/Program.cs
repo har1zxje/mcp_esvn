@@ -1,5 +1,6 @@
 using ModelContextProtocol.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Cryptography;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +11,10 @@ builder.Configuration
     .AddUserSecrets<Program>()
     .AddEnvironmentVariables(); 
 
-var planeAPIKey = builder.Configuration["PlaneAPIKey"];
 var baseUrl = builder.Configuration["BaseUrl"];
 var workspace = builder.Configuration["Workspace"];
 var projectId = builder.Configuration["ProjectId"];
+var mcpInternalToken = builder.Configuration["MCP_INTERNAL_TOKEN"];
 var mcpPort = builder.Configuration.GetValue<int?>("McpPort") ?? 3003;
 
 if (mcpPort is < 1 or > 65535)
@@ -21,12 +22,26 @@ if (mcpPort is < 1 or > 65535)
     throw new InvalidOperationException("McpPort phải nằm trong khoảng 1-65535.");
 }
 
-if(string.IsNullOrEmpty(planeAPIKey) || string.IsNullOrEmpty(baseUrl) || string.IsNullOrEmpty(workspace) || string.IsNullOrEmpty(projectId))
+var missingConfiguration = new[]
 {
-    throw new InvalidOperationException("Vui lòng cung cấp PlaneAPIKey, BaseUrl, Workspace và ProjectId trong appsettings.json hoặc User Secrets.");
+    (Name: "MCP_INTERNAL_TOKEN", Value: mcpInternalToken),
+    (Name: "BaseUrl", Value: baseUrl),
+    (Name: "Workspace", Value: workspace),
+    (Name: "ProjectId", Value: projectId)
+}
+    .Where(setting => string.IsNullOrWhiteSpace(setting.Value))
+    .Select(setting => setting.Name)
+    .ToArray();
+
+if (missingConfiguration.Length > 0)
+{
+    throw new InvalidOperationException(
+        $"Plane MCP configuration is incomplete. Missing: {string.Join(", ", missingConfiguration)}. " +
+        "Configure MCP_INTERNAL_TOKEN in User Secrets or the process environment; BaseUrl, Workspace, and ProjectId may be configured in appsettings.json.");
 }
 
 builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSingleton(sp =>
 {
@@ -35,9 +50,10 @@ builder.Services.AddSingleton(sp =>
     return new PlaneAPIServices(
         httpClientFactory, 
         baseUrl, 
-        workspace, 
-        projectId, 
-        planeAPIKey);
+        workspace,
+        projectId,
+        sp.GetRequiredService<IHttpContextAccessor>(),
+        sp.GetRequiredService<ILogger<PlaneAPIServices>>());
 });
 
 builder.Services.AddMcpServer()
@@ -45,6 +61,22 @@ builder.Services.AddMcpServer()
                 .WithToolsFromAssembly();
 
 var app = builder.Build();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/mcp"))
+    {
+        var supplied = context.Request.Headers["X-MCP-Internal-Token"].ToString();
+        if (string.IsNullOrEmpty(supplied) || !CryptographicOperations.FixedTimeEquals(
+                System.Text.Encoding.UTF8.GetBytes(supplied),
+                System.Text.Encoding.UTF8.GetBytes(mcpInternalToken)))
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return;
+        }
+    }
+    await next();
+});
 
 app.MapMcp("/mcp");
 

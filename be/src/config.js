@@ -47,9 +47,24 @@ const loadServerGoogleKey = () => {
 export const config = {
   host: process.env.HOST ?? '127.0.0.1',
   port: Number(process.env.PORT ?? 3091),
-  libreChatUrl: required('LIBRECHAT_URL').replace(/\/$/, ''),
+  databaseUrl: process.env.DATABASE_URL ?? '',
+  databaseHost: process.env.DB_HOST ?? '127.0.0.1',
+  databasePort: Number(process.env.DB_PORT ?? 5432),
+  databaseName: process.env.DB_NAME ?? 'mcpserver',
+  databaseUser: process.env.DB_USER ?? 'postgres',
+  databasePassword: process.env.DB_PASSWORD,
+  // Optional model/UI integration. Authentication does not use this service.
+  libreChatUrl: (process.env.LIBRECHAT_URL ?? 'http://127.0.0.1:3080').replace(/\/$/, ''),
   // Optional server-to-server credential. It never reaches the browser.
   libreChatServiceToken: process.env.LIBRECHAT_SERVICE_TOKEN ?? '',
+  googleClientId: process.env.GOOGLE_CLIENT_ID ?? '',
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+  projectFrontendUrl: (process.env.PROJECT_FRONTEND_URL ?? 'http://localhost:3090').replace(/\/$/, ''),
+  // Use the browser-facing origin in development; Vite proxies this callback
+  // to the backend, allowing the cookie to belong to the frontend host.
+  authCallbackUrl: process.env.AUTH_CALLBACK_URL ?? `${(process.env.PROJECT_FRONTEND_URL ?? 'http://localhost:3090').replace(/\/$/, '')}/api/auth/google/callback`,
+  authCookieSecure: process.env.AUTH_COOKIE_SECURE === 'true',
+  authSessionTtlMs: Number(process.env.AUTH_SESSION_TTL_MS ?? 604800000),
   corsOrigins: origins,
   defaultModelId: process.env.CHAT_DEFAULT_MODEL_ID ?? '',
   modelMap: parseModelMap(),
@@ -58,6 +73,23 @@ export const config = {
   contextMessageLimit: Number(process.env.CONTEXT_MESSAGE_LIMIT ?? 24),
   modelTimeoutMs: Number(process.env.MODEL_TIMEOUT_MS ?? 30000),
   mcpTimeoutMs: Number(process.env.MCP_TIMEOUT_MS ?? 15000),
+  mcpInternalToken: process.env.MCP_INTERNAL_TOKEN ?? '',
+  discordValidationUrl: process.env.DISCORD_VALIDATION_URL ?? 'http://127.0.0.1:3002/internal/discord/destination',
+  integrationEncryptionKey: process.env.INTEGRATION_ENCRYPTION_KEY ?? '',
+  planeBaseUrl: process.env.PLANE_BASE_URL ?? 'https://api.plane.so/',
+  planeValidationTimeoutMs: Number(process.env.PLANE_VALIDATION_TIMEOUT_MS ?? 10000),
+  planeClientId: process.env.PLANE_OAUTH_CLIENT_ID ?? process.env.PLANE_CLIENT_ID ?? '',
+  planeClientSecret: process.env.PLANE_OAUTH_CLIENT_SECRET ?? process.env.PLANE_CLIENT_SECRET ?? '',
+  planeOAuthAuthorizeUrl: process.env.PLANE_OAUTH_AUTHORIZE_URL ?? '',
+  planeOAuthTokenUrl: process.env.PLANE_OAUTH_TOKEN_URL ?? '',
+  planeOAuthRedirectUri: process.env.PLANE_OAUTH_REDIRECT_URI ?? process.env.PLANE_REDIRECT_URI ?? '',
+  planeOAuthScopes: process.env.PLANE_OAUTH_SCOPES ?? '',
+  discordClientId: process.env.DISCORD_CLIENT_ID ?? '',
+  discordClientSecret: process.env.DISCORD_CLIENT_SECRET ?? '',
+  discordOAuthRedirectUri: process.env.DISCORD_REDIRECT_URI ?? '',
+  discordBotPermissions: process.env.DISCORD_BOT_PERMISSIONS ?? '2048',
+  discordDiscoveryUrl: process.env.DISCORD_DISCOVERY_URL ?? 'http://127.0.0.1:3002/internal/discord',
+  oauthStateTtlMs: Number(process.env.OAUTH_STATE_TTL_MS ?? 600000),
   mcpServers: parseMcpServers(),
 };
 
@@ -89,6 +121,14 @@ if (!Number.isInteger(config.modelTimeoutMs) || config.modelTimeoutMs < 1000) {
 
 if (!Number.isInteger(config.mcpTimeoutMs) || config.mcpTimeoutMs < 1000) {
   throw new Error('MCP_TIMEOUT_MS must be an integer >= 1000');
+}
+
+if (!Number.isInteger(config.planeValidationTimeoutMs) || config.planeValidationTimeoutMs < 1000) {
+  throw new Error('PLANE_VALIDATION_TIMEOUT_MS must be an integer >= 1000');
+}
+
+if (!Number.isInteger(config.authSessionTtlMs) || config.authSessionTtlMs < 60_000) {
+  throw new Error('AUTH_SESSION_TTL_MS must be an integer >= 60000');
 }
 
 if (config.defaultModelId && !config.modelMap[config.defaultModelId]) {
