@@ -2,6 +2,25 @@ export class PlaneOAuthError extends Error {
   constructor(code, message, statusCode = 400) { super(message); this.code = code; this.statusCode = statusCode; }
 }
 
+// Keep this list in code as well as .env.example.  Deployments that still have
+// an older PLANE_OAUTH_SCOPES value get the required scopes appended to the
+// authorization request instead of silently issuing an under-scoped token.
+export const REQUIRED_PLANE_OAUTH_SCOPES = [
+  'profile:read',
+  'projects:read',
+  'projects.work_items:read',
+  'projects.work_items:write',
+  // State lookup is required for dynamic state-ID resolution. Project-member
+  // discovery is optional and must be explicitly enabled only after this
+  // staged authorize request succeeds.
+  'projects.states:read',
+];
+
+export function requiredPlaneOAuthScopes(configuredScopes = '') {
+  const configured = typeof configuredScopes === 'string' ? configuredScopes.split(/\s+/).filter(Boolean) : [];
+  return [...new Set([...configured, ...REQUIRED_PLANE_OAUTH_SCOPES])].join(' ');
+}
+
 export function isPlaneOAuthConfigured(config) {
   return Boolean(config.planeOAuthAuthorizeUrl && config.planeOAuthTokenUrl && config.planeClientId && config.planeClientSecret && config.planeOAuthRedirectUri);
 }
@@ -9,7 +28,7 @@ export function isPlaneOAuthConfigured(config) {
 export function buildPlaneAuthorizationUrl(config, state) {
   if (!isPlaneOAuthConfigured(config)) throw new PlaneOAuthError('PLANE_OAUTH_UNAVAILABLE', 'Plane OAuth is not configured for this deployment', 503);
   const url = new URL(config.planeOAuthAuthorizeUrl);
-  url.search = new URLSearchParams({ response_type: 'code', client_id: config.planeClientId, redirect_uri: config.planeOAuthRedirectUri, state, ...(config.planeOAuthScopes ? { scope: config.planeOAuthScopes } : {}) }).toString();
+  url.search = new URLSearchParams({ response_type: 'code', client_id: config.planeClientId, redirect_uri: config.planeOAuthRedirectUri, state, scope: requiredPlaneOAuthScopes(config.planeOAuthScopes) }).toString();
   return url.toString();
 }
 
@@ -46,11 +65,21 @@ export async function refreshPlaneToken(refreshToken, config, { fetchImpl = fetc
   return payload;
 }
 
-export async function getPlaneProfile(accessToken, config, { fetchImpl = fetch } = {}) {
+export async function getPlaneProfile(accessToken, config, { fetchImpl = fetch, authType = 'oauth' } = {}) {
   const url = new URL('/api/v1/users/me/', config.planeBaseUrl);
-  const response = await fetchImpl(url, { headers: { authorization: `Bearer ${accessToken}`, accept: 'application/json' } });
+  let response;
+  try {
+    const headers = { accept: 'application/json' };
+    if (authType === 'oauth') headers.authorization = `Bearer ${accessToken}`;
+    else headers['x-api-key'] = accessToken;
+    response = await fetchImpl(url, { headers });
+  } catch (error) {
+    throw networkError(error, 'plane.oauth.profile', url);
+  }
   const profile = await response.json().catch(() => ({}));
-  if (!response.ok || !profile?.id) throw new PlaneOAuthError('PLANE_OAUTH_PROFILE_FAILED', 'Plane account could not be verified', 400);
+  if (response.status === 401) throw new PlaneOAuthError('PLANE_REAUTH_REQUIRED', 'Plane authorization is invalid or expired; reconnect is required.', 401);
+  if (response.status === 403) throw new PlaneOAuthError('PLANE_FORBIDDEN', 'Plane authorization is valid but does not have permission to read the profile.', 403);
+  if (!response.ok || !profile?.id) throw new PlaneOAuthError('PLANE_OAUTH_PROFILE_FAILED', 'Plane account could not be verified', response.status >= 500 ? 503 : 400);
   return profile;
 }
 

@@ -1,0 +1,5 @@
+[
+  { "id": "employee-a1", "tenantId": "*", "displayName": "Employee A1", "departmentId": "dept-product", "title": "Product Builder", "employmentStatus": "active" },
+  { "id": "employee-a2", "tenantId": "*", "displayName": "Employee A2", "departmentId": "dept-product", "title": "Quality Builder", "employmentStatus": "active" },
+  { "id": "employee-b1", "tenantId": "*", "displayName": "Employee B1", "departmentId": "dept-operations", "title": "Operations Builder", "employmentStatus": "active" }
+]

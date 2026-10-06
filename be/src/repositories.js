@@ -20,6 +20,10 @@ export class UserRepository {
     const { rows } = await this.database.query('SELECT id, email, display_name, avatar_url FROM users WHERE id = $1', [id]);
     return safeUser(rows[0]);
   }
+  async listDirectoryUsers() {
+    const { rows } = await this.database.query('SELECT id, email, display_name FROM users ORDER BY display_name, id');
+    return rows.map((row) => ({ id: row.id, email: row.email, name: row.display_name }));
+  }
   async createUser({ id, googleSub = null, email, name, avatar = null, passwordHash = null }) {
     const { rows } = await this.database.query(`INSERT INTO users (id, google_sub, email, display_name, avatar_url, password_hash)
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, email, display_name, avatar_url`, [id, googleSub, email, name, avatar, passwordHash]);
@@ -86,4 +90,84 @@ export class ConversationRepository {
   async upsert(conversation) { await this.database.query(`INSERT INTO conversations (id, owner_id, legacy_owner_id, data, updated_at) VALUES ($1, $2, $3, $4::jsonb, to_timestamp($5 / 1000.0))
     ON CONFLICT (id) DO UPDATE SET owner_id = EXCLUDED.owner_id, legacy_owner_id = EXCLUDED.legacy_owner_id, data = EXCLUDED.data, updated_at = EXCLUDED.updated_at`, [conversation.id, conversation.ownerId || null, null, JSON.stringify(conversation), conversation.updatedAt ?? Date.now()]); }
   async delete(id, userId) { const result = await this.database.query('DELETE FROM conversations WHERE id = $1 AND owner_id = $2', [id, userId]); return result.rowCount > 0; }
+}
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const COMPANY_ID = /^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$/;
+const MUTATION_KIND = /^[a-z][a-z0-9._-]{0,99}$/;
+const DIGEST = /^[0-9a-f]{64}$/;
+const requiredUuid = (value, name) => {
+  if (!UUID.test(String(value ?? ''))) throw new TypeError(`${name} must be a UUID.`);
+  return String(value);
+};
+const requiredObject = (value, name) => {
+  if (!value || Array.isArray(value) || typeof value !== 'object') throw new TypeError(`${name} must be an object.`);
+  return value;
+};
+const requiredCompanyId = (value) => {
+  if (!COMPANY_ID.test(String(value ?? ''))) throw new TypeError('companyId is invalid.');
+  return String(value);
+};
+const requiredMutationKind = (value) => {
+  if (!MUTATION_KIND.test(String(value ?? ''))) throw new TypeError('mutationKind is invalid.');
+  return String(value);
+};
+const requiredDigest = (value) => {
+  if (!DIGEST.test(String(value ?? ''))) throw new TypeError('payloadDigest must be a SHA-256 digest.');
+  return String(value);
+};
+const requiredConversationId = (value) => requiredUuid(value, 'conversationId');
+
+/** Persists semantic-mutation authorization state; callers must supply only
+ * server-resolved identities and canonical payloads. */
+export class MutationConfirmationRepository {
+  constructor(database) { this.database = database; }
+  map(row) {
+    return row ? {
+      id: row.id,
+      userId: row.user_id,
+      companyId: row.company_id,
+      conversationId: row.conversation_id,
+      mutationKind: row.mutation_kind,
+      targetIds: row.target_ids,
+      payloadDigest: row.payload_digest,
+      resolvedPayload: row.resolved_payload,
+      expiresAt: row.expires_at instanceof Date ? row.expires_at.toISOString() : row.expires_at,
+      consumedAt: row.consumed_at instanceof Date ? row.consumed_at.toISOString() : row.consumed_at,
+    } : null;
+  }
+  async create({ userId, companyId, conversationId, mutationKind, targetIds, payloadDigest, resolvedPayload, expiresAt }) {
+    const safeUserId = requiredUuid(userId, 'userId');
+    const safeConversationId = requiredUuid(conversationId, 'conversationId');
+    if (!(expiresAt instanceof Date) || Number.isNaN(expiresAt.getTime())) throw new TypeError('expiresAt must be a valid Date.');
+    const { rows } = await this.database.query(`INSERT INTO mutation_confirmations
+      (user_id, company_id, conversation_id, mutation_kind, target_ids, payload_digest, resolved_payload, expires_at)
+      VALUES ($1,$2,$3,$4,$5::jsonb,$6,$7::jsonb,$8)
+      RETURNING id, user_id, company_id, conversation_id, mutation_kind, target_ids, payload_digest, resolved_payload, expires_at, consumed_at`,
+    [safeUserId, requiredCompanyId(companyId), safeConversationId, requiredMutationKind(mutationKind), JSON.stringify(requiredObject(targetIds, 'targetIds')), requiredDigest(payloadDigest), JSON.stringify(requiredObject(resolvedPayload, 'resolvedPayload')), expiresAt]);
+    return this.map(rows[0]);
+  }
+  async consume({ id, userId, companyId, conversationId, mutationKind, payloadDigest }) {
+    const { rows } = await this.database.query(`UPDATE mutation_confirmations SET consumed_at = now()
+      WHERE id = $1 AND user_id = $2 AND company_id = $3 AND conversation_id = $4 AND mutation_kind = $5
+        AND payload_digest = $6 AND consumed_at IS NULL AND expires_at > now()
+      RETURNING id, user_id, company_id, conversation_id, mutation_kind, target_ids, payload_digest, resolved_payload, expires_at, consumed_at`,
+    [requiredUuid(id, 'id'), requiredUuid(userId, 'userId'), requiredCompanyId(companyId), requiredConversationId(conversationId), requiredMutationKind(mutationKind), requiredDigest(payloadDigest)]);
+    return this.map(rows[0]);
+  }
+
+  /**
+   * Atomically consumes a record using only server-owned identity/context. The
+   * canonical payload digest remains persisted with the record and is checked
+   * by MutationConfirmationService before its payload is handed to an
+   * executor; callers never supply a model-controlled digest.
+   */
+  async consumeBound({ id, userId, companyId, conversationId, mutationKind }) {
+    const { rows } = await this.database.query(`UPDATE mutation_confirmations SET consumed_at = now()
+      WHERE id = $1 AND user_id = $2 AND company_id = $3 AND conversation_id = $4 AND mutation_kind = $5
+        AND consumed_at IS NULL AND expires_at > now()
+      RETURNING id, user_id, company_id, conversation_id, mutation_kind, target_ids, payload_digest, resolved_payload, expires_at, consumed_at`,
+    [requiredUuid(id, 'id'), requiredUuid(userId, 'userId'), requiredCompanyId(companyId), requiredConversationId(conversationId), requiredMutationKind(mutationKind)]);
+    return this.map(rows[0]);
+  }
 }

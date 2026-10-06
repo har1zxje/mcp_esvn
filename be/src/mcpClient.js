@@ -4,11 +4,14 @@ export class McpClient {
   constructor(name, server) {
     this.name = name;
     this.server = server;
-    this.sessionId = null;
+    this.sessions = new Map();
+    this.initializations = new Map();
     this.requestId = 0;
   }
 
   async rpc(method, params = {}, signal, extraHeaders = {}) {
+    const sessionScope = this.sessionScope(extraHeaders);
+    const sessionId = this.sessions.get(sessionScope);
     const isNotification = method.startsWith('notifications/');
     const requestSignal = signal
       ? AbortSignal.any([signal, AbortSignal.timeout(config.mcpTimeoutMs)])
@@ -23,7 +26,7 @@ export class McpClient {
         accept: 'application/json, text/event-stream',
         'mcp-protocol-version': '2025-06-18',
         ...(this.server.internalToken ? { 'x-mcp-internal-token': this.server.internalToken } : {}),
-        ...(this.sessionId ? { 'mcp-session-id': this.sessionId } : {}),
+        ...(sessionId ? { 'mcp-session-id': sessionId } : {}),
         ...extraHeaders,
       },
       body: JSON.stringify({
@@ -47,7 +50,7 @@ export class McpClient {
       throw wrapped;
     }
     const session = response.headers.get('mcp-session-id');
-    if (session) this.sessionId = session;
+    if (session) this.sessions.set(sessionScope, session);
     const text = await response.text();
     if (!text.trim() && method.startsWith('notifications/')) return {};
     const contentType = response.headers.get('content-type') ?? '';
@@ -92,26 +95,43 @@ export class McpClient {
     return payload.result;
   }
 
-  async initialize(signal) {
-    if (this.sessionId) return;
-    if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.initialize.started', server: this.name, url: this.server.url }));
-    try {
-      await this.rpc('initialize', {
-        protocolVersion: '2025-06-18',
-        capabilities: {},
-        clientInfo: { name: 'project-chat-agent', version: '1.0.0' },
-      }, signal);
-      await this.rpc('notifications/initialized', {}, signal);
-      if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.initialize.success', server: this.name }));
-    } catch (error) {
-      console.error(JSON.stringify({ event: 'mcp.initialize.failed', server: this.name, errorCode: error?.code || 'MCP_INITIALIZE_FAILED', errorName: error?.name || 'Error', causeCode: error?.cause?.code || error?.cause?.cause?.code || null, httpStatus: error?.statusCode || null }));
-      throw error;
-    }
+  sessionScope(headers) {
+    if (this.name !== 'hrm') return 'default';
+    // HrmMCPServer validates this context on every MCP request. Keeping its
+    // transport session separate as well prevents an accidental future server
+    // implementation from sharing state across application users.
+    return headers['x-mcp-user-id'] ?? '';
   }
 
-  async listTools(signal) { await this.initialize(signal); const tools = (await this.rpc('tools/list', {}, signal)).tools ?? []; if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.list_tools.success', server: this.name, toolCount: tools.length })); return tools; }
+  async initialize(signal, extraHeaders = {}) {
+    const scope = this.sessionScope(extraHeaders);
+    if (this.sessions.has(scope)) return;
+    const existing = this.initializations.get(scope);
+    if (existing) return existing;
+    const initialization = (async () => {
+      if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.initialize.started', server: this.name, url: this.server.url }));
+      try {
+        await this.rpc('initialize', {
+          protocolVersion: '2025-06-18',
+          capabilities: {},
+          clientInfo: { name: 'project-chat-agent', version: '1.0.0' },
+        }, signal, extraHeaders);
+        await this.rpc('notifications/initialized', {}, signal, extraHeaders);
+        if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.initialize.success', server: this.name }));
+      } catch (error) {
+        console.error(JSON.stringify({ event: 'mcp.initialize.failed', server: this.name, errorCode: error?.code || 'MCP_INITIALIZE_FAILED', errorName: error?.name || 'Error', causeCode: error?.cause?.code || error?.cause?.cause?.code || null, httpStatus: error?.statusCode || null }));
+        throw error;
+      } finally {
+        this.initializations.delete(scope);
+      }
+    })();
+    this.initializations.set(scope, initialization);
+    return initialization;
+  }
+
+  async listTools(signal, extraHeaders = {}) { await this.initialize(signal, extraHeaders); const tools = (await this.rpc('tools/list', {}, signal, extraHeaders)).tools ?? []; if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.list_tools.success', server: this.name, toolCount: tools.length })); return tools; }
   async callTool(name, arguments_, signal, extraHeaders = {}) {
-    await this.initialize(signal);
+    await this.initialize(signal, extraHeaders);
     return this.rpc('tools/call', { name, arguments: arguments_ ?? {} }, signal, extraHeaders);
   }
 }
@@ -147,6 +167,6 @@ function safeHostname(url) {
 }
 
 export function createMcpClients() {
-  return new Map(Object.entries(config.mcpServers).filter(([, server]) => server.enabled && server.url)
+  return new Map(Object.entries(config.mcpServers).filter(([name, server]) => server.enabled && server.url && (!config.mcpEnabledServers || config.mcpEnabledServers.includes(name)))
     .map(([name, server]) => [name, new McpClient(name, { ...server, internalToken: config.mcpInternalToken })]));
 }

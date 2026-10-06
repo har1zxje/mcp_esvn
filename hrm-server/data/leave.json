@@ -1,0 +1,4 @@
+[
+  { "id": "leave-a1", "tenantId": "*", "employeeId": "employee-a1", "type": "annual", "status": "approved", "startDate": "2026-10-05", "endDate": "2026-10-06", "remainingDays": 12 },
+  { "id": "leave-b1", "tenantId": "*", "employeeId": "employee-b1", "type": "personal", "status": "pending", "startDate": "2026-10-12", "endDate": "2026-10-12", "remainingDays": 4 }
+]

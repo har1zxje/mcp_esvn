@@ -44,6 +44,9 @@ const loadServerGoogleKey = () => {
   }
 };
 
+const mcpServers = parseMcpServers();
+const mcpEnabledServers = parseMcpEnabledServers(mcpServers);
+
 export const config = {
   host: process.env.HOST ?? '127.0.0.1',
   port: Number(process.env.PORT ?? 3091),
@@ -74,6 +77,8 @@ export const config = {
   modelTimeoutMs: Number(process.env.MODEL_TIMEOUT_MS ?? 30000),
   mcpTimeoutMs: Number(process.env.MCP_TIMEOUT_MS ?? 15000),
   mcpInternalToken: process.env.MCP_INTERNAL_TOKEN ?? '',
+  hrmApiBaseUrl: (process.env.HRM_API_BASE_URL ?? '').replace(/\/$/, ''),
+  hrmInternalToken: process.env.HRM_INTERNAL_TOKEN ?? '',
   discordValidationUrl: process.env.DISCORD_VALIDATION_URL ?? 'http://127.0.0.1:3002/internal/discord/destination',
   integrationEncryptionKey: process.env.INTEGRATION_ENCRYPTION_KEY ?? '',
   planeBaseUrl: process.env.PLANE_BASE_URL ?? 'https://api.plane.so/',
@@ -83,14 +88,16 @@ export const config = {
   planeOAuthAuthorizeUrl: process.env.PLANE_OAUTH_AUTHORIZE_URL ?? '',
   planeOAuthTokenUrl: process.env.PLANE_OAUTH_TOKEN_URL ?? '',
   planeOAuthRedirectUri: process.env.PLANE_OAUTH_REDIRECT_URI ?? process.env.PLANE_REDIRECT_URI ?? '',
-  planeOAuthScopes: process.env.PLANE_OAUTH_SCOPES ?? '',
+  planeOAuthScopes: process.env.PLANE_OAUTH_SCOPES ?? 'profile:read projects:read projects.work_items:read projects.work_items:write',
   discordClientId: process.env.DISCORD_CLIENT_ID ?? '',
   discordClientSecret: process.env.DISCORD_CLIENT_SECRET ?? '',
   discordOAuthRedirectUri: process.env.DISCORD_REDIRECT_URI ?? '',
   discordBotPermissions: process.env.DISCORD_BOT_PERMISSIONS ?? '2048',
   discordDiscoveryUrl: process.env.DISCORD_DISCOVERY_URL ?? 'http://127.0.0.1:3002/internal/discord',
   oauthStateTtlMs: Number(process.env.OAUTH_STATE_TTL_MS ?? 600000),
-  mcpServers: parseMcpServers(),
+  mcpServers,
+  mcpEnabledServers,
+  hrmLearningMode: mcpEnabledServers?.length === 1 && mcpEnabledServers[0] === 'hrm',
 };
 
 function parseMcpServers() {
@@ -109,6 +116,12 @@ function parseMcpServers() {
     transport: value.transport ?? 'streamable-http',
     enabled: value.enabled !== false,
   }]));
+}
+
+function parseMcpEnabledServers(servers) {
+  const raw = process.env.MCP_ENABLED_SERVERS;
+  if (raw == null || raw.trim() === '') return null;
+  return [...new Set(raw.split(',').map((value) => value.trim()).filter((name) => Object.hasOwn(servers, name)))];
 }
 
 if (!Number.isInteger(config.port) || config.port < 1 || config.port > 65535) {

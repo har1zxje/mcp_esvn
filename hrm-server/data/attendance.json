@@ -1,0 +1,4 @@
+[
+  { "id": "attendance-a1", "tenantId": "*", "employeeId": "employee-a1", "date": "2026-10-01", "status": "present", "hoursWorked": 8 },
+  { "id": "attendance-b1", "tenantId": "*", "employeeId": "employee-b1", "date": "2026-10-01", "status": "remote", "hoursWorked": 8 }
+]

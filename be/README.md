@@ -45,6 +45,20 @@ docker compose up -d postgres
 
 The frontend proxy targets `http://127.0.0.1:3091`; start Plane MCP on `3003` and Discord MCP on `3002` when needed.
 
+### HRM company context provisioning
+
+The Chat Backend stores only the active company context of an authenticated
+application user. This is not an authorization grant: `hrm-server` validates
+the user/company pair against its own `hrm_identity_links` record and derives
+roles/permissions from its own database for every request.
+
+Provision the HRM identity link during employee onboarding. An authorized HRM
+administrator links the canonical Chat Backend user ID to an employee through
+the HRM identity-link API; HRM derives that employee's company from the link.
+Never accept employee or company identity from browser input, a chat prompt,
+or MCP tool arguments. An account without a provisioned identity link fails
+closed and cannot call HRM tools.
+
 ### Starting the Plane MCP server locally
 
 `MCP_INTERNAL_TOKEN` is intentionally not committed to `PlaneMCPServer/appsettings.json`.
