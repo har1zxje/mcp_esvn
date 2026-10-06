@@ -9,7 +9,7 @@ async function copyText(text) {
   const input = document.createElement('textarea'); input.value = text; input.style.position = 'fixed'; input.style.opacity = '0'; document.body.appendChild(input); input.select(); document.execCommand('copy'); input.remove();
 }
 
-export default function ProjectMessage({ message, toolCalls, modelLabel, onEdit }) {
+export default function ProjectMessage({ message, toolCalls, modelLabel, onEdit, onOpenPlaneSettings }) {
   const isUser = message.role === 'user'; const [copied, setCopied] = useState(false); const text = message.text || '';
   const handleCopy = async () => { try { await copyText(text); setCopied(true); window.setTimeout(() => setCopied(false), 1500); } catch { /* clipboard unavailable */ } };
   const handleRead = () => { if (!window.speechSynthesis || !text) return; window.speechSynthesis.cancel(); window.speechSynthesis.speak(new SpeechSynthesisUtterance(text)); };
@@ -21,6 +21,6 @@ export default function ProjectMessage({ message, toolCalls, modelLabel, onEdit 
       <button type="button" onClick={handleCopy} aria-label="Sao chép" title={copied ? 'Đã sao chép' : 'Sao chép'}>{copied ? <Check size={14} /> : <Copy size={14} />}</button>
       <button type="button" onClick={() => onEdit?.(message)} aria-label="Chỉnh sửa" title="Chỉnh sửa"><Edit3 size={14} /></button>
       <button type="button" onClick={handleShare} aria-label="Chia sẻ" title="Chia sẻ"><Share2 size={14} /></button>
-    </div></> : <><ToolExecutionSummary toolCalls={toolCalls} /><div className="assistant-content"><ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown></div></>}
+    </div></> : <><ToolExecutionSummary toolCalls={toolCalls} onOpenPlaneSettings={onOpenPlaneSettings} /><div className="assistant-content"><ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown></div></>}
   </div></article>;
 }

@@ -6,19 +6,24 @@ import { config } from './config.js';
 import { publicModels, resolveModel } from './modelRegistry.js';
 import { createMcpClients } from './mcpClient.js';
 import { ToolRegistry } from './toolRegistry.js';
+import { PlaneWorkManagementProvider, WorkManagementService } from './workManagement.js';
+import { HrmContextService } from './hrmContext.js';
 import { AgentService } from './agentService.js';
 import { createRequireAuthenticatedUser, getSessionToken } from './auth.js';
 import { ApplicationAuthService } from './applicationAuth.js';
 import { getAuthenticatedOwnerId, ownsConversation } from './ownership.js';
 import { IntegrationService } from './integrationService.js';
 import { connectPlaneIntegration } from './planeLinking.js';
+import { PlaneScopeService } from './planeScope.js';
 import { connectDiscordIntegration } from './discordLinking.js';
 import { buildGoogleAuthorizationUrl, createGoogleState, exchangeGoogleCode, verifyGoogleIdentity } from './googleAuth.js';
 import { OAuthStateStore } from './oauthState.js';
-import { buildPlaneAuthorizationUrl, exchangePlaneCode, getPlaneProfile, isPlaneOAuthConfigured, refreshPlaneToken } from './planeOAuth.js';
+import { buildPlaneAuthorizationUrl, exchangePlaneCode, getPlaneProfile, refreshPlaneToken } from './planeOAuth.js';
+import { PlaneCredentialService } from './planeCredentialService.js';
+import { MutationConfirmationService } from './mutationConfirmationService.js';
 import { buildDiscordAuthorizationUrl, exchangeDiscordCode, fetchDiscordInternal } from './discordOAuth.js';
 import { createDatabase, initializeDatabase } from './database.js';
-import { UserRepository, SessionRepository, IntegrationRepository, ConversationRepository } from './repositories.js';
+import { UserRepository, SessionRepository, IntegrationRepository, ConversationRepository, MutationConfirmationRepository } from './repositories.js';
 
 const app = express();
 const database = createDatabase({ connectionString: config.databaseUrl || undefined, host: config.databaseHost, port: config.databasePort, database: config.databaseName, user: config.databaseUser, password: config.databasePassword });
@@ -34,37 +39,34 @@ const authService = new ApplicationAuthService({
 const requireAuthenticatedUser = createRequireAuthenticatedUser({ authService });
 const googleStates = new Map();
 const integrationOAuthStates = new OAuthStateStore({ ttlMs: config.oauthStateTtlMs });
-const planeRefreshLocks = new Map();
 const mcpClients = createMcpClients();
 const integrations = new IntegrationService({
   integrationRepository: new IntegrationRepository(database),
   encryptionKey: config.integrationEncryptionKey,
 });
-const resolveExecutionContext = async (userId, tool) => {
+const hrmContextService = new HrmContextService();
+const mutationConfirmationService = new MutationConfirmationService({ confirmationRepository: new MutationConfirmationRepository(database) });
+const planeCredentialService = new PlaneCredentialService({ integrations, config, refreshToken: refreshPlaneToken });
+const planeScopeService = mcpClients.has('plane') ? new PlaneScopeService(mcpClients.get('plane'), integrations, planeCredentialService) : null;
+const resolveExecutionContext = async (userId, tool, executionContext = {}) => {
   if (!userId) throw Object.assign(new Error('Authenticated user is required'), { code: 'PLANE_CONTEXT_INVALID' });
+  if (tool.server === 'hrm') return hrmContextService.resolve(userId, executionContext.requestId);
   const integration = await integrations.getIntegration(userId, tool.server);
   if (tool.server === 'plane') {
-    if (!integration?.accessToken) throw Object.assign(new Error('Plane account is not connected for this user.'), { code: 'PLANE_NOT_CONNECTED', statusCode: 400 });
-    let accessToken = integration.accessToken;
-    if (integration.credentialType === 'oauth' && integration.expiresAt && new Date(integration.expiresAt).getTime() <= Date.now() + 60_000) {
-      if (!integration.refreshToken || !isPlaneOAuthConfigured(config)) {
-        throw Object.assign(new Error('Plane authorization expired; reconnect is required.'), { code: 'PLANE_RECONNECT_REQUIRED', statusCode: 400 });
-      }
-      const refresh = planeRefreshLocks.get(String(userId)) ?? (async () => {
-        const refreshed = await refreshPlaneToken(integration.refreshToken, config);
-        const refreshedAccessToken = refreshed.access_token;
-        await integrations.saveIntegration(userId, 'plane', {
-          accessToken: refreshedAccessToken,
-          refreshToken: refreshed.refresh_token ?? integration.refreshToken,
-          expiresAt: refreshed.expires_in ? new Date(Date.now() + Number(refreshed.expires_in) * 1000).toISOString() : null,
-          credentialType: 'oauth',
-        });
-        return refreshedAccessToken;
-      })();
-      planeRefreshLocks.set(String(userId), refresh);
-      try { accessToken = await refresh; } finally { if (planeRefreshLocks.get(String(userId)) === refresh) planeRefreshLocks.delete(String(userId)); }
+    const resolved = await planeCredentialService.resolve(userId, { operation: `plane.${tool.remoteName}` });
+    const resolvedIntegration = resolved.integration;
+    const workspaceSlug = resolvedIntegration.workspaceSlug;
+    const defaultProjectId = resolvedIntegration.metadata?.defaultProjectId;
+    const requestedProjectId = typeof executionContext.planeEffectiveProjectId === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(executionContext.planeEffectiveProjectId)
+      ? executionContext.planeEffectiveProjectId
+      : null;
+    const projectId = requestedProjectId ?? defaultProjectId;
+    const requiresProject = !['list_projects', 'get_authenticated_user'].includes(tool.remoteName);
+    if (!workspaceSlug || (requiresProject && !projectId)) throw Object.assign(new Error('Plane workspace and project scope must be selected for this user.'), { code: 'PLANE_SCOPE_REQUIRED', statusCode: 400 });
+    if (['update_work_item', 'delete_work_item'].includes(tool.remoteName) && planeScopeService) {
+      await planeScopeService.validateDefaultProject(String(userId), resolvedIntegration);
     }
-    return { userId: String(userId), apiKey: accessToken, authType: integration.credentialType === 'oauth' ? 'oauth' : 'pat' };
+    return { userId: String(userId), externalUserId: resolvedIntegration.externalUserId ?? null, credential: resolved.credential, authType: resolved.authType, workspaceSlug, projectId, defaultProjectId: defaultProjectId ?? null };
   }
   if (tool.server === 'discord') {
     if (!integration?.guildId || !integration.channelId) throw Object.assign(new Error('Discord destination is not configured for this user.'), { code: 'DISCORD_NOT_CONNECTED', statusCode: 400 });
@@ -72,7 +74,20 @@ const resolveExecutionContext = async (userId, tool) => {
   }
   return { userId: String(userId) };
 };
-const agent = new AgentService(new ToolRegistry(mcpClients, resolveExecutionContext));
+const hrmMcpHeaders = async (userId, requestId) => {
+  const context = await hrmContextService.resolve(userId, requestId);
+  if (!requestId) throw Object.assign(new Error('HRM request context is required.'), { code: 'HRM_CONTEXT_REQUIRED' });
+  return {
+    'x-mcp-user-id': context.userId,
+    'x-mcp-request-id': requestId,
+  };
+};
+const visibleMcpTools = (_name, tools) => tools;
+const toolRegistry = new ToolRegistry(mcpClients, resolveExecutionContext);
+toolRegistry.setMutationConfirmationService(mutationConfirmationService);
+const workManagementService = new WorkManagementService(new PlaneWorkManagementProvider(toolRegistry));
+toolRegistry.setWorkManagementService(workManagementService);
+const agent = new AgentService(toolRegistry);
 app.disable('x-powered-by');
 app.use(express.json({ limit: '2mb' }));
 app.use((req, _res, next) => {
@@ -125,7 +140,7 @@ const describeError = (error, status) => {
   if (error?.code === 'PLANE_OAUTH_UNAVAILABLE') return { code: 'PLANE_OAUTH_UNAVAILABLE', action: 'Plane OAuth is not configured for this deployment. Use Advanced setup to connect with a Personal Access Token.' };
   if (error?.code === 'PLANE_CONFIGURATION_ERROR') return { code: 'PLANE_CONFIGURATION_ERROR', action: 'Check the configured Plane deployment URL and OAuth application settings.' };
   if (error?.code === 'PLANE_UPSTREAM_UNREACHABLE') return { code: 'PLANE_UPSTREAM_UNREACHABLE', action: 'The configured Plane service could not be reached. Check the backend network and Plane URL.' };
-  if (error?.code === 'PLANE_RECONNECT_REQUIRED' || error?.code === 'PLANE_OAUTH_REFRESH_FAILED') return { code: 'PLANE_RECONNECT_REQUIRED', action: 'Plane authorization expired. Reconnect the Plane account in Settings.' };
+  if (error?.code === 'PLANE_REAUTH_REQUIRED' || error?.code === 'PLANE_RECONNECT_REQUIRED' || error?.code === 'PLANE_OAUTH_REFRESH_FAILED') return { code: 'PLANE_REAUTH_REQUIRED', action: 'Plane authorization has expired or is invalid. Reconnect Plane.' };
   if (status === 429 || /quota|rate limit|too many requests/i.test(message)) {
     return {
       code: 'GEMINI_QUOTA_EXCEEDED',
@@ -362,6 +377,62 @@ app.get('/api/me', requireAuthenticatedUser, (req, res) => {
   } });
 });
 
+// The browser can reach this proxy only through a verified Chat session. HRM
+// remains the authorization authority: every request carries the session user
+// as actor and HRM resolves its role/company from hrm_identity_links.
+const callHrmIdentityAdmin = async (req, path, options = {}) => {
+  if (!config.hrmApiBaseUrl || !config.hrmInternalToken) {
+    const error = new Error('HRM identity administration is not configured.');
+    error.code = 'HRM_UNAVAILABLE'; error.statusCode = 503;
+    throw error;
+  }
+  const response = await fetch(`${config.hrmApiBaseUrl}${path}`, {
+    method: options.method ?? 'GET',
+    headers: {
+      'content-type': 'application/json',
+      'x-hrm-internal-token': config.hrmInternalToken,
+      'x-hrm-contract-version': '1',
+      'x-actor-user-id': String(req.user.id),
+      'x-request-id': req.requestId,
+    },
+    ...(options.body === undefined ? {} : { body: JSON.stringify(options.body) }),
+  });
+  const payload = await response.json().catch(() => null);
+  if (response.status === 204) return null;
+  if (response.ok && payload?.data !== undefined) return payload.data;
+  const error = new Error(payload?.error?.message || 'HRM identity administration failed.');
+  error.code = payload?.error?.code || 'HRM_UNAVAILABLE'; error.statusCode = response.status >= 400 && response.status < 600 ? response.status : 502;
+  throw error;
+};
+
+// The directory comes from the Chat database, not browser-provided text. HRM
+// checks organization.manage before this endpoint returns either directory.
+app.get('/api/hrm/identity-link-options', requireAuthenticatedUser, async (req, res) => {
+  try {
+    const options = await callHrmIdentityAdmin(req, '/internal/v1/identity-links/employees');
+    const users = await userRepository.listDirectoryUsers();
+    return res.json({ users, employees: options.employees ?? [], links: options.links ?? [] });
+  } catch (error) { return jsonError(res, error); }
+});
+
+app.put('/api/hrm/identity-links/:userId', requireAuthenticatedUser, async (req, res) => {
+  try {
+    const user = await userRepository.findById(String(req.params.userId));
+    if (!user) return res.status(404).json({ error: 'Chat user was not found.', code: 'CHAT_USER_NOT_FOUND', requestId: req.requestId });
+    const data = await callHrmIdentityAdmin(req, `/internal/v1/identity-links/${encodeURIComponent(user.id)}`, { method: 'PUT', body: { employeeId: req.body?.employeeId } });
+    return res.json({ data });
+  } catch (error) { return jsonError(res, error); }
+});
+
+app.delete('/api/hrm/identity-links/:userId', requireAuthenticatedUser, async (req, res) => {
+  try {
+    const user = await userRepository.findById(String(req.params.userId));
+    if (!user) return res.status(404).json({ error: 'Chat user was not found.', code: 'CHAT_USER_NOT_FOUND', requestId: req.requestId });
+    await callHrmIdentityAdmin(req, `/internal/v1/identity-links/${encodeURIComponent(user.id)}`, { method: 'DELETE' });
+    return res.status(204).end();
+  } catch (error) { return jsonError(res, error); }
+});
+
 app.get('/api/chat/models', (_req, res) => {
   res.json({ models: publicModels() });
 });
@@ -373,6 +444,9 @@ app.get('/api/chat/profile', requireAuthenticatedUser, async (req, res) => {
 
 app.get('/api/chat/integrations', requireAuthenticatedUser, async (req, res) => {
   try {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
     const providers = ['plane', 'discord'];
     const result = await Promise.all(providers.map((provider) => integrations.getSafeIntegration(getAuthenticatedOwnerId(req), provider)));
     return res.json({ integrations: result });
@@ -395,19 +469,12 @@ const startPlaneOAuth = (req, res) => {
   try {
     const state = integrationOAuthStates.create({ userId: req.user.id, provider: 'plane', returnTo: '/chat/new' });
     const authorizationUrl = buildPlaneAuthorizationUrl(config, state);
-    if (isDevelopment) {
-      const parsedAuthorizationUrl = new URL(authorizationUrl);
-      console.info('[Plane OAuth] authorization request', {
-        authorizeEndpoint: parsedAuthorizationUrl.origin + parsedAuthorizationUrl.pathname,
-        client_id: parsedAuthorizationUrl.searchParams.get('client_id'),
-        redirect_uri: parsedAuthorizationUrl.searchParams.get('redirect_uri'),
-        configuredRedirectUri: config.planeOAuthRedirectUri,
-        redirectUriMatchesConfigured: parsedAuthorizationUrl.searchParams.get('redirect_uri') === config.planeOAuthRedirectUri,
-        scope: parsedAuthorizationUrl.searchParams.get('scope') || '',
-        statePresent: Boolean(parsedAuthorizationUrl.searchParams.get('state')),
-        authorizationUrl,
-      });
-    }
+    const parsedAuthorizationUrl = new URL(authorizationUrl);
+    const requestedScopes = (parsedAuthorizationUrl.searchParams.get('scope') || '').split(/\s+/).filter(Boolean);
+    // Log only the non-secret scope profile needed to diagnose invalid_scope.
+    // Do not log the authorization URL (it contains the CSRF state), tokens,
+    // client secret, or any credential.
+    console.info(JSON.stringify({ event: 'plane.oauth.authorize.started', requestId: req.requestId || null, userId: String(req.user.id), authorizeEndpoint: parsedAuthorizationUrl.origin + parsedAuthorizationUrl.pathname, requestedScopes, scopeCount: requestedScopes.length }));
     return res.redirect(authorizationUrl);
   } catch (error) { error.operation = 'plane.oauth.start'; error.diagnosticUrl = config.planeOAuthAuthorizeUrl || config.planeBaseUrl; return jsonError(res, error); }
 };
@@ -469,6 +536,36 @@ app.post('/api/integrations/plane/connect', requireAuthenticatedUser, async (req
   } catch (error) {
     return jsonError(res, error);
   }
+});
+
+app.get('/api/integrations/plane/projects', requireAuthenticatedUser, async (req, res) => {
+  try {
+    if (!planeScopeService) throw Object.assign(new Error('Plane MCP is not configured.'), { code: 'PLANE_SCOPE_VALIDATION_FAILED', statusCode: 503 });
+    const integration = await integrations.getIntegration(getAuthenticatedOwnerId(req), 'plane');
+    const workspaceSlug = typeof req.query.workspaceSlug === 'string' ? req.query.workspaceSlug : integration?.workspaceSlug;
+    return res.json({ projects: await planeScopeService.listProjects(getAuthenticatedOwnerId(req), workspaceSlug) });
+  } catch (error) { return jsonError(res, error); }
+});
+
+// Safe, authenticated proof that the current user's credential reaches Plane
+// with an OAuth Bearer token. It intentionally returns no credential or raw
+// provider profile payload.
+app.get('/api/integrations/plane/diagnostic/me', requireAuthenticatedUser, async (req, res) => {
+  try {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    const ownerId = getAuthenticatedOwnerId(req);
+    const resolved = await planeCredentialService.resolve(ownerId, { operation: 'plane.users_me' });
+    const profile = await getPlaneProfile(resolved.credential, config, { authType: resolved.authType });
+    return res.json({ connected: true, externalPlaneUserId: String(profile.id), authType: resolved.authType });
+  } catch (error) { return jsonError(res, error); }
+});
+
+app.post('/api/integrations/plane/scope', requireAuthenticatedUser, async (req, res) => {
+  try {
+    if (!planeScopeService) throw Object.assign(new Error('Plane MCP is not configured.'), { code: 'PLANE_SCOPE_VALIDATION_FAILED', statusCode: 503 });
+    const integration = await planeScopeService.saveScope(getAuthenticatedOwnerId(req), req.body);
+    return res.json({ integration });
+  } catch (error) { return jsonError(res, error); }
 });
 
 app.delete('/api/integrations/plane', requireAuthenticatedUser, async (req, res) => {
@@ -583,14 +680,14 @@ app.delete('/api/chat/integrations/:provider', requireAuthenticatedUser, async (
 });
 
 // Safe, browser-facing MCP catalog. URLs and credentials stay server-side.
-app.get('/api/chat/mcp', requireAuthenticatedUser, async (_req, res) => {
+app.get('/api/chat/mcp', requireAuthenticatedUser, async (req, res) => {
   // MCP availability is live state; do not serve a stale cached 304 result.
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.set('Pragma', 'no-cache');
   res.set('Expires', '0');
   const servers = await Promise.all([...mcpClients.entries()].map(async ([name, client]) => {
     try {
-      const tools = await client.listTools();
+      const tools = visibleMcpTools(name, await client.listTools(undefined, name === 'hrm' ? await hrmMcpHeaders(getAuthenticatedOwnerId(req), req.requestId) : {}));
       return { name, status: 'connected', toolCount: tools.length, tools: tools.map((tool) => ({ name: tool.name, description: tool.description ?? '', inputSchema: tool.inputSchema })) };
     } catch (error) {
       const safe = describeError(error, 502);
@@ -607,7 +704,7 @@ app.post('/api/chat/mcp/:name/test', requireAuthenticatedUser, async (req, res) 
   const client = mcpClients.get(req.params.name);
   if (!client) return res.status(404).json({ error: 'MCP server is not configured' });
   try {
-    const tools = await client.listTools();
+    const tools = visibleMcpTools(req.params.name, await client.listTools(undefined, req.params.name === 'hrm' ? await hrmMcpHeaders(getAuthenticatedOwnerId(req), req.requestId) : {}));
     return res.json({ name: req.params.name, status: 'connected', toolCount: tools.length, tools: tools.map((tool) => ({ name: tool.name, description: tool.description ?? '', inputSchema: tool.inputSchema })) });
   } catch (error) {
     const safe = describeError(error, 502);
@@ -737,7 +834,7 @@ app.post('/api/chat', requireAuthenticatedUser, async (req, res) => {
     res.status(200).set({ 'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-cache, no-transform', Connection: 'keep-alive' });
     res.flushHeaders?.();
     sendEvent = (payload) => { if (!res.writableEnded) res.write(`data: ${JSON.stringify(payload)}\n\n`); };
-    const result = await agent.run(conversation, mapping, abortController.signal, (delta) => sendEvent({ delta }), { userId: ownerId, requestId: req.requestId });
+    const result = await agent.run(conversation, mapping, abortController.signal, (delta) => sendEvent({ delta }), { userId: ownerId, requestId: req.requestId, conversationId: conversation.id });
     conversation.messages.push({ role: 'assistant', text: result.text, createdAt: Date.now() });
     conversation.updatedAt = Date.now();
     history[conversationId] = conversation;

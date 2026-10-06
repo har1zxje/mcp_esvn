@@ -5,6 +5,26 @@ using System.Text.Json;
 [McpServerToolType]
 public class PlaneTools
 {
+    [McpServerTool, Description("Get the authenticated Plane account identity. Read-only; used internally to resolve the current project member.")]
+    public static Task<string> GetAuthenticatedUser(PlaneAPIServices planeApiServices)
+        => PlaneToolResponse.Execute(() => planeApiServices.GetAuthenticatedUserAsync());
+
+    [McpServerTool, Description("List projects available in the authenticated user's selected Plane workspace. Read-only.")]
+    public static Task<string> ListProjects(PlaneAPIServices planeApiServices)
+        => PlaneToolResponse.Execute(() => planeApiServices.ListProjectsAsync());
+
+    [McpServerTool, Description("List workflow states for a Plane project. Read-only.")]
+    public static Task<string> ListProjectStates(
+        PlaneAPIServices planeApiServices,
+        [Description("Plane project ID. Omit to use the authenticated user's selected project; another project is rejected.")] string? projectId = null)
+        => PlaneToolResponse.Execute(() => planeApiServices.ListProjectStatesAsync(projectId));
+
+    [McpServerTool, Description("List members of a Plane project. Read-only.")]
+    public static Task<string> ListProjectMembers(
+        PlaneAPIServices planeApiServices,
+        [Description("Plane project ID. Omit to use the authenticated user's selected project; another project is rejected.")] string? projectId = null)
+        => PlaneToolResponse.Execute(() => planeApiServices.ListProjectMembersAsync(projectId));
+
     [McpServerTool, Description("The tool allow for the creation of a work item in Plane, in the given state.")]
     public static async Task<string> CreateWorkItem(
         PlaneAPIServices planeApiServices,
@@ -31,7 +51,7 @@ public class PlaneTools
             throw new ArgumentException(
                 "Provide at least one of name, description, priority, stateId, assigneeIds, or labelIds.");
         
-        return await planeApiServices.CreateWorkItemsAsync(
+        return await PlaneToolResponse.Execute(() => planeApiServices.CreateWorkItemsAsync(
             name, 
             description, 
             stateId,
@@ -46,7 +66,7 @@ public class PlaneTools
             targetDate,
             externalSource,
             externalId,
-            isDraft);
+            isDraft));
     }
 
     [McpServerTool]
@@ -97,7 +117,7 @@ public class PlaneTools
             throw new ArgumentException(
                 "Provide at least one field to update.");
 
-        return await planeApiServices.UpdateWorkItemAsync(
+        return await PlaneToolResponse.Execute(() => planeApiServices.UpdateWorkItemAsync(
             workItemId,
             newName,
             newDescription,
@@ -113,13 +133,15 @@ public class PlaneTools
             newTargetDate,
             newExternalSource,
             newExternalId,
-            newIsDraft);
+            newIsDraft));
     }
 
     [McpServerTool]
     [Description("Find Plane work items using one or more fields.")]
     public static async Task<string> FindWorkItems(
         PlaneAPIServices planeApiServices,
+        [Description("Exact Plane work item ID")]
+        string? workItemId = null,
         [Description("Name or part of the work item name")]
         string? name = null,
         [Description("Text contained in the description")]
@@ -137,9 +159,9 @@ public class PlaneTools
         [Description("Whether the work item is a draft")]
         bool? isDraft = null)
     {
-        return await planeApiServices.FindWorkItemsAsync(
-            name, description, priority, stateId,
-            assigneeId, labelId, externalId, isDraft);
+        return await PlaneToolResponse.Execute(() => planeApiServices.FindWorkItemsAsync(
+            workItemId, name, description, priority, stateId,
+            assigneeId, labelId, externalId, isDraft));
     }
 
     [McpServerTool]
@@ -163,9 +185,9 @@ public class PlaneTools
         [Description("Whether the work item is a draft")]
         bool? isDraft = null)
     {
-        return await planeApiServices.FindWorkItemsAsync(
-            name, description, priority, stateId,
-            assigneeId, labelId, externalId, isDraft);
+        return await PlaneToolResponse.Execute(() => planeApiServices.FindWorkItemsAsync(
+            null, name, description, priority, stateId,
+            assigneeId, labelId, externalId, isDraft));
     }
 
     [McpServerTool]
@@ -220,7 +242,7 @@ public class PlaneTools
         if (string.IsNullOrWhiteSpace(workItemId))
         {
             var searchResult = await planeApiServices.FindWorkItemsAsync(
-                delName, description, priority, stateId,
+                null, delName, description, priority, stateId,
                 assigneeId, labelId, externalId, isDraft);
 
             using var searchDocument = JsonDocument.Parse(searchResult);
@@ -253,7 +275,7 @@ public class PlaneTools
                 workItemId
             });
 
-        return await planeApiServices.DeleteWorkItemAsync(
+        return await PlaneToolResponse.Execute(() => planeApiServices.DeleteWorkItemAsync(
             workItemId,
             delName,
             description,
@@ -262,6 +284,33 @@ public class PlaneTools
             assigneeId,
             labelId,
             externalId,
-            isDraft);
+            isDraft));
+    }
+}
+
+// The MCP SDK turns thrown exceptions into an unstructured tool error.  Return
+// a small, non-secret domain envelope for Plane API failures so the backend can
+// preserve authentication/scope status for the business layer.
+internal static class PlaneToolResponse
+{
+    public static async Task<string> Execute(Func<Task<string>> operation)
+    {
+        try
+        {
+            return await operation();
+        }
+        catch (PlaneAPIServices.PlaneApiException exception)
+        {
+            return JsonSerializer.Serialize(new
+            {
+                error = new
+                {
+                    code = exception.Code,
+                    message = exception.Message,
+                    status = exception.StatusCode,
+                    requiredScope = exception.RequiredScope,
+                },
+            });
+        }
     }
 }

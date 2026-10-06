@@ -1,0 +1,16 @@
+# .NET generated files
+**/bin/
+**/obj/
+
+# MCP verification/test generated output
+**/verify-output/
+**/verify-plane-tests/
+
+# Node.js dependencies and local runtime output
+**/node_modules/
+*.log
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example

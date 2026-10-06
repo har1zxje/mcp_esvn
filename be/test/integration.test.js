@@ -61,9 +61,37 @@ test('safe integration responses do not expose credentials', async () => {
     await service.saveIntegration('user-a', 'plane', { accessToken: 'secret-access', refreshToken: 'secret-refresh', metadata: { label: 'work' } });
     const safe = await service.getSafeIntegration('user-a', 'plane');
     assert.equal(safe.connected, true);
+    assert.equal(safe.status, 'scopeIncomplete');
     assert.equal('accessToken' in safe, false);
     assert.equal('refreshToken' in safe, false);
     assert.equal(JSON.stringify(safe).includes('secret-'), false);
+  } finally {
+    await fs.rm(directory, { recursive: true, force: true });
+  }
+});
+
+test('Plane safe status distinguishes linked credentials from a ready saved scope', async () => {
+  const { service, directory } = await createService();
+  try {
+    await service.saveIntegration('user-a', 'plane', { accessToken: 'credential-a', refreshToken: 'refresh-a', externalUserId: 'plane-a', credentialType: 'oauth', metadata: { label: 'A' } });
+    await service.saveIntegration('user-b', 'plane', { accessToken: 'credential-b', workspaceSlug: 'workspace-b', metadata: { defaultProjectId: 'project-b' } });
+    assert.equal((await service.getSafeIntegration('user-a', 'plane')).status, 'scopeIncomplete');
+    assert.equal((await service.getSafeIntegration('user-b', 'plane')).status, 'ready');
+
+    // The scope update is user-scoped and merges non-secret account metadata;
+    // it must never replace that user's OAuth credentials or affect User B.
+    await service.saveIntegration('user-a', 'plane', {
+      workspaceSlug: 'workspace-a',
+      metadata: { label: 'A', defaultProjectId: 'project-a' },
+    });
+    const a = await service.getIntegration('user-a', 'plane');
+    const b = await service.getIntegration('user-b', 'plane');
+    assert.equal(a.accessToken, 'credential-a');
+    assert.equal(a.refreshToken, 'refresh-a');
+    assert.equal(a.externalUserId, 'plane-a');
+    assert.equal((await service.getSafeIntegration('user-a', 'plane')).status, 'ready');
+    assert.equal(b.workspaceSlug, 'workspace-b');
+    assert.equal(b.metadata.defaultProjectId, 'project-b');
   } finally {
     await fs.rm(directory, { recursive: true, force: true });
   }

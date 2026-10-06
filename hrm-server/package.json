@@ -1,0 +1,21 @@
+{
+  "name": "hrm-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env src/app.js",
+    "dev": "node --env-file=.env --watch src/app.js",
+    "test": "node --test tests/*.test.js",
+    "test:postgres": "node --env-file=.env.test --test tests/postgres.integration.test.js",
+    "db:migrate": "node --env-file=.env src/migrate.js",
+    "db:migrate:test": "node --env-file=.env.test src/migrate.js",
+    "verify:migration:legacy": "node --env-file=.env.test scripts/verify-legacy-migration.js",
+    "db:seed": "node --env-file=.env src/seed.js",
+    "verify:authorization-fixtures": "node scripts/verify-authorization-fixtures.js"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "engines": { "node": ">=18.18" }
+}

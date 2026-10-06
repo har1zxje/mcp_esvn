@@ -12,8 +12,6 @@ builder.Configuration
     .AddEnvironmentVariables(); 
 
 var baseUrl = builder.Configuration["BaseUrl"];
-var workspace = builder.Configuration["Workspace"];
-var projectId = builder.Configuration["ProjectId"];
 var mcpInternalToken = builder.Configuration["MCP_INTERNAL_TOKEN"];
 var mcpPort = builder.Configuration.GetValue<int?>("McpPort") ?? 3003;
 
@@ -25,9 +23,7 @@ if (mcpPort is < 1 or > 65535)
 var missingConfiguration = new[]
 {
     (Name: "MCP_INTERNAL_TOKEN", Value: mcpInternalToken),
-    (Name: "BaseUrl", Value: baseUrl),
-    (Name: "Workspace", Value: workspace),
-    (Name: "ProjectId", Value: projectId)
+    (Name: "BaseUrl", Value: baseUrl)
 }
     .Where(setting => string.IsNullOrWhiteSpace(setting.Value))
     .Select(setting => setting.Name)
@@ -37,7 +33,7 @@ if (missingConfiguration.Length > 0)
 {
     throw new InvalidOperationException(
         $"Plane MCP configuration is incomplete. Missing: {string.Join(", ", missingConfiguration)}. " +
-        "Configure MCP_INTERNAL_TOKEN in User Secrets or the process environment; BaseUrl, Workspace, and ProjectId may be configured in appsettings.json.");
+        "Configure MCP_INTERNAL_TOKEN in User Secrets or the process environment; BaseUrl may be configured in appsettings.json.");
 }
 
 builder.Services.AddHttpClient();
@@ -49,9 +45,7 @@ builder.Services.AddSingleton(sp =>
 
     return new PlaneAPIServices(
         httpClientFactory, 
-        baseUrl, 
-        workspace,
-        projectId,
+        baseUrl!,
         sp.GetRequiredService<IHttpContextAccessor>(),
         sp.GetRequiredService<ILogger<PlaneAPIServices>>());
 });
@@ -69,7 +63,7 @@ app.Use(async (context, next) =>
         var supplied = context.Request.Headers["X-MCP-Internal-Token"].ToString();
         if (string.IsNullOrEmpty(supplied) || !CryptographicOperations.FixedTimeEquals(
                 System.Text.Encoding.UTF8.GetBytes(supplied),
-                System.Text.Encoding.UTF8.GetBytes(mcpInternalToken)))
+                System.Text.Encoding.UTF8.GetBytes(mcpInternalToken!)))
         {
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
             return;

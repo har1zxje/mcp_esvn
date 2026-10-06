@@ -941,3 +941,15 @@ html[data-project-theme='dark'], html[data-project-theme='dark'] body { color-sc
   color: #777780;
   background: #37373d;
 }
+
+.tool-plane-settings-action {
+  align-self: flex-start;
+  margin-top: 5px;
+  padding: 4px 7px;
+  color: #4c35b7;
+  background: #f0edff;
+  border: 1px solid #dcd4ff;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+}

@@ -58,3 +58,21 @@ ALTER TABLE conversations ADD COLUMN IF NOT EXISTS legacy_owner_id TEXT;
 ALTER TABLE conversations ALTER COLUMN owner_id DROP NOT NULL;
 CREATE INDEX IF NOT EXISTS conversations_owner_id_idx ON conversations (owner_id);
 CREATE INDEX IF NOT EXISTS conversations_updated_at_idx ON conversations (updated_at);
+
+-- Server-owned, one-time authorization state for semantic mutations. The model
+-- never authorizes a mutation with a boolean argument: future execute paths
+-- must atomically consume a record bound to its authenticated context.
+CREATE TABLE IF NOT EXISTS mutation_confirmations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  company_id TEXT NOT NULL CHECK (company_id ~ '^[A-Za-z0-9][A-Za-z0-9_-]{0,99}$'),
+  conversation_id UUID NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+  mutation_kind TEXT NOT NULL CHECK (mutation_kind ~ '^[a-z][a-z0-9._-]{0,99}$'),
+  target_ids JSONB NOT NULL CHECK (jsonb_typeof(target_ids) = 'object'),
+  payload_digest TEXT NOT NULL CHECK (payload_digest ~ '^[0-9a-f]{64}$'),
+  resolved_payload JSONB NOT NULL CHECK (jsonb_typeof(resolved_payload) = 'object'),
+  expires_at TIMESTAMPTZ NOT NULL,
+  consumed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS mutation_confirmations_active_idx ON mutation_confirmations (user_id, company_id, conversation_id, expires_at) WHERE consumed_at IS NULL;
