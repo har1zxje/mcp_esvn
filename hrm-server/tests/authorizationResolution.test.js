@@ -55,6 +55,25 @@ test('an employee cannot enumerate company departments or department members thr
   assert.deepEqual(await subject.getLearningDepartmentMembers(manager, 'hrm-test-department-a'), [{ id: 'hrm-test-employee-a1' }]);
 });
 
+test('department member lists and overviews require team or company-wide profile permission', async () => {
+  const subject = service();
+  const manager = { ...await subject.resolveExecutionContext('10000000-0000-4000-8000-0000000000a1', 'authorization-test'), permissions: ['employee.profile.read.self', 'employee.profile.read.team'] };
+  const employee = await subject.resolveExecutionContext('10000000-0000-4000-8000-0000000000a2', 'authorization-test');
+  const hr = { ...manager, permissions: ['employee.profile.read.any'] };
+  const member = { id: 'hrm-test-employee-a1', displayName: 'Team Member', email: 'member@example.test', title: 'Builder', employmentStatus: 'active' };
+  let memberReads = 0;
+  subject.departments.getLearningById = async (_companyId, id) => ({ id, name: id, code: id });
+  subject.departments.listLearningMembers = async () => { memberReads++; return [member]; };
+  for (const method of ['getLearningDepartmentMembers', 'getDepartmentOverview']) {
+    await assert.rejects(subject[method](employee, 'hrm-test-department-a'), (error) => error.code === 'HRM_FORBIDDEN');
+    await assert.rejects(subject[method](manager, 'hrm-test-department-b'), (error) => error.code === 'HRM_FORBIDDEN');
+    assert.equal(memberReads, 0);
+    assert.ok(await subject[method](manager, 'hrm-test-department-a'));
+    assert.ok(await subject[method](hr, 'hrm-test-department-b'));
+    memberReads = 0;
+  }
+});
+
 test('identity-link provisioning requires organization permission and writes only the actor company', async () => {
   const writes = [];
   const manager = actors.get('10000000-0000-4000-8000-0000000000a1');

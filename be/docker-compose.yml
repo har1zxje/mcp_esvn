@@ -15,6 +15,9 @@ services:
       - .env
     environment:
       DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-change-me}@postgres:5432/${DB_NAME:-mcpserver}
+      HOST: 0.0.0.0
+      HRM_API_BASE_URL: http://host.docker.internal:3010
+      MCP_SERVERS_JSON: '{"plane":{"url":"http://host.docker.internal:3003/mcp","transport":"streamable-http"},"discord":{"url":"http://host.docker.internal:3002/mcp","transport":"streamable-http"},"clickhouse":{"url":"http://host.docker.internal:3001/mcp","transport":"streamable-http"},"hrm":{"url":"http://host.docker.internal:3004/mcp","transport":"streamable-http"}}'
     depends_on:
       - postgres
     ports:
