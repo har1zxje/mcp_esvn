@@ -60,8 +60,8 @@ const employeeRoles = [
   ['dev-company-b', 'emp-man-warehouse-yen', 'role-manager'], ['dev-company-b', 'emp-man-cs-vy', 'role-employee'],
 ];
 const identityLinks = [
-  ['dev-company-a', 'chat-sao-minh-anh', 'employee-a1'], ['dev-company-a', 'chat-sao-khanh-linh', 'employee-a2'], ['dev-company-a', 'chat-sao-hr-quynh', 'emp-svt-hr-quynh'],
-  ['dev-company-b', 'chat-minh-an-tuan-lam', 'emp-man-logistics-lam'], ['dev-company-b', 'chat-minh-an-trang', 'emp-man-dispatch-trang'],
+  ['dev-company-a', '30000000-0000-4000-8000-000000000001', 'employee-a1'], ['dev-company-a', '30000000-0000-4000-8000-000000000002', 'employee-a2'], ['dev-company-a', '30000000-0000-4000-8000-000000000003', 'emp-svt-hr-quynh'],
+  ['dev-company-b', '30000000-0000-4000-8000-000000000004', 'emp-man-logistics-lam'], ['dev-company-b', '30000000-0000-4000-8000-000000000005', 'emp-man-dispatch-trang'],
 ];
 const leaveTypes = [
   ['leave-annual-sao-viet', 'dev-company-a', 'ANNUAL', 'Nghỉ phép năm', true], ['leave-sick-sao-viet', 'dev-company-a', 'SICK', 'Nghỉ ốm', false], ['leave-personal-sao-viet', 'dev-company-a', 'PERSONAL', 'Nghỉ việc riêng', true],

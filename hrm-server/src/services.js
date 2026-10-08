@@ -233,6 +233,11 @@ export class HrmService {
     if (employee.departmentId && employee.departmentId === context.departmentId) return this.requirePermission(context, 'employee.profile.read.team');
     return this.requirePermission(context, 'employee.profile.read.any');
   }
+  requireDepartmentMembersRead(context, departmentId) {
+    if (context.permissions.includes('employee.profile.read.any')) return;
+    return this.requirePermission(context, departmentId === context.departmentId
+      ? 'employee.profile.read.team' : 'employee.profile.read.any');
+  }
   async linkIdentity(context, userId, input) {
     this.requirePermission(context, 'organization.manage');
     userId = requiredId(userId, 'user id');
@@ -330,8 +335,8 @@ export class HrmService {
     return this.departments.listLearningDepartments(requiredId(context.companyId, 'company id'));
   }
   async getLearningDepartmentMembers(context, id) {
-    this.requirePermission(context, 'employee.profile.read.any');
     id = requiredId(id, 'department id');
+    this.requireDepartmentMembersRead(context, id);
     if (!await this.departments.getLearningById(context.companyId, id)) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     return this.departments.listLearningMembers(context.companyId, id);
   }
@@ -436,6 +441,7 @@ export class HrmService {
   }
   async getDepartmentOverview(context, id) {
     const departmentId = requiredId(id, 'department id');
+    this.requireDepartmentMembersRead(context, departmentId);
     const department = await this.departments.getLearningById(context.companyId, departmentId);
     if (!department) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     const members = await this.departments.listLearningMembers(context.companyId, departmentId);
