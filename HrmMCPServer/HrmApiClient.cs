@@ -28,6 +28,7 @@ public sealed class HrmApiClient
     public Task<string> ListDepartmentsAsync(CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Get, "/api/departments", null, cancellationToken);
     public Task<string> GetLearningDepartmentMembersAsync(string departmentId, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Get, $"/api/departments/{departmentId}/employees", null, cancellationToken);
     public Task<string> PostAsync(string path, object body, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Post, path, body, cancellationToken);
+    public Task<string> QueryDataAsync(JsonElement query, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Post, "/internal/v1/query", query, cancellationToken);
     public Task<string> PatchAsync(string path, object body, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Patch, path, body, cancellationToken);
     public Task<string> GetDepartmentDetailsAsync(string departmentId, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Get, $"/api/departments/{departmentId}", null, cancellationToken);
     public Task<string> GetDepartmentOverviewAsync(string departmentId, CancellationToken cancellationToken = default) => SendAsync(HttpMethod.Get, $"/api/departments/{departmentId}/overview", null, cancellationToken);

@@ -5,8 +5,8 @@ import { createDatabase } from './database.js';
 import { AttendanceRepository, AuditRepository, AuthorizationRepository, CompanyRepository, DepartmentRepository, EmployeeRepository, IdentityLinkRepository, LeaveRepository, TaskRepository } from './repositories.js';
 import { HrmDomainError, HrmService } from './services.js';
 
-export const createHrmService = (db = createDatabase()) => new HrmService({
-  db, companies: new CompanyRepository(db), employees: new EmployeeRepository(db), departments: new DepartmentRepository(db), audit: new AuditRepository(db), authorization: new AuthorizationRepository(db), identityLinks: new IdentityLinkRepository(db), leave: new LeaveRepository(db), attendance: new AttendanceRepository(db), tasks: new TaskRepository(db),
+export const createHrmService = (db = createDatabase(), queryDb = null) => new HrmService({
+  db, queryDb, companies: new CompanyRepository(db), employees: new EmployeeRepository(db), departments: new DepartmentRepository(db), audit: new AuditRepository(db), authorization: new AuthorizationRepository(db), identityLinks: new IdentityLinkRepository(db), leave: new LeaveRepository(db), attendance: new AttendanceRepository(db), tasks: new TaskRepository(db),
 });
 
 const send = (res, status, payload) => {
@@ -105,7 +105,8 @@ export function createServer(service = createHrmService(), { internalToken = pro
       if (path[0] !== 'internal' || path[1] !== 'v1') throw new HrmDomainError('HRM_NOT_FOUND', 'Route was not found.', 404);
       const context = await internalContext(req, internalToken, service);
       let data; let status = 200;
-      if (path.length === 3 && path[2] === 'companies' && req.method === 'POST') {
+      if (path.length === 3 && path[2] === 'query' && req.method === 'POST') data = await service.queryData(context, await parseJson(req));
+      else if (path.length === 3 && path[2] === 'companies' && req.method === 'POST') {
         service.requirePermission(context, 'organization.manage');
         const input = await parseJson(req);
         if (input.id !== context.companyId) throw new HrmDomainError('HRM_VALIDATION_FAILED', 'Company id must match the trusted company context.');
@@ -137,7 +138,7 @@ export function createServer(service = createHrmService(), { internalToken = pro
       else if (path.length === 3 && path[2] === 'employees' && req.method === 'GET') { service.requirePermission(context, 'employee.profile.read.any'); data = (await service.listEmployees(context.companyId, url.searchParams.get('query') ?? '')).map((employee) => employeeView(employee, context)); }
       else if (path.length === 4 && path[2] === 'employees' && path[3] === 'search' && req.method === 'GET') { service.requirePermission(context, 'employee.profile.read.any'); data = (await service.listEmployees(context.companyId, url.searchParams.get('query') ?? '')).map((employee) => employeeView(employee, context)); }
       else if (path.length === 3 && path[2] === 'employees' && req.method === 'POST') { service.requirePermission(context, 'organization.manage'); data = await service.createEmployee(context.companyId, await parseJson(req), context); status = 201; }
-      else if (path.length === 4 && path[2] === 'employees' && req.method === 'GET') { const employee = await service.getEmployee(context.companyId, path[3]); if (employee.id === context.employeeId) service.requirePermission(context, 'employee.profile.read.self'); else if (employee.departmentId === context.departmentId) service.requirePermission(context, 'employee.profile.read.team'); else service.requirePermission(context, 'employee.profile.read.any'); data = employeeView(employee, context); }
+      else if (path.length === 4 && path[2] === 'employees' && req.method === 'GET') { const employee = await service.getEmployee(context.companyId, path[3]); if (employee.id === context.employeeId) service.requirePermission(context, 'employee.profile.read.self'); else if (employee.departmentId && employee.departmentId === context.departmentId) service.requirePermission(context, 'employee.profile.read.team'); else service.requirePermission(context, 'employee.profile.read.any'); data = employeeView(employee, context); }
       else if (path.length === 4 && path[2] === 'employees' && req.method === 'PATCH') { service.requirePermission(context, 'organization.manage'); data = await service.updateEmployee(context.companyId, path[3], await parseJson(req), context); }
       else if (path.length === 4 && path[2] === 'employees' && req.method === 'DELETE') { service.requirePermission(context, 'organization.manage'); await service.deleteEmployee(context.companyId, path[3], context); status = 204; }
       else if (path.length === 4 && path[2] === 'identity-links' && path[3] === 'employees' && req.method === 'GET') { data = await service.listIdentityLinkEmployees(context); }
@@ -159,7 +160,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const port = Number(process.env.HRM_PORT ?? 3010);
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('HRM_PORT must be a valid TCP port.');
   const db = createDatabase();
-  const close = async () => { await db.close(); process.exit(0); };
+  const queryDb = process.env.DQE_DATABASE_URL ? createDatabase(process.env.DQE_DATABASE_URL) : null;
+  const close = async () => { if (queryDb) await queryDb.close(); await db.close(); process.exit(0); };
   process.once('SIGINT', close); process.once('SIGTERM', close);
-  createServer(createHrmService(db)).listen(port, '127.0.0.1', () => console.log(JSON.stringify({ event: 'hrm.server.started', port, storage: 'postgresql' })));
+  createServer(createHrmService(db, queryDb)).listen(port, '127.0.0.1', () => console.log(JSON.stringify({ event: 'hrm.server.started', port, storage: 'postgresql' })));
 }

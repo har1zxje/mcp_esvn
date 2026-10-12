@@ -1,3 +1,5 @@
+import { executeDynamicQuery } from './dynamicQuery.js';
+
 export class HrmDomainError extends Error {
   constructor(code, message, statusCode = 400) { super(message); this.code = code; this.statusCode = statusCode; }
 }
@@ -78,7 +80,11 @@ const normalizeDatabaseError = (error) => {
 };
 
 export class HrmService {
-  constructor({ db, companies, employees, departments, audit, authorization, identityLinks, leave, attendance, tasks }) { Object.assign(this, { db, companies, employees, departments, audit, authorization, identityLinks, leave, attendance, tasks }); }
+  constructor({ db, queryDb = null, companies, employees, departments, audit, authorization, identityLinks, leave, attendance, tasks }) { Object.assign(this, { db, queryDb, companies, employees, departments, audit, authorization, identityLinks, leave, attendance, tasks }); }
+  async queryData(context, query) {
+    if (!this.queryDb) throw new HrmDomainError('HRM_UNAVAILABLE', 'HRM query service is unavailable.', 503);
+    return executeDynamicQuery(this.queryDb, context, query);
+  }
   async getMyTasks(context, status) { this.requirePermission(context, 'task.read.self'); return this.tasks.mine(context.companyId, context.employeeId, taskQueryStatus(status)); }
   async getTeamTasks(context, status) { this.requirePermission(context, 'task.read.team'); if (!context.departmentId) throw new HrmDomainError('HRM_NOT_FOUND', 'Team was not found.', 404); return this.tasks.team(context.companyId, context.departmentId, taskQueryStatus(status)); }
   taskScope(context, task) {
@@ -326,7 +332,9 @@ export class HrmService {
     const employee = await this.employees.getProfileById(requiredId(companyId, 'company id'), requiredId(id, 'employee id'));
     if (!employee) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     this.requireEmployeeRead(context, { ...employee, departmentId: employee.department?.id ?? null });
-    return employee;
+    if (employee.id === context.employeeId || context.permissions.includes('employee.profile.read.any')) return employee;
+    const { email: _email, ...teamProfile } = employee;
+    return teamProfile;
   }
   async listLearningEmployees(context) { this.requirePermission(context, 'employee.profile.read.any'); return this.employees.listLearningProfiles(requiredId(context.companyId, 'company id')); }
   async searchLearningEmployees(context, query) { this.requirePermission(context, 'employee.profile.read.any'); return this.employees.searchLearningProfiles(requiredId(context.companyId, 'company id'), requiredText(query, 'search query', 100)); }
@@ -338,15 +346,21 @@ export class HrmService {
     id = requiredId(id, 'department id');
     this.requireDepartmentMembersRead(context, id);
     if (!await this.departments.getLearningById(context.companyId, id)) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
-    return this.departments.listLearningMembers(context.companyId, id);
+    const members = await this.departments.listLearningMembers(context.companyId, id);
+    if (context.permissions.includes('employee.profile.read.any')) return members;
+    return members.map((member) => {
+      if (member.id === context.employeeId) return member;
+      const { email: _email, ...teamMember } = member;
+      return teamMember;
+    });
   }
   async getLearningEmployeeAttendance(context, id) {
     id = requiredId(id, 'employee id');
     const employee = await this.employees.getById(context.companyId, id);
     if (!employee) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     if (employee.id === context.employeeId) this.requirePermission(context, 'attendance.read.self');
-    else if (employee.departmentId === context.departmentId) this.requirePermission(context, 'attendance.read.team');
-    else this.requirePermission(context, 'employee.profile.read.any');
+    else if (employee.departmentId && employee.departmentId === context.departmentId) this.requirePermission(context, 'attendance.read.team');
+    else throw new HrmDomainError('HRM_FORBIDDEN', 'You do not have permission to perform this action.', 403);
     return this.attendance.forLearningEmployee(context.companyId, id);
   }
   async getLearningEmployeeLeaveRequests(context, id) {
@@ -368,11 +382,19 @@ export class HrmService {
     if (!result) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     return result;
   }
-  async listLearningProjects(context) { return this.tasks.learningProjects(requiredId(context.companyId, 'company id')); }
+  projectReadScope(context) {
+    const self = context.permissions.includes('task.read.self');
+    const team = context.permissions.includes('task.read.team') && Boolean(context.departmentId);
+    const manage = context.permissions.includes('task.manage.team');
+    if (!self && !team && !manage) throw new HrmDomainError('HRM_FORBIDDEN', 'You do not have permission to perform this action.', 403);
+    return { employeeId: context.employeeId, departmentId: team ? context.departmentId : null, self, team, manage };
+  }
+  async listLearningProjects(context) { return this.tasks.learningProjects(requiredId(context.companyId, 'company id'), this.projectReadScope(context)); }
   async listLearningProjectTasks(context, id) {
     id = requiredId(id, 'project id');
-    if (!await this.tasks.learningProject(context.companyId, id)) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
-    return this.tasks.learningProjectTasks(context.companyId, id);
+    const scope = this.projectReadScope(context);
+    if (!await this.tasks.learningProject(context.companyId, id, scope)) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
+    return this.tasks.learningProjectTasks(context.companyId, id, scope);
   }
   async updateLearningTaskStatus(context, id, input) {
     return this.updateTaskStatus(context, requiredId(id, 'task id'), input);
@@ -435,6 +457,7 @@ export class HrmService {
   }
   async getDepartmentMembers(companyId, id) { await this.getDepartment(companyId, id); return this.departments.members(companyId, id); }
   async getDepartmentDetails(context, id) {
+    this.requirePermission(context, 'employee.profile.read.any');
     const department = await this.departments.getDepartmentDetails(requiredId(context.companyId, 'company id'), requiredId(id, 'department id'));
     if (!department) throw new HrmDomainError('HRM_RESOURCE_NOT_FOUND', 'The requested HRM resource was not found.', 404);
     return department;

@@ -1,0 +1,121 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "minimal",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "select": [
+                "id",
+                "display_name",
+                "department_name",
+                "title",
+                "employment_status",
+                "email"
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "field": "display_name",
+                  "value": "MCP DQE Employee 1",
+                  "operator": "contains"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.id AS \"id\", e.display_name AS \"display_name\", d.name AS \"department_name\", e.title AS \"title\", e.employment_status AS \"employment_status\", e.email AS \"email\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.display_name ILIKE $2 ESCAPE '\\' ORDER BY e.id ASC LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-2d1053338a5d44ea945b2bb9cbb220b7",
+        "%MCP DQE Employee 1%",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "id": "mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7",
+            "display_name": "MCP DQE Employee 1",
+            "department_name": "MCP DQE Department",
+            "title": "Tester",
+            "employment_status": "active",
+            "email": "mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7@example.test"
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Đã tìm thấy nhân viên phù hợp trong hệ thống HRM:\n\n* **Họ và tên:** MCP DQE Employee 1\n* **ID:** `mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7`\n* **Phòng ban:** MCP DQE Department\n* **Chức danh:** Tester\n* **Trạng thái làm việc:** active\n* **Email:** `mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7@example.test`",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [
+        "hrm__search_employees",
+        "hrm__get_employee_profile"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "MCP DQE Employee 1"
+          }
+        },
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "MCP DQE Employee 1"
+          }
+        },
+        {
+          "name": "hrm__get_employee_profile",
+          "args": {
+            "employeeId": "mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7"
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": null,
+      "parameters": null,
+      "result": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "answer": "Tìm thấy nhân viên **MCP DQE Employee 1** (ID: `mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7`, Email: `mcp-dqe-peer-2d1053338a5d44ea945b2bb9cbb220b7@example.test`, Chức vụ: Tester, Phòng ban: MCP DQE Department). \n\nTuy nhiên, khi cố gắng truy vấn chi tiết hồ sơ nhân viên này, hệ thống báo lỗi không có quyền thực hiện (`HRM_FORBIDDEN`).",
+      "status": "PASS",
+      "failureLayer": null,
+      "route": "hrm__search_employees"
+    }
+  ]
+}

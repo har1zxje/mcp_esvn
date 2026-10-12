@@ -1,0 +1,461 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "select_filter",
+      "question": "Liệt kê tên các nhân viên đang làm việc.",
+      "expected": {
+        "names": [
+          "Fixture Restricted",
+          "MCP DQE Employee 0",
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND employment_status='active' ORDER BY display_name",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                }
+              ],
+              "dataset": "employees"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                }
+              ],
+              "dataset": "employees"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "select": [
+                "display_name"
+              ],
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ],
+              "dataset": "employees"
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.display_name AS \"display_name\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 ORDER BY e.id ASC LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-9764ad8c47ea468da8b06b646c641a6c",
+        "active",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "display_name": "MCP DQE Employee 0"
+          },
+          {
+            "display_name": "MCP DQE Employee 1"
+          },
+          {
+            "display_name": "Fixture Restricted"
+          }
+        ],
+        "count": 3,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Danh sách tên các nhân viên đang làm việc:\n1. MCP DQE Employee 0\n2. MCP DQE Employee 1\n3. Fixture Restricted",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [
+        "hrm__search_employees"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "MCP DQE Employee 1"
+          }
+        }
+      ],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "FAIL",
+      "failureLayer": "Payload guard",
+      "providerHttpStatus": null,
+      "error": "Gemini payload guard blocked unexpected text."
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "group_count_order",
+      "question": "Nhóm nhân viên theo trạng thái làm việc, đếm từng nhóm và sắp xếp số lượng giảm dần.",
+      "expected": {
+        "groups": [
+          {
+            "employment_status": "active",
+            "total": 3
+          },
+          {
+            "employment_status": "inactive",
+            "total": 1
+          }
+        ]
+      },
+      "verificationSql": "SELECT employment_status, count(*)::int AS total FROM employees WHERE company_id=$1 GROUP BY employment_status ORDER BY total DESC",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "sort": [
+                {
+                  "field": "total",
+                  "direction": "desc"
+                }
+              ],
+              "dataset": "employees",
+              "groupBy": [
+                "employment_status"
+              ],
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.employment_status AS \"employment_status\", COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 GROUP BY e.employment_status ORDER BY \"total\" DESC LIMIT $2 OFFSET $3",
+      "parameters": [
+        "mcp-dqe-company-9764ad8c47ea468da8b06b646c641a6c",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "employment_status": "active",
+            "total": 3
+          },
+          {
+            "employment_status": "inactive",
+            "total": 1
+          }
+        ],
+        "count": 2,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Dưới đây là danh sách nhân viên được nhóm theo trạng thái làm việc, đếm số lượng từng nhóm và sắp xếp theo số lượng giảm dần:\n\n1. **Đang làm việc (Active)**: 3 nhân viên\n2. **Không hoạt động (Inactive)**: 1 nhân viên",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "sum",
+      "question": "Tổng số phút làm việc của nhóm trong ngày 2026-09-21 là bao nhiêu?",
+      "expected": {
+        "minutes": 780
+      },
+      "verificationSql": "SELECT sum(a.minutes_worked)::int AS minutes FROM attendance_records a JOIN employees e ON e.company_id=a.company_id AND e.id=a.employee_id WHERE a.company_id=$1 AND e.department_id=$2 AND a.work_date='2026-09-21'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "alias": "total_minutes",
+                  "field": "minutes_worked",
+                  "function": "sum"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "2026-09-21",
+                  "field": "work_date",
+                  "operator": "eq"
+                }
+              ],
+              "dataset": "attendance_records"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "alias": "total_minutes",
+                  "field": "minutes_worked",
+                  "function": "sum"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "2026-09-21",
+                  "field": "work_date",
+                  "operator": "eq"
+                }
+              ],
+              "dataset": "attendance_records"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "attendance_records",
+              "aggregations": [
+                {
+                  "alias": "total_minutes",
+                  "function": "sum",
+                  "field": "minutes_worked"
+                }
+              ],
+              "filters": [
+                {
+                  "operator": "between",
+                  "value": [
+                    "2026-09-21",
+                    "2026-09-21"
+                  ],
+                  "field": "work_date"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT SUM(a.minutes_worked) AS \"total_minutes\" FROM attendance_records a JOIN employees e ON e.company_id = a.company_id AND e.id = a.employee_id WHERE a.company_id = $1 AND e.department_id = $2 AND a.work_date BETWEEN $3 AND $4 LIMIT $5 OFFSET $6",
+      "parameters": [
+        "mcp-dqe-company-9764ad8c47ea468da8b06b646c641a6c",
+        "mcp-dqe-dept-9764ad8c47ea468da8b06b646c641a6c",
+        "2026-09-21",
+        "2026-09-21",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "attendance_records",
+        "rows": [
+          {
+            "total_minutes": 780
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Tổng số phút làm việc của nhóm trong ngày 21/09/2026 là **780 phút**.",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "multi_filter",
+      "question": "Có bao nhiêu nhân viên đang làm việc và có chức danh Tester?",
+      "expected": {
+        "total": 2
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active' AND title='Tester'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "filters": [
+                {
+                  "field": "employment_status",
+                  "value": "active",
+                  "operator": "eq"
+                },
+                {
+                  "field": "title",
+                  "operator": "eq",
+                  "value": "Tester"
+                }
+              ],
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 AND e.title = $3 LIMIT $4 OFFSET $5",
+      "parameters": [
+        "mcp-dqe-company-9764ad8c47ea468da8b06b646c641a6c",
+        "active",
+        "Tester",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "total": 2
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Có **2** nhân viên đang làm việc (active) và có chức danh là Tester.",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [
+        "hrm__query_hrm_data",
+        "hrm__list_employees"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "value": "active",
+                  "field": "employment_status",
+                  "operator": "eq"
+                }
+              ],
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "value": "active",
+                  "field": "employment_status",
+                  "operator": "eq"
+                }
+              ],
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__list_employees",
+          "args": {}
+        }
+      ],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "FAIL",
+      "failureLayer": "Payload guard",
+      "providerHttpStatus": null,
+      "error": "Gemini payload guard blocked unexpected text."
+    }
+  ]
+}

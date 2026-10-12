@@ -1,0 +1,51 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "count",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "total": 3
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                }
+              ],
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "FAIL",
+      "failureLayer": "Payload guard",
+      "providerHttpStatus": null,
+      "error": "Gemini payload guard blocked unexpected text."
+    }
+  ]
+}

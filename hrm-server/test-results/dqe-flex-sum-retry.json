@@ -1,0 +1,25 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-2.5-flash",
+  "cases": [
+    {
+      "mode": "minimal",
+      "case": "sum",
+      "question": "Tổng số phút làm việc của nhóm trong ngày 2026-09-21 là bao nhiêu?",
+      "expected": {
+        "minutes": 780
+      },
+      "verificationSql": "SELECT sum(a.minutes_worked)::int AS minutes FROM attendance_records a JOIN employees e ON e.company_id=a.company_id AND e.id=a.employee_id WHERE a.company_id=$1 AND e.department_id=$2 AND a.work_date='2026-09-21'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "FAIL",
+      "failureLayer": "Gemini provider quota",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa"
+    }
+  ]
+}

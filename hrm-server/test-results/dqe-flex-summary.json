@@ -1,0 +1,800 @@
+{
+  "fixtureOnly": true,
+  "classification": "Agent answer correctness is independent of whether DQE or a valid specialized tool was chosen.",
+  "totals": {
+    "geminiE2ePass": 6,
+    "geminiE2eFail": 0,
+    "blockedQuota": 9,
+    "inconclusiveFixture": 1,
+    "dqeSelectedAndPassed": 5,
+    "validSpecializedTool": 1
+  },
+  "agentMock": {
+    "deterministicAgentTestsPass": 3,
+    "toolRegistryTestsPass": 2,
+    "totalFocusedTestsPass": 5,
+    "geminiE2eCredit": false,
+    "note": "Deterministic AgentService and schema/catalog tests are separate from real Gemini E2E."
+  },
+  "dqeCapability": {
+    "test": "tests/dynamicQuery.security.postgres.test.js",
+    "database": "hrm_identity_test",
+    "status": "PASS",
+    "geminiE2eCredit": false,
+    "cases": [
+      {
+        "case": "sum",
+        "status": "PASS",
+        "sqlCheck": "SUM(a.minutes_worked); company + department + work_date BETWEEN scopes",
+        "parameterOrder": [
+          "fixture company",
+          "fixture department",
+          "2026-09-21",
+          "2026-09-22",
+          20,
+          0
+        ],
+        "independentSqlResult": {
+          "total": 3,
+          "sum_minutes": 780,
+          "avg_minutes": 390
+        },
+        "dqeResult": {
+          "total": 3,
+          "sum_minutes": 780,
+          "avg_minutes": 390
+        },
+        "authorization": "attendance.read.team"
+      },
+      {
+        "case": "empty",
+        "status": "PASS",
+        "sqlCheck": "employee ID equality with company scope",
+        "parameterOrder": [
+          "fixture company",
+          "absent",
+          20,
+          0
+        ],
+        "independentSqlResult": [],
+        "dqeResult": [],
+        "authorization": "employee.profile.read.any"
+      },
+      {
+        "case": "multi_filter",
+        "status": "PASS",
+        "sqlCheck": "employment_status = $2 AND title = $3 with company = $1",
+        "parameterOrder": [
+          "fixture company",
+          "active",
+          "Tester",
+          20,
+          0
+        ],
+        "independentSqlResult": {
+          "total": 4
+        },
+        "dqeResult": {
+          "total": 4
+        },
+        "authorization": "employee.profile.read.any"
+      },
+      {
+        "case": "forbidden",
+        "status": "PASS",
+        "sqlCheck": "no DQE SELECT executed",
+        "parameterOrder": [],
+        "httpStatus": 403,
+        "errorCode": "HRM_FORBIDDEN",
+        "authorization": "active linked employee without employee.profile.read.any"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "mode": "minimal",
+      "case": "count",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "total": 2
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                }
+              ],
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "dataset": "employees"
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-4de7f0bfa78143da83c9616a14cddadf",
+        "active",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "total": 2
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Công ty có 2 nhân viên đang làm việc.",
+      "status": "PASS",
+      "failureLayer": null,
+      "rawStatus": "PASS",
+      "agentAnswer": "PASS",
+      "dqeUsage": "PASS",
+      "reason": "Gemini selected DQE; validator, fixture SQL comparison and final answer passed."
+    },
+    {
+      "mode": "minimal",
+      "case": "select_filter",
+      "question": "Liệt kê tên các nhân viên đang làm việc.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 0",
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND employment_status='active' ORDER BY display_name",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "field": "employment_status",
+                  "value": "active",
+                  "operator": "eq"
+                }
+              ],
+              "select": [
+                "display_name"
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.display_name AS \"display_name\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 ORDER BY e.id ASC LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-4de7f0bfa78143da83c9616a14cddadf",
+        "active",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "display_name": "MCP DQE Employee 0"
+          },
+          {
+            "display_name": "MCP DQE Employee 1"
+          }
+        ],
+        "count": 2,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "MCP DQE Employee 0\nMCP DQE Employee 1",
+      "status": "PASS",
+      "failureLayer": null,
+      "rawStatus": "PASS",
+      "agentAnswer": "PASS",
+      "dqeUsage": "PASS",
+      "reason": "Gemini selected DQE; validator, fixture SQL comparison and final answer passed."
+    },
+    {
+      "mode": "minimal",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "operator": "contains",
+                  "value": "MCP DQE Employee 1",
+                  "field": "display_name"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.id AS \"id\", e.display_name AS \"display_name\", e.department_id AS \"department_id\", e.employment_status AS \"employment_status\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.display_name ILIKE $2 ESCAPE '\\' ORDER BY e.id ASC LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-4de7f0bfa78143da83c9616a14cddadf",
+        "%MCP DQE Employee 1%",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "id": "mcp-dqe-peer-4de7f0bfa78143da83c9616a14cddadf",
+            "display_name": "MCP DQE Employee 1",
+            "department_id": "mcp-dqe-dept-4de7f0bfa78143da83c9616a14cddadf",
+            "employment_status": "active"
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Đã tìm thấy nhân viên: MCP DQE Employee 1.",
+      "status": "PASS",
+      "failureLayer": null,
+      "rawStatus": "PASS",
+      "agentAnswer": "PASS",
+      "dqeUsage": "PASS",
+      "reason": "Gemini selected DQE; validator, fixture SQL comparison and final answer passed."
+    },
+    {
+      "mode": "minimal",
+      "case": "group_count_order",
+      "question": "Nhóm nhân viên theo trạng thái làm việc, đếm từng nhóm và sắp xếp số lượng giảm dần.",
+      "expected": {
+        "groups": [
+          {
+            "employment_status": "active",
+            "total": 2
+          },
+          {
+            "employment_status": "inactive",
+            "total": 1
+          }
+        ]
+      },
+      "verificationSql": "SELECT employment_status, count(*)::int AS total FROM employees WHERE company_id=$1 GROUP BY employment_status ORDER BY total DESC",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "groupBy": [
+                "employment_status"
+              ],
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "total",
+                  "direction": "desc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "groupBy": [
+                "employment_status"
+              ],
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "total",
+                  "direction": "desc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "groupBy": [
+                "employment_status"
+              ],
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "total",
+                  "direction": "desc"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.employment_status AS \"employment_status\", COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 GROUP BY e.employment_status ORDER BY \"total\" DESC LIMIT $2 OFFSET $3",
+      "parameters": [
+        "mcp-dqe-company-4de7f0bfa78143da83c9616a14cddadf",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "employment_status": "active",
+            "total": 2
+          },
+          {
+            "employment_status": "inactive",
+            "total": 1
+          }
+        ],
+        "count": 2,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Dựa trên trạng thái làm việc, có 2 nhân viên đang làm việc và 1 nhân viên đã nghỉ việc.",
+      "status": "PASS",
+      "failureLayer": null,
+      "rawStatus": "PASS",
+      "agentAnswer": "PASS",
+      "dqeUsage": "PASS",
+      "reason": "Gemini selected DQE; validator, fixture SQL comparison and final answer passed."
+    },
+    {
+      "mode": "minimal",
+      "case": "sum",
+      "question": "Tổng số phút làm việc của nhóm trong ngày 2026-09-21 là bao nhiêu?",
+      "expected": {
+        "minutes": 780
+      },
+      "verificationSql": "SELECT sum(a.minutes_worked)::int AS minutes FROM attendance_records a JOIN employees e ON e.company_id=a.company_id AND e.id=a.employee_id WHERE a.company_id=$1 AND e.department_id=$2 AND a.work_date='2026-09-21'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "minimal",
+      "case": "multi_filter",
+      "question": "Có bao nhiêu nhân viên đang làm việc và có chức danh Tester?",
+      "expected": {
+        "total": 2
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active' AND title='Tester'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                },
+                {
+                  "field": "title",
+                  "operator": "eq",
+                  "value": "Tester"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                },
+                {
+                  "field": "title",
+                  "operator": "eq",
+                  "value": "Tester"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 AND e.title = $3 LIMIT $4 OFFSET $5",
+      "parameters": [
+        "mcp-dqe-company-4de7f0bfa78143da83c9616a14cddadf",
+        "active",
+        "Tester",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "total": 2
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Có 2 nhân viên đang làm việc với chức danh Tester.",
+      "status": "PASS",
+      "failureLayer": null,
+      "rawStatus": "PASS",
+      "agentAnswer": "PASS",
+      "dqeUsage": "PASS",
+      "reason": "Gemini selected DQE; validator, fixture SQL comparison and final answer passed."
+    },
+    {
+      "mode": "minimal",
+      "case": "empty",
+      "question": "Tìm nhân viên có tên chứa Nobody Fixture XYZ bằng truy vấn HRM.",
+      "expected": {
+        "names": []
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%Nobody Fixture XYZ%'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "minimal",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "count",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "total": 2
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "select_filter",
+      "question": "Liệt kê tên các nhân viên đang làm việc.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 0",
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND employment_status='active' ORDER BY display_name",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "group_count_order",
+      "question": "Nhóm nhân viên theo trạng thái làm việc, đếm từng nhóm và sắp xếp số lượng giảm dần.",
+      "expected": {
+        "groups": [
+          {
+            "employment_status": "active",
+            "total": 2
+          },
+          {
+            "employment_status": "inactive",
+            "total": 1
+          }
+        ]
+      },
+      "verificationSql": "SELECT employment_status, count(*)::int AS total FROM employees WHERE company_id=$1 GROUP BY employment_status ORDER BY total DESC",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "sum",
+      "question": "Tổng số phút làm việc của nhóm trong ngày 2026-09-21 là bao nhiêu?",
+      "expected": {
+        "minutes": 780
+      },
+      "verificationSql": "SELECT sum(a.minutes_worked)::int AS minutes FROM attendance_records a JOIN employees e ON e.company_id=a.company_id AND e.id=a.employee_id WHERE a.company_id=$1 AND e.department_id=$2 AND a.work_date='2026-09-21'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "multi_filter",
+      "question": "Có bao nhiêu nhân viên đang làm việc và có chức danh Tester?",
+      "expected": {
+        "total": 2
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active' AND title='Tester'",
+      "selectedTools": [],
+      "arguments": [],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "BLOCKED_QUOTA",
+      "failureLayer": "Agent/MCP transport",
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Gemini provider rejected the call for quota; no Agent/tool conclusion."
+    },
+    {
+      "mode": "production",
+      "case": "empty",
+      "question": "Tìm nhân viên có tên chứa Nobody Fixture XYZ bằng truy vấn HRM.",
+      "expected": {
+        "names": []
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%Nobody Fixture XYZ%'",
+      "selectedTools": [
+        "hrm__search_employees"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "Nobody Fixture XYZ"
+          }
+        }
+      ],
+      "validator": "NOT_REACHED",
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": "Không tìm thấy nhân viên nào có tên Nobody Fixture XYZ.",
+      "status": "PASS",
+      "failureLayer": "Agent tool selection",
+      "rawStatus": "FAIL",
+      "agentAnswer": "PASS",
+      "dqeUsage": "NOT_USED_VALID_SPECIALIZED_TOOL",
+      "reason": "Production prompt explicitly routes named employee searches to search_employees; the specialized tool returned no matches and the final answer was correct."
+    },
+    {
+      "mode": "production",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "value": "active",
+                  "operator": "eq",
+                  "field": "employment_status"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "NOT_REACHED",
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": "Có vẻ như tài khoản HRM của bạn chưa được liên kết. Vui lòng liên kết tài khoản của bạn để tôi có thể hỗ trợ bạn với yêu cầu này.",
+      "status": "INCONCLUSIVE_FIXTURE",
+      "failureLayer": "Agent result interpretation or query shape",
+      "rawStatus": "FAIL",
+      "agentAnswer": "UNVERIFIED",
+      "dqeUsage": "UNVERIFIED",
+      "reason": "Initial linked employee was inactive; corrected active actor without the read role still awaits Gemini E2E due to quota."
+    }
+  ],
+  "quotaEvidence": {
+    "observedProviderMessage": "You exceeded your current quota, please check your plan and billing details.",
+    "httpStatus": "not captured in initial run",
+    "quotaLimit": "not provided in retained evidence",
+    "resetTime": "not provided in retained evidence",
+    "isolatedSumRetry": "BLOCKED_QUOTA"
+  }
+}
