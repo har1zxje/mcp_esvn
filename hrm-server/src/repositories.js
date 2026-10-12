@@ -324,21 +324,39 @@ const taskRecord = (row) => ({
 
 export class TaskRepository {
   constructor(db) { this.db = db; }
-  async learningProjects(companyId) {
-    const { rows } = await this.db.query("SELECT id, company_id, name, code, description, status, created_by_employee_id FROM projects WHERE company_id = $1 AND status = 'active' ORDER BY name, id", [companyId]);
+  async learningProjects(companyId, scope) {
+    const { rows } = await this.db.query(`SELECT p.id, p.company_id, p.name, p.code, p.description, p.status, p.created_by_employee_id FROM projects p
+      WHERE p.company_id = $1 AND p.status = 'active' AND
+      (($4::boolean AND p.created_by_employee_id = $2) OR EXISTS (
+        SELECT 1 FROM tasks t JOIN task_assignments a ON a.company_id = t.company_id AND a.task_id = t.id
+        JOIN employees e ON e.company_id = a.company_id AND e.id = a.employee_id
+        WHERE t.company_id = p.company_id AND t.project_id = p.id
+          AND (($5::boolean AND a.employee_id = $2) OR ($6::boolean AND e.department_id = $3))))
+      ORDER BY p.name, p.id`, [companyId, scope.employeeId, scope.departmentId, scope.manage, scope.self, scope.team]);
     return rows.map(projectRecord);
   }
-  async learningProject(companyId, id) {
-    const { rows } = await this.db.query("SELECT id, company_id, name, code, description, status, created_by_employee_id FROM projects WHERE company_id = $1 AND id = $2 AND status = 'active'", [companyId, id]);
+  async learningProject(companyId, id, scope) {
+    const { rows } = await this.db.query(`SELECT p.id, p.company_id, p.name, p.code, p.description, p.status, p.created_by_employee_id FROM projects p
+      WHERE p.company_id = $1 AND p.id = $2 AND p.status = 'active' AND
+      (($5::boolean AND p.created_by_employee_id = $3) OR EXISTS (
+        SELECT 1 FROM tasks t JOIN task_assignments a ON a.company_id = t.company_id AND a.task_id = t.id
+        JOIN employees e ON e.company_id = a.company_id AND e.id = a.employee_id
+        WHERE t.company_id = p.company_id AND t.project_id = p.id
+          AND (($6::boolean AND a.employee_id = $3) OR ($7::boolean AND e.department_id = $4))))`,
+      [companyId, id, scope.employeeId, scope.departmentId, scope.manage, scope.self, scope.team]);
     return rows[0] ? projectRecord(rows[0]) : null;
   }
-  async learningProjectTasks(companyId, projectId) {
+  async learningProjectTasks(companyId, projectId, scope) {
     const { rows } = await this.db.query(`SELECT t.id, t.company_id, t.project_id, p.name AS project_name, t.title, t.description, t.status, t.priority, t.due_date, t.created_by_employee_id,
       a.employee_id AS assigned_employee_id, e.display_name AS assigned_employee_display_name, e.department_id AS assigned_employee_department_id
       FROM tasks t JOIN projects p ON p.company_id = t.company_id AND p.id = t.project_id
       LEFT JOIN task_assignments a ON a.company_id = t.company_id AND a.task_id = t.id
       LEFT JOIN employees e ON e.company_id = a.company_id AND e.id = a.employee_id
-      WHERE p.company_id = $1 AND p.id = $2 AND p.status = 'active' ORDER BY t.updated_at DESC, t.id`, [companyId, projectId]);
+      WHERE p.company_id = $1 AND p.id = $2 AND p.status = 'active'
+        AND (($5::boolean AND t.created_by_employee_id = $3)
+          OR ($6::boolean AND a.employee_id = $3)
+          OR ($7::boolean AND e.department_id = $4))
+      ORDER BY t.updated_at DESC, t.id`, [companyId, projectId, scope.employeeId, scope.departmentId, scope.manage, scope.self, scope.team]);
     return rows.map(taskRecord);
   }
   async learningTask(companyId, id, lock = false) {

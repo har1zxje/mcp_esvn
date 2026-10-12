@@ -18,12 +18,14 @@ integration('PostgreSQL migration-backed v1 API supports company and employee CR
   const suffix = randomUUID().replaceAll('-', '');
   const companyA = `test-company-a-${suffix}`;
   const companyB = `test-company-b-${suffix}`;
+  const departmentId = `test-department-${suffix}`;
   const employeeId = `test-employee-${suffix}`;
   const requestHeaders = (companyId, actor = 'chat-admin-a') => ({ 'content-type': 'application/json', 'x-hrm-internal-token': 'integration-token', 'x-hrm-contract-version': '1', 'x-company-id': companyId, 'x-actor-user-id': actor, 'x-request-id': `test-${suffix}` });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   try {
     await db.query('INSERT INTO companies (id, name, code) VALUES ($1, $2, $3), ($4, $5, $6)', [companyA, 'Integration Company A', `A${suffix.slice(0, 8)}`, companyB, 'Integration Company B', `B${suffix.slice(0, 8)}`]);
-    await db.query("INSERT INTO employees (id, company_id, email, display_name, title, employment_status) VALUES ($1, $2, $3, 'Integration Admin', 'Administrator', 'active')", [`admin-${suffix}`, companyA, `admin-${suffix}@example.test`]);
+    await db.query('INSERT INTO departments (id,company_id,name,code) VALUES ($1,$2,$3,$4)', [departmentId, companyA, 'Integration Department', `D${suffix.slice(0, 8)}`]);
+    await db.query("INSERT INTO employees (id, company_id, department_id, email, display_name, title, employment_status) VALUES ($1, $2, $3, $4, 'Integration Admin', 'Administrator', 'active')", [`admin-${suffix}`, companyA, departmentId, `admin-${suffix}@example.test`]);
     await db.query('INSERT INTO roles (id, code, name) VALUES ($1, $2, $3)', [`role-${suffix}`, `INTEGRATION_ADMIN_${suffix}`, 'Integration Admin']);
     await db.query("INSERT INTO permissions (id, code, description) VALUES ($1, 'organization.manage', 'integration') ON CONFLICT (code) DO NOTHING", [`permission-${suffix}`]);
     const permission = (await db.query("SELECT id FROM permissions WHERE code = 'organization.manage' LIMIT 1")).rows[0].id;
@@ -33,7 +35,7 @@ integration('PostgreSQL migration-backed v1 API supports company and employee CR
     await db.query('INSERT INTO role_permissions (role_id, permission_id) VALUES ($1, $2)', [`role-${suffix}`, teamPermission]);
     await db.query('INSERT INTO employee_roles (company_id, employee_id, role_id) VALUES ($1, $2, $3)', [companyA, `admin-${suffix}`, `role-${suffix}`]);
     await db.query('INSERT INTO hrm_identity_links (company_id, chat_user_id, employee_id) VALUES ($1, $2, $3)', [companyA, 'chat-admin-a', `admin-${suffix}`]);
-    const created = await request(server, '/internal/v1/employees', { method: 'POST', headers: requestHeaders(companyA), body: JSON.stringify({ id: employeeId, email: `${employeeId}@example.test`, displayName: 'Integration Employee', title: 'Tester' }) });
+    const created = await request(server, '/internal/v1/employees', { method: 'POST', headers: requestHeaders(companyA), body: JSON.stringify({ id: employeeId, departmentId, email: `${employeeId}@example.test`, displayName: 'Integration Employee', title: 'Tester' }) });
     assert.equal(created.status, 201);
     assert.equal((await request(server, `/internal/v1/employees/${employeeId}`, { headers: requestHeaders(companyA) })).body.data.id, employeeId);
     const restarted = createServer(createHrmService(db), { internalToken: 'integration-token' });

@@ -1,0 +1,51 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-2.5-flash",
+  "cases": [
+    {
+      "mode": "minimal",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "AUTHORIZATION_DENIED",
+      "sql": null,
+      "parameters": null,
+      "result": {
+        "code": "HRM_FORBIDDEN",
+        "message": "You do not have permission to perform this action."
+      },
+      "answer": "Tôi xin lỗi, có vẻ như tôi không có quyền để truy vấn thông tin này.",
+      "status": "PASS",
+      "failureLayer": null
+    }
+  ]
+}

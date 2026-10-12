@@ -1,0 +1,92 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-2.5-flash",
+  "cases": [
+    {
+      "mode": "production",
+      "case": "count",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "total": 3
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "operator": "eq",
+                  "value": "active",
+                  "field": "employment_status"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "operator": "eq",
+                  "value": "active",
+                  "field": "employment_status"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "operator": "eq",
+                  "value": "active",
+                  "field": "employment_status"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": null,
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": null,
+      "status": "INCONCLUSIVE",
+      "failureLayer": "Gemini provider quota",
+      "providerHttpStatus": 429,
+      "error": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usa"
+    }
+  ]
+}

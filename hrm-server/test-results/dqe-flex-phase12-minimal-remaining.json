@@ -1,0 +1,103 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-2.5-flash",
+  "cases": [
+    {
+      "mode": "minimal",
+      "case": "empty",
+      "question": "Tìm nhân viên có tên chứa Nobody Fixture XYZ bằng truy vấn HRM.",
+      "expected": {
+        "names": []
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%Nobody Fixture XYZ%'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "select": [
+                "id",
+                "display_name",
+                "department_name",
+                "title",
+                "employment_status",
+                "email"
+              ],
+              "dataset": "employees",
+              "filters": [
+                {
+                  "value": "Nobody Fixture XYZ",
+                  "operator": "contains",
+                  "field": "display_name"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT e.id AS \"id\", e.display_name AS \"display_name\", d.name AS \"department_name\", e.title AS \"title\", e.employment_status AS \"employment_status\", e.email AS \"email\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.display_name ILIKE $2 ESCAPE '\\' ORDER BY e.id ASC LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-2ed898d7c5b947e9b0e38709ec0f50b6",
+        "%Nobody Fixture XYZ%",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [],
+        "count": 0,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Không tìm thấy nhân viên nào có tên chứa 'Nobody Fixture XYZ'.",
+      "status": "PASS",
+      "failureLayer": null
+    },
+    {
+      "mode": "minimal",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ],
+              "aggregations": [
+                {
+                  "function": "count",
+                  "alias": "total"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "validator": "NOT_REACHED",
+      "sql": null,
+      "parameters": null,
+      "result": null,
+      "answer": "Tôi xin lỗi, có vẻ như tôi không có quyền để truy cập thông tin đó.",
+      "status": "FAIL",
+      "failureLayer": "Agent result interpretation or query shape"
+    }
+  ]
+}

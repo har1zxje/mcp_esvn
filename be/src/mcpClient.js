@@ -54,7 +54,7 @@ export class McpClient {
     const text = await response.text();
     if (!text.trim() && method.startsWith('notifications/')) return {};
     const contentType = response.headers.get('content-type') ?? '';
-    if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.rpc.response', server: this.name, method, httpStatus: response.status, contentType, mcpSessionIdPresent: Boolean(session), mcpProtocolVersion: response.headers.get('mcp-protocol-version'), cacheControl: response.headers.get('cache-control'), rawBodyPreview: sanitizeMcpPreview(text) }));
+    if (process.env.NODE_ENV !== 'production') console.info(JSON.stringify({ event: 'mcp.rpc.response', server: this.name, method, httpStatus: response.status, contentType, mcpSessionIdPresent: Boolean(session), mcpProtocolVersion: response.headers.get('mcp-protocol-version'), cacheControl: response.headers.get('cache-control'), rawBodyPreview: this.name === 'hrm' ? '[redacted HRM payload]' : sanitizeMcpPreview(text) }));
     if (!isMcpContentType(contentType, text)) {
       const error = new Error(`MCP ${this.name} returned an unsupported Content-Type`);
       error.code = 'MCP_INVALID_CONTENT_TYPE'; error.statusCode = response.status;

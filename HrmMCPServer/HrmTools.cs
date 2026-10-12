@@ -5,6 +5,10 @@ using System.Text.Json;
 [McpServerToolType]
 public class HrmTools
 {
+    [McpServerTool(Name = "query_hrm_data"), Description("Query HRM data using a structured query object. Dataset must be exactly employees, attendance_records, or leave_requests. Use filters with field/operator/value. Pending privacy approval, employee and team attendance aggregates are denied; only self-scoped attendance and leave aggregates are available. Never send SQL, companyId, employeeId, or actor identity. Attendance requires a work_date between filter (up to 366 days).")]
+    public static Task<string> QueryHrmData(HrmApiClient api, [Description("Structured HRM query. For a list of active employees use {dataset:employees,filters:[{field:employment_status,operator:eq,value:active}],select:[id,display_name]}. Aggregate queries are limited to the linked employee's own attendance or leave. Never include SQL or actor identity.")] HrmQueryContract query, CancellationToken cancellationToken)
+      => Execute(() => api.QueryDataAsync(JsonSerializer.SerializeToElement(query, new JsonSerializerOptions { DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull }), cancellationToken));
+
     [McpServerTool, Description("Get department details by department ID.")]
     public static Task<string> GetDepartmentDetails(HrmApiClient api, [Description("Department ID, for example dept-product")] string departmentId, CancellationToken cancellationToken)
       => Execute(() => api.GetDepartmentDetailsAsync(ResourceId(departmentId, "department"), cancellationToken));

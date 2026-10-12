@@ -1,0 +1,64 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "count",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "total": 3
+      },
+      "verificationSql": "SELECT count(*)::int AS total FROM employees WHERE company_id=$1 AND employment_status='active'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "filters": [
+                {
+                  "field": "employment_status",
+                  "value": "active",
+                  "operator": "eq"
+                }
+              ],
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ],
+              "dataset": "employees"
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT COUNT(*) AS \"total\" FROM employees e LEFT JOIN departments d ON d.company_id = e.company_id AND d.id = e.department_id WHERE e.company_id = $1 AND e.employment_status = $2 LIMIT $3 OFFSET $4",
+      "parameters": [
+        "mcp-dqe-company-4dfa4f18293640ac8308dc646636c514",
+        "active",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "employees",
+        "rows": [
+          {
+            "total": 3
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Hiện tại công ty có **3** nhân viên đang làm việc (active).",
+      "status": "PASS",
+      "failureLayer": null
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-2.5-flash",
+  "cases": [
+    {
+      "mode": "minimal",
+      "case": "sum",
+      "question": "Tổng số phút làm việc của nhóm trong ngày 2026-09-21 là bao nhiêu?",
+      "expected": {
+        "minutes": 780
+      },
+      "verificationSql": "SELECT sum(a.minutes_worked)::int AS minutes FROM attendance_records a JOIN employees e ON e.company_id=a.company_id AND e.id=a.employee_id WHERE a.company_id=$1 AND e.department_id=$2 AND a.work_date='2026-09-21'",
+      "selectedTools": [
+        "hrm__query_hrm_data"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "field": "minutes_worked",
+                  "alias": "total_minutes_worked",
+                  "function": "sum"
+                }
+              ],
+              "filters": [
+                {
+                  "field": "work_date",
+                  "operator": "eq",
+                  "value": "2026-09-21"
+                }
+              ],
+              "dataset": "attendance_records"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "aggregations": [
+                {
+                  "field": "minutes_worked",
+                  "alias": "total_minutes_worked",
+                  "function": "sum"
+                }
+              ],
+              "filters": [
+                {
+                  "field": "work_date",
+                  "operator": "eq",
+                  "value": "2026-09-21"
+                }
+              ],
+              "dataset": "attendance_records"
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "filters": [
+                {
+                  "field": "work_date",
+                  "operator": "between",
+                  "value": [
+                    "2026-09-21",
+                    "2026-09-21"
+                  ]
+                }
+              ],
+              "aggregations": [
+                {
+                  "function": "sum",
+                  "alias": "total_minutes_worked",
+                  "field": "minutes_worked"
+                }
+              ],
+              "dataset": "attendance_records"
+            }
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": "SELECT SUM(a.minutes_worked) AS \"total_minutes_worked\" FROM attendance_records a JOIN employees e ON e.company_id = a.company_id AND e.id = a.employee_id WHERE a.company_id = $1 AND e.department_id = $2 AND a.work_date BETWEEN $3 AND $4 LIMIT $5 OFFSET $6",
+      "parameters": [
+        "mcp-dqe-company-74a75be28dab46c0ac2cf23467a636ec",
+        "mcp-dqe-dept-74a75be28dab46c0ac2cf23467a636ec",
+        "2026-09-21",
+        "2026-09-21",
+        20,
+        0
+      ],
+      "result": {
+        "dataset": "attendance_records",
+        "rows": [
+          {
+            "total_minutes_worked": 780
+          }
+        ],
+        "count": 1,
+        "limit": 20,
+        "offset": 0
+      },
+      "answer": "Tổng số phút làm việc của nhóm vào ngày 2026-09-21 là 780 phút.",
+      "status": "PASS",
+      "failureLayer": null
+    }
+  ]
+}

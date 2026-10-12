@@ -1,0 +1,156 @@
+{
+  "fixtureOnly": true,
+  "model": "gemini-3.5-flash-lite",
+  "cases": [
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "search",
+      "question": "Tìm nhân viên có tên chứa MCP DQE Employee 1 bằng truy vấn HRM.",
+      "expected": {
+        "names": [
+          "MCP DQE Employee 1"
+        ]
+      },
+      "verificationSql": "SELECT display_name FROM employees WHERE company_id=$1 AND display_name ILIKE '%MCP DQE Employee 1%'",
+      "selectedTools": [
+        "hrm__search_employees",
+        "hrm__get_employee_profile"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "MCP DQE Employee 1"
+          }
+        },
+        {
+          "name": "hrm__search_employees",
+          "args": {
+            "query": "MCP DQE Employee 1"
+          }
+        },
+        {
+          "name": "hrm__get_employee_profile",
+          "args": {
+            "employeeId": "mcp-dqe-peer-e165bd4b73fb4bd0845277e58d766f3f"
+          }
+        }
+      ],
+      "validator": "ACCEPTED",
+      "sql": null,
+      "parameters": null,
+      "result": {
+        "names": [
+          null
+        ]
+      },
+      "answer": "Tìm thấy 1 nhân viên với tên \"MCP DQE Employee 1\":\n- **ID:** `mcp-dqe-peer-e165bd4b73fb4bd0845277e58d766f3f`\n- **Tên hiển thị:** MCP DQE Employee 1\n- **Email:** `mcp-dqe-peer-e165bd4b73fb4bd0845277e58d766f3f@example.test`\n- **Chức vụ:** Tester\n- **Phòng ban:** MCP DQE Department (Mã: DQE)\n- **Trạng thái:** Đang làm việc (active)\n\n*(Lưu ý: Khi cố gắng gọi chi tiết hồ sơ bằng `get_employee_profile`, hệ thống trả về lỗi không có quyền truy cập (`HRM_FORBIDDEN`).)*",
+      "status": "FAIL",
+      "failureLayer": "Agent tool selection",
+      "route": "hrm__search_employees"
+    },
+    {
+      "model": "gemini-3.5-flash-lite",
+      "mode": "production",
+      "case": "forbidden",
+      "question": "Có bao nhiêu nhân viên đang làm việc trong công ty?",
+      "expected": {
+        "error": "HRM_FORBIDDEN"
+      },
+      "verificationSql": null,
+      "selectedTools": [
+        "hrm__query_hrm_data",
+        "hrm__list_employees",
+        "hrm__get_my_profile"
+      ],
+      "arguments": [
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ],
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ],
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__list_employees",
+          "args": {}
+        },
+        {
+          "name": "hrm__query_hrm_data",
+          "args": {
+            "query": {
+              "dataset": "employees",
+              "aggregations": [
+                {
+                  "alias": "total",
+                  "function": "count"
+                }
+              ],
+              "filters": [
+                {
+                  "operator": "eq",
+                  "field": "employment_status",
+                  "value": "active"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "hrm__list_employees",
+          "args": {}
+        },
+        {
+          "name": "hrm__get_my_profile",
+          "args": {}
+        }
+      ],
+      "validator": "AUTHORIZATION_DENIED",
+      "sql": null,
+      "parameters": null,
+      "result": {
+        "code": "HRM_FORBIDDEN",
+        "message": "You do not have permission to perform this action."
+      },
+      "answer": "Xin lỗi, tôi không có quyền truy cập vào hệ thống HRM để xem thông tin về danh sách nhân viên hoặc số lượng nhân viên đang làm việc trong công ty. Bạn vui lòng liên hệ với bộ phận Nhân sự (HR) để được hỗ trợ thêm nhé.",
+      "status": "PASS",
+      "failureLayer": null
+    }
+  ]
+}

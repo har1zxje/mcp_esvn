@@ -79,7 +79,21 @@ export class ToolRegistry {
       .map((tool) => ({
       name: `${tool.server}__${tool.remoteName}`.replace(/[^a-zA-Z0-9_]/g, '_'),
       description: `[${tool.server}] ${tool.description ?? ''}`,
-      parameters: toGeminiSchema(tool.inputSchema),
+      parameters: (() => {
+        const parameters = toGeminiSchema(tool.inputSchema);
+        if (tool.server === 'hrm' && tool.remoteName === 'query_hrm_data') {
+          const value = parameters.properties?.query?.properties?.filters?.items?.properties?.value;
+          if (value) {
+            delete value.type;
+            value.anyOf = [
+              { type: 'STRING' }, { type: 'NUMBER' },
+              { type: 'ARRAY', items: { type: 'STRING' } },
+              { type: 'ARRAY', items: { type: 'NUMBER' } },
+            ];
+          }
+        }
+        return parameters;
+      })(),
       }));
     return [...rawDefinitions, ...(this.workManagementService && this.planeEnabled ? workManagementDefinitions() : []), ...(this.crossDomainService && this.planeEnabled && this.hrmEnabled ? crossDomainDefinitions() : [])];
   }
